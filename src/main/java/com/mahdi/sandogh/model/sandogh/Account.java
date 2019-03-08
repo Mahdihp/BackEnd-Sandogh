@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model;
+package com.mahdi.sandogh.model.sandogh;
 
 
 import lombok.Data;
@@ -6,6 +6,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -16,7 +18,7 @@ public class Account {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
     private Long id;
 
@@ -43,11 +45,17 @@ public class Account {
 
     @Column(name = "creationdate", updatable = false)
     @CreatedDate
-    private Long creationDate;
+    private long creationDate;
 
     @Column(name = "modificationdate", updatable = true)
     @LastModifiedDate
-    private Long modificationDate;
+    private long modificationDate;
+
+    @OneToMany(mappedBy = "account")
+    private Set<Loan> loans = new HashSet<>();
+
+    @OneToMany(mappedBy = "account")
+    private Set<Monthly> monthlies = new HashSet<>();
 
     public Account() {
     }
