@@ -23,9 +23,11 @@ public class User {
     @Column(unique = true, nullable = false)
     private UUID uid;
 
+    @Size(max = 50)
     @Column(name = "firstname")
     private String firstName;
 
+    @Size(max = 50)
     @Column(name = "firstname")
     private String lastName;
 
