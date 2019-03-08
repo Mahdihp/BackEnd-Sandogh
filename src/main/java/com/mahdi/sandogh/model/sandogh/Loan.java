@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "loans")
 @Data
-public class Loan { // وام ها
+public class Loan { //جدول وام ها
 
     private static final long serialVersionUID = 1L;
 

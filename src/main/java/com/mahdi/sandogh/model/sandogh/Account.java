@@ -57,6 +57,9 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private Set<Monthly> monthlies = new HashSet<>();
 
+    @OneToMany(mappedBy = "account")
+    private Set<InstallmentLoan> installmentLoans = new HashSet<>();
+
     public Account() {
     }
 }
