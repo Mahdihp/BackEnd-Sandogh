@@ -25,6 +25,9 @@ public class Account {
     @Column(unique = true, nullable = false)
     private UUID uid;
 
+    @Column(name = "accountnumber")
+    private String accountNumber;
+
     @Column(name = "firstname")
     private String firstName;
 
@@ -36,6 +39,9 @@ public class Account {
 
     @Column(name = "mobilenumber")
     private String mobileNumber;
+
+    @Column(name = "nationalCode" , unique = true)
+    private String nationalCode;
 
     @Column(name = "city")
     private String city;
