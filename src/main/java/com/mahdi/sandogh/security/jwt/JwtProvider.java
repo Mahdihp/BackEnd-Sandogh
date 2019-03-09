@@ -16,11 +16,11 @@ public class JwtProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    @Value("${grokonez.app.jwtSecret}")
+    @Value("${sandogh.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${grokonez.app.jwtExpiration}")
-    private int jwtExpiration;
+    @Value("${sandogh.app.jwtExpiration}")
+    private long jwtExpiration;
 
     public String generateJwtToken(Authentication authentication) {
 

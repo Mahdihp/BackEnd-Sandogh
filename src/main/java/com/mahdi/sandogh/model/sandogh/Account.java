@@ -31,7 +31,7 @@ public class Account {
     @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "firstname")
+    @Column(name = "lastname")
     private String lastName;
 
     @Column(name = "fathername")
@@ -48,6 +48,9 @@ public class Account {
 
     @Column(name = "adderss")
     private String adderss;
+
+    @Column(name = "active")
+    private boolean active;
 
     @Column(name = "creationdate", updatable = false)
     @CreatedDate

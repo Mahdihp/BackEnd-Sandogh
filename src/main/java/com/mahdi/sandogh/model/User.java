@@ -18,7 +18,7 @@ public class User {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false)
     private Long id;
 
@@ -30,7 +30,7 @@ public class User {
     private String firstName;
 
     @Size(max = 50)
-    @Column(name = "firstname")
+    @Column(name = "lastname")
     private String lastName;
 
     @Column(name = "username")

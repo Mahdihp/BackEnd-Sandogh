@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.dto;
+package com.mahdi.sandogh.model.dto.account;
 
 
 import lombok.Data;
@@ -27,6 +27,8 @@ public class AccountForm {
 
     @NotBlank
     private String mobileNumber;
+
+    private boolean active;
 
     private String city;
     private String adderss;

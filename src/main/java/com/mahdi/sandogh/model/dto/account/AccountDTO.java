@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.dto;
+package com.mahdi.sandogh.model.dto.account;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,6 +18,7 @@ public class AccountDTO extends BaseDTO {
     private String nationalCode;
     private String mobileNumber;
     private String city;
+    private Boolean active;
     private String adderss;
     private Long creationDate;
 
