@@ -8,6 +8,7 @@ import com.mahdi.sandogh.repository.AccountRepo;
 import com.mahdi.sandogh.utils.Constants;
 import com.mahdi.sandogh.utils.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,27 @@ public class AccountService {
     @Autowired
     AccountRepo accountRepo;
 
+    @Value("${mostashar.app.accountNumber}")
+    private String accountNumber;
+
+
     public boolean createAccount(AccountForm accountForm) {
         Boolean exists = accountRepo.existsByNationalCode(accountForm.getNationalCode());
         if (!exists) {
             Account account = new Account();
             account.setUid(UUID.randomUUID());
-            account.setAccountNumber(DataUtil.generateNumericRandomAccountNumber(10));
+            Long accountNumber = accountRepo.findMaxAccountNumber();
+            if (accountNumber == null) {
+
+               int years=  DataUtil.generateNumericRandomAccountNumber();
+                account.setAccountNumber(String.valueOf(accountNumber + years));
+            }else{
+                accountNumber++;
+                account.setAccountNumber(String.valueOf(accountNumber));
+
+            }
+
+
             account.setActive(true);
             account.setFirstName(accountForm.getFirstName());
             account.setLastName(accountForm.getLastName());
