@@ -14,7 +14,7 @@ public class SahamSalaneh { // سهام سالانه
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USERS_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
