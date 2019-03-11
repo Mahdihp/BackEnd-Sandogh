@@ -33,17 +33,15 @@ public class AccountService {
             Account account = new Account();
             account.setUid(UUID.randomUUID());
             Long accountNumber = accountRepo.findMaxAccountNumber();
-            if (accountNumber == null) {
+            if (accountNumber != null) {
 
-               int years=  DataUtil.generateNumericRandomAccountNumber();
-                account.setAccountNumber(String.valueOf(accountNumber + years));
-            }else{
                 accountNumber++;
-                account.setAccountNumber(String.valueOf(accountNumber));
-
+                int years = DataUtil.generateNumericRandomAccountNumber();
+                account.setAccountNumber(String.valueOf(accountNumber + years));
+            } else {
+                int years = DataUtil.generateNumericRandomAccountNumber();
+                account.setAccountNumber(String.valueOf(this.accountNumber + years));
             }
-
-
             account.setActive(true);
             account.setFirstName(accountForm.getFirstName());
             account.setLastName(accountForm.getLastName());

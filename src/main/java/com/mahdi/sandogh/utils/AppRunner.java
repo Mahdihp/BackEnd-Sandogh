@@ -13,7 +13,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import javax.xml.ws.soap.Addressing;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -74,7 +73,7 @@ public class AppRunner implements ApplicationRunner {
         account1.setFirstName("mahdi");
         account1.setLastName("hosseinpour");
         account1.setFatherName("ali");
-        account1.setAccountNumber(DataUtil.generateNumericRandomAccountNumber(10));
+        account1.setAccountNumber(String.valueOf(DataUtil.generateNumericRandomAccountNumber()));
 
 
 
