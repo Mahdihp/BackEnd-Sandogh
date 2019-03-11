@@ -1,6 +1,6 @@
-package com.mahdi.sandogh.repository;
+package com.mahdi.sandogh.model.account.repository;
 
-import com.mahdi.sandogh.model.sandogh.Account;
+import com.mahdi.sandogh.model.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

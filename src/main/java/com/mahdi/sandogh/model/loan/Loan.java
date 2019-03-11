@@ -1,7 +1,9 @@
-package com.mahdi.sandogh.model.sandogh;
+package com.mahdi.sandogh.model.loan;
 
 
+import com.mahdi.sandogh.model.account.Account;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public class Loan { //جدول وام ها
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @Type(type = "uuid-char")
     private UUID uid;
 
     @Column(name = "countloan")

@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model;
+package com.mahdi.sandogh.model.role;
 
 public enum  RoleName {
     ROLE_ADMIN,

@@ -1,8 +1,8 @@
-package com.mahdi.sandogh.model;
+package com.mahdi.sandogh.model.user;
 
+import com.mahdi.sandogh.model.role.Role;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,6 +23,7 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @Type(type = "uuid-char")
     private UUID uid;
 
     @Size(max = 50)

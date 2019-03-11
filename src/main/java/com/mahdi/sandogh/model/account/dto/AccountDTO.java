@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.dto.account;
+package com.mahdi.sandogh.model.account.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

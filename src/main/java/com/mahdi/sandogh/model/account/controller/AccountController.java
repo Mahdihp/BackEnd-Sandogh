@@ -1,0 +1,64 @@
+package com.mahdi.sandogh.model.account.controller;
+
+
+import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.account.dto.AccountDTO;
+import com.mahdi.sandogh.model.account.dto.AccountForm;
+import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
+import com.mahdi.sandogh.model.account.service.AccountService;
+import com.mahdi.sandogh.utils.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Optional;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/v1/accounts")
+public class AccountController {
+
+    @Autowired
+    AccountService accountService;
+
+    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
+        if (accountService.create(accountForm))
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_ACCOUNT));
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+
+    }
+
+    @PostMapping(value = "/{accountid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> updateAccount(@PathVariable(value = "accountid") String accountid, @Valid @RequestBody AccountForm accountForm) {
+        accountForm.setAccountId(accountid);
+        if (accountService.update(accountForm))
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_UPDATE_ACCOUNT));
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+
+    }
+
+    @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> findAllAccount() {
+        Optional<ListAccountDTO> list = accountService.findAllDTO();
+        if (list.isPresent())
+            return ResponseEntity.status(HttpStatus.OK).body(list.get());
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+    }
+
+    @PostMapping(value = "/", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> findAccount(@RequestParam("type") int type, @RequestParam("accountid") String accountid) {
+        Optional<AccountDTO> accountDTO = accountService.findDTOByUid(type, accountid);
+        if (accountDTO.isPresent())
+            return ResponseEntity.status(HttpStatus.OK).body(accountDTO.get());
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+    }
+
+}

@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.security.jwt;
 
 
-import com.mahdi.sandogh.model.UserPrinciple;
+import com.mahdi.sandogh.model.user.UserPrinciple;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

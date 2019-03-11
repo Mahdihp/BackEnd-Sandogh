@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model;
+package com.mahdi.sandogh.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

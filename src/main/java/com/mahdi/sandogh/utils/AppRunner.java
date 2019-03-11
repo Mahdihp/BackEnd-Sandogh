@@ -1,13 +1,13 @@
 package com.mahdi.sandogh.utils;
 
 
-import com.mahdi.sandogh.model.Role;
-import com.mahdi.sandogh.model.RoleName;
-import com.mahdi.sandogh.model.User;
-import com.mahdi.sandogh.model.sandogh.Account;
-import com.mahdi.sandogh.repository.AccountRepo;
-import com.mahdi.sandogh.repository.RoleRepo;
-import com.mahdi.sandogh.repository.UserRepo;
+import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.account.repository.AccountRepo;
+import com.mahdi.sandogh.model.role.Role;
+import com.mahdi.sandogh.model.role.RoleName;
+import com.mahdi.sandogh.model.role.repository.RoleRepo;
+import com.mahdi.sandogh.model.user.User;
+import com.mahdi.sandogh.model.user.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -70,11 +70,14 @@ public class AppRunner implements ApplicationRunner {
 
         Account account1=new Account();
         account1.setUid(UUID.fromString("b3dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
+        account1.setCreationDate(System.currentTimeMillis());
         account1.setFirstName("mahdi");
         account1.setLastName("hosseinpour");
         account1.setFatherName("ali");
-        account1.setAccountNumber(String.valueOf(DataUtil.generateNumericRandomAccountNumber()));
-
+        int years = DataUtil.generateNumericRandomAccountNumber();
+        System.out.println("Log---initDatabase--------------------:" + String.valueOf("1000001000" + years));
+        account1.setAccountNumber(String.valueOf("1000001000" + years));
+        System.out.println("Log---initDatabase--------------------:" + DataUtil.longToDate(account1.getCreationDate()));
 
 
         roleRepo.save(role1);
@@ -82,6 +85,8 @@ public class AppRunner implements ApplicationRunner {
 
         userRepo.save(user1);
         userRepo.save(user2);
+
+        accountRepo.save(account1);
 
 
     }

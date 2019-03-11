@@ -1,17 +1,15 @@
 package com.mahdi.sandogh.utils;
 
 
-import java.sql.Date;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.util.Calendar;
 import com.ibm.icu.util.ULocale;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import javax.xml.crypto.Data;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class DataUtil {
 
@@ -51,6 +49,14 @@ public class DataUtil {
         return RandomStringUtils.randomAlphanumeric(count);
     }
 
+    public static String longToDate(long date) {
+        ULocale locale = new ULocale("fa_IR@calendar=persian");
+
+        Calendar persianCalendar = Calendar.getInstance(locale);
+        persianCalendar.setTimeInMillis(date);
+        DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
+        return df.format(persianCalendar.getTime());
+    }
     public synchronized static int generateNumericRandomAccountNumber() {
         ULocale locale = new ULocale("fa_IR@calendar=persian");
         Calendar persianCalendar = Calendar.getInstance(locale);
@@ -63,6 +69,6 @@ public class DataUtil {
         System.out.println(persianCalendar.get(Calendar.MONTH));        // 3
         System.out.println(persianCalendar.get(Calendar.DAY_OF_MONTH)); // 10
 //        return  Calendar.YEAR + RandomStringUtils.randomNumeric(count);
-        return  Calendar.YEAR;
+        return persianCalendar.get(Calendar.YEAR);
     }
 }

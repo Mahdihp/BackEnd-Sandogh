@@ -1,7 +1,11 @@
-package com.mahdi.sandogh.model.sandogh;
+package com.mahdi.sandogh.model.account;
 
 
+import com.mahdi.sandogh.model.installmentLoan.InstallmentLoan;
+import com.mahdi.sandogh.model.loan.Loan;
+import com.mahdi.sandogh.model.monthly.Monthly;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -23,9 +27,10 @@ public class Account {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @Type(type = "uuid-char")
     private UUID uid;
 
-    @Column(name = "accountnumber")
+    @Column(name = "accountnumber", unique = true)
     private String accountNumber;
 
     @Column(name = "firstname")

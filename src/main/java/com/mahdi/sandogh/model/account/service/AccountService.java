@@ -1,10 +1,10 @@
-package com.mahdi.sandogh.service;
+package com.mahdi.sandogh.model.account.service;
 
-import com.mahdi.sandogh.model.dto.account.AccountDTO;
-import com.mahdi.sandogh.model.dto.account.AccountForm;
-import com.mahdi.sandogh.model.dto.account.ListAccountDTO;
-import com.mahdi.sandogh.model.sandogh.Account;
-import com.mahdi.sandogh.repository.AccountRepo;
+import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.account.dto.AccountDTO;
+import com.mahdi.sandogh.model.account.dto.AccountForm;
+import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
+import com.mahdi.sandogh.model.account.repository.AccountRepo;
 import com.mahdi.sandogh.utils.Constants;
 import com.mahdi.sandogh.utils.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AccountService {
     private String accountNumber;
 
 
-    public boolean createAccount(AccountForm accountForm) {
+    public boolean create(AccountForm accountForm) {
         Boolean exists = accountRepo.existsByNationalCode(accountForm.getNationalCode());
         if (!exists) {
             Account account = new Account();
@@ -37,10 +37,10 @@ public class AccountService {
 
                 accountNumber++;
                 int years = DataUtil.generateNumericRandomAccountNumber();
-                account.setAccountNumber(String.valueOf(accountNumber + years));
+                account.setAccountNumber(String.valueOf(accountNumber) + years);
             } else {
                 int years = DataUtil.generateNumericRandomAccountNumber();
-                account.setAccountNumber(String.valueOf(this.accountNumber + years));
+                account.setAccountNumber(String.valueOf(this.accountNumber) + years);
             }
             account.setActive(true);
             account.setFirstName(accountForm.getFirstName());
@@ -57,7 +57,7 @@ public class AccountService {
         return false;
     }
 
-    public boolean updateAccount(AccountForm accountForm) {
+    public boolean update(AccountForm accountForm) {
         Optional<Account> account = accountRepo.findByUid(UUID.fromString(accountForm.getAccountId()));
         if (account.isPresent()) {
             account.get().setFirstName(accountForm.getFirstName());
@@ -67,7 +67,6 @@ public class AccountService {
             account.get().setNationalCode(accountForm.getNationalCode());
             account.get().setCity(accountForm.getCity());
             account.get().setAdderss(accountForm.getAdderss());
-            account.get().setActive(accountForm.isActive());
             account.get().setModificationDate(System.currentTimeMillis());
             account.get().setModificationDate(System.currentTimeMillis());
             accountRepo.save(account.get());
@@ -84,7 +83,7 @@ public class AccountService {
             return Optional.empty();
     }
 
-    public Optional<AccountDTO> findAccountDTOByUid(int queryType, String uid) {
+    public Optional<AccountDTO> findDTOByUid(int queryType, String uid) {
         Optional<Account> account = Optional.empty();
         switch (queryType) {
             case 1:
@@ -99,7 +98,6 @@ public class AccountService {
             case 4:
                 account = accountRepo.findByNationalCode(uid);
                 break;
-
         }
         if (account.isPresent()) {
             AccountDTO accountDTO = new AccountDTO();
@@ -121,7 +119,35 @@ public class AccountService {
         return Optional.empty();
     }
 
-    public Optional<ListAccountDTO> findAllDTOByUid(String firstName, String lastName) {
+    public Optional<ListAccountDTO> findAllDTO() {
+        List<Account> list = accountRepo.findAll();
+        if (list != null) {
+            ListAccountDTO laDTO = new ListAccountDTO();
+            laDTO.setStatus(HttpStatus.OK.value());
+            laDTO.setMessage(Constants.KEY_SUCESSE);
+            List<AccountDTO> dtoList = new ArrayList<>();
+            for (Account account : list) {
+                AccountDTO accountDTO = new AccountDTO();
+                accountDTO.setAccountId(account.getUid().toString());
+                accountDTO.setActive(account.isActive());
+                accountDTO.setFirstName(account.getFirstName());
+                accountDTO.setAccountNumber(account.getAccountNumber());
+                accountDTO.setLastName(account.getLastName());
+                accountDTO.setFatherName(account.getFatherName());
+                accountDTO.setMobileNumber(account.getMobileNumber());
+                accountDTO.setNationalCode(account.getNationalCode());
+                accountDTO.setCity(account.getCity());
+                accountDTO.setAdderss(account.getAdderss());
+                accountDTO.setCreationDate(account.getCreationDate());
+                dtoList.add(accountDTO);
+            }
+            laDTO.setData(dtoList);
+            return Optional.ofNullable(laDTO);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<ListAccountDTO> findAllDTO(String firstName, String lastName) {
         Optional<List<Account>> list = accountRepo.findAllByFirstNameLikeOrLastNameLike(firstName, lastName);
         if (list.isPresent()) {
             ListAccountDTO laDTO = new ListAccountDTO();
@@ -130,7 +156,6 @@ public class AccountService {
             List<AccountDTO> dtoList = new ArrayList<>();
             for (Account account : list.get()) {
                 AccountDTO accountDTO = new AccountDTO();
-
                 accountDTO.setAccountId(account.getUid().toString());
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());

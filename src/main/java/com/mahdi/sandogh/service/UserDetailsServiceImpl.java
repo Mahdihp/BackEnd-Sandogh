@@ -1,8 +1,8 @@
 package com.mahdi.sandogh.service;
 
-import com.mahdi.sandogh.model.User;
-import com.mahdi.sandogh.model.UserPrinciple;
-import com.mahdi.sandogh.repository.UserRepo;
+import com.mahdi.sandogh.model.user.User;
+import com.mahdi.sandogh.model.user.UserPrinciple;
+import com.mahdi.sandogh.model.user.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
