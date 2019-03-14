@@ -64,6 +64,32 @@ public class LoanService {
         return false;
     }
 
+    public Optional<ListLoanDTO> findAllDTO() {
+        List<Loan> list = loanRepo.findAll();
+        if (list != null) {
+            ListLoanDTO llDTO = new ListLoanDTO();
+            llDTO.setStatus(HttpStatus.OK.value());
+            llDTO.setMessage(Constants.KEY_SUCESSE);
+            List<LoanDTO> dtoList = new ArrayList<>();
+            for (Loan loan : list) {
+                LoanDTO loanDTO = new LoanDTO();
+                loanDTO.setLoanId(loan.getUid().toString());
+                loanDTO.setCountLoan(loan.getCountLoan());
+                loanDTO.setSumLoan(loan.getSumLoan());
+                loanDTO.setCurrentLoanAmount(loan.getCurrentLoanAmount());
+                loanDTO.setDateCurrentLoan(loan.getDateCurrentLoan());
+                loanDTO.setCountInstallments(loan.getCountInstallments());
+                loanDTO.setAmountPerInstallment(loan.getAmountPerInstallment());
+                loanDTO.setDateFinishInstallment(loan.getDateFinishInstallment());
+                loanDTO.setAccountId(loan.getAccount().getUid().toString());
+                dtoList.add(loanDTO);
+            }
+            llDTO.setData(dtoList);
+            return Optional.ofNullable(llDTO);
+        }
+        return Optional.empty();
+    }
+
     public Optional<Loan> findById(String loanId) {
         Optional<Loan> loan = loanRepo.findByUid(UUID.fromString(loanId));
         if (loan.isPresent())
@@ -93,7 +119,7 @@ public class LoanService {
         return Optional.empty();
     }
 
-    public Optional<ListLoanDTO> findAllDTOById(String accountId) {
+    public Optional<ListLoanDTO> findAllDTOByAccountId(String accountId) {
         Optional<List<Loan>> list = loanRepo.findAllByAccountUid(UUID.fromString(accountId));
         if (list.isPresent()) {
             ListLoanDTO llDTO = new ListLoanDTO();

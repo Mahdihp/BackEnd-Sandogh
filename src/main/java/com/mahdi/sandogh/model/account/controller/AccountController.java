@@ -22,7 +22,7 @@ import java.util.Optional;
 public class AccountController {
 
     @Autowired
-    AccountService accountService;
+    private AccountService accountService;
 
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
