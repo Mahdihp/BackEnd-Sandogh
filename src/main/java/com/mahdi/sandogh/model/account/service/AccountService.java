@@ -75,7 +75,7 @@ public class AccountService {
         return false;
     }
 
-    public Optional<Account> findUid(String uid) {
+    public Optional<Account> findById(String uid) {
         Optional<Account> account = accountRepo.findByUid(UUID.fromString(uid));
         if (account.isPresent())
             return Optional.ofNullable(account.get());

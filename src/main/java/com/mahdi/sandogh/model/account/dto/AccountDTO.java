@@ -19,6 +19,7 @@ public class AccountDTO extends BaseDTO {
     private String mobileNumber;
     private String city;
     private Boolean active;
+    private Integer countLoan;
     private String adderss;
     private Long creationDate;
 

@@ -29,12 +29,12 @@ public class LoanService {
 
     //  یه عضو چند بار وام می تونه بگیره
     public boolean create(LoanForm loanForm) {
-        Optional<Account> account = accountService.findUid(loanForm.getAccountId());
+        Optional<Account> account = accountService.findById(loanForm.getAccountId());
         if (account.isPresent()) {
             Loan loan = new Loan();
             loan.setUid(UUID.randomUUID());
             loan.setCountLoan(loanForm.getCountLoan());
-            loan.setSumLoan(loanForm.getSumLoan());
+//            loan.setSumLoan(loanForm.getSumLoan());
             loan.setCurrentLoanAmount(loanForm.getCurrentLoanAmount());
             loan.setDateCurrentLoan(loanForm.getDateCurrentLoan());
             loan.setCountInstallments(loanForm.getCountInstallments());
@@ -51,7 +51,7 @@ public class LoanService {
         Optional<Loan> loan = loanRepo.findByUid(UUID.fromString(loanForm.getLoanId()));
         if (loan.isPresent()) {
             loan.get().setCountLoan(loanForm.getCountLoan());
-            loan.get().setSumLoan(loanForm.getSumLoan());
+//            loan.get().setSumLoan(loanForm.getSumLoan());
             loan.get().setCurrentLoanAmount(loanForm.getCurrentLoanAmount());
             loan.get().setDateCurrentLoan(loanForm.getDateCurrentLoan());
             loan.get().setCountInstallments(loanForm.getCountInstallments());
@@ -75,7 +75,7 @@ public class LoanService {
                 LoanDTO loanDTO = new LoanDTO();
                 loanDTO.setLoanId(loan.getUid().toString());
                 loanDTO.setCountLoan(loan.getCountLoan());
-                loanDTO.setSumLoan(loan.getSumLoan());
+//                loanDTO.setSumLoan(loan.getSumLoan());
                 loanDTO.setCurrentLoanAmount(loan.getCurrentLoanAmount());
                 loanDTO.setDateCurrentLoan(loan.getDateCurrentLoan());
                 loanDTO.setCountInstallments(loan.getCountInstallments());
@@ -107,7 +107,7 @@ public class LoanService {
 
             loanDTO.setLoanId(loan.get().getUid().toString());
             loanDTO.setCountLoan(loan.get().getCountLoan());
-            loanDTO.setSumLoan(loan.get().getSumLoan());
+//            loanDTO.setSumLoan(loan.get().getSumLoan());
             loanDTO.setCurrentLoanAmount(loan.get().getCurrentLoanAmount());
             loanDTO.setDateCurrentLoan(loan.get().getDateCurrentLoan());
             loanDTO.setCountInstallments(loan.get().getCountInstallments());
@@ -130,7 +130,7 @@ public class LoanService {
                 LoanDTO loanDTO = new LoanDTO();
                 loanDTO.setLoanId(loan.getUid().toString());
                 loanDTO.setCountLoan(loan.getCountLoan());
-                loanDTO.setSumLoan(loan.getSumLoan());
+//                loanDTO.setSumLoan(loan.getSumLoan());
                 loanDTO.setCurrentLoanAmount(loan.getCurrentLoanAmount());
                 loanDTO.setDateCurrentLoan(loan.getDateCurrentLoan());
                 loanDTO.setCountInstallments(loan.getCountInstallments());

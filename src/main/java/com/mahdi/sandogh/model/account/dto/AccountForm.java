@@ -3,28 +3,30 @@ package com.mahdi.sandogh.model.account.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class AccountForm {
 
     private String accountId;
 
-    @NotBlank
+    @NotNull
     private String firstName;
 
     private String accountNumber;
 
-    @NotBlank
+    @NotNull
     private String lastName;
 
-    @NotBlank
+    @NotNull
     private String fatherName;
 
-    @NotBlank
+    @NotNull
     private String nationalCode;
 
-    @NotBlank
+    private Integer countLoan;
+
+    @NotNull
     private String mobileNumber;
 
     private String city;

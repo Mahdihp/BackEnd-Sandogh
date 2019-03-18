@@ -5,6 +5,7 @@ import com.mahdi.sandogh.model.account.Account;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -31,6 +32,10 @@ public class Monthly { // جدول ماهانه ها
     @Column(name = "creationdate", updatable = false)
     @CreatedDate
     private long creationDate; // تاریخ
+
+    @Column(name = "modificationdate", updatable = true)
+    @LastModifiedDate
+    private long modificationDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "accountid", nullable = false)

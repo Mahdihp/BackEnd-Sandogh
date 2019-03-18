@@ -27,7 +27,7 @@ public class InstallmentLoanService {
     private AccountService accountService;
 
     public boolean create(InstallmentLoanForm ilForm) {
-        Optional<Account> account = accountService.findUid(ilForm.getAccountId());
+        Optional<Account> account = accountService.findById(ilForm.getAccountId());
         if (account.isPresent()) {
             InstallmentLoan installmentLoan = new InstallmentLoan();
             installmentLoan.setUid(UUID.randomUUID());

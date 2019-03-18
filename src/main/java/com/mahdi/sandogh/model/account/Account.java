@@ -57,6 +57,9 @@ public class Account {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "countloan")
+    private int countLoan;
+
     @Column(name = "creationdate", updatable = false)
     @CreatedDate
     private long creationDate;
