@@ -1,12 +1,12 @@
-package com.mahdi.sandogh.model.installmentLoan.service;
+package com.mahdi.sandogh.model.installmentloan.service;
 
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.service.AccountService;
-import com.mahdi.sandogh.model.installmentLoan.InstallmentLoan;
-import com.mahdi.sandogh.model.installmentLoan.dto.InstallmentLoanDTO;
-import com.mahdi.sandogh.model.installmentLoan.dto.InstallmentLoanForm;
-import com.mahdi.sandogh.model.installmentLoan.dto.ListInstallmentLoanDTO;
-import com.mahdi.sandogh.model.installmentLoan.repository.InstallmentLoanRepo;
+import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
+import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDTO;
+import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanForm;
+import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDTO;
+import com.mahdi.sandogh.model.installmentloan.repository.InstallmentLoanRepo;
 import com.mahdi.sandogh.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

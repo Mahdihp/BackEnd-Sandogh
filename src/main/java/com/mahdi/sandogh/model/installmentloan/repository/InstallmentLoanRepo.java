@@ -1,6 +1,6 @@
-package com.mahdi.sandogh.model.installmentLoan.repository;
+package com.mahdi.sandogh.model.installmentloan.repository;
 
-import com.mahdi.sandogh.model.installmentLoan.InstallmentLoan;
+import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

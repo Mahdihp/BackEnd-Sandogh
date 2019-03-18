@@ -1,9 +1,10 @@
-package com.mahdi.sandogh.model.sahamSalaneh;
+package com.mahdi.sandogh.model.sahamsalaneh;
 
 
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -32,4 +33,8 @@ public class SahamSalaneh { // سهام سالانه
     @Column(name = "creationdate", updatable = false)
     @CreatedDate
     private long creationDate;
+
+    @Column(name = "modificationdate", updatable = true)
+    @LastModifiedDate
+    private long modificationDate;
 }

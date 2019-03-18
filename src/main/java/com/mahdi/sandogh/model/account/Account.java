@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.model.account;
 
 
-import com.mahdi.sandogh.model.installmentLoan.InstallmentLoan;
+import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
 import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.monthly.Monthly;
 import lombok.Data;

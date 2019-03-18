@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.installmentLoan.dto;
+package com.mahdi.sandogh.model.installmentloan.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mahdi.sandogh.model.BaseDTO;

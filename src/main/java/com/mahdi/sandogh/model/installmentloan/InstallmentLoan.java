@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.installmentLoan;
+package com.mahdi.sandogh.model.installmentloan;
 
 
 import com.mahdi.sandogh.model.account.Account;

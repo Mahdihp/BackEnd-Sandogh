@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.installmentLoan.dto;
+package com.mahdi.sandogh.model.installmentloan.dto;
 
 import lombok.Data;
 
