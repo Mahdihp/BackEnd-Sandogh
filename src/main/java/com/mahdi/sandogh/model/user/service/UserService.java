@@ -78,6 +78,8 @@ public class UserService {
             userDTO.setStatus(HttpStatus.OK.value());
             userDTO.setMessage(Constants.KEY_SUCESSE);
 
+            userDTO.setUserId(user.get().getUid().toString());
+
             userDTO.setFirstName(user.get().getFirstName());
             userDTO.setLastName(user.get().getLastName());
             userDTO.setUserName(user.get().getUserName());
@@ -97,6 +99,7 @@ public class UserService {
             List<UserDTO> dtoList = new ArrayList<>();
             for (User user : list) {
                 UserDTO userDTO = new UserDTO();
+                userDTO.setUserId(user.getUid().toString());
                 userDTO.setFirstName(user.getFirstName());
                 userDTO.setLastName(user.getLastName());
                 userDTO.setUserName(user.getUserName());

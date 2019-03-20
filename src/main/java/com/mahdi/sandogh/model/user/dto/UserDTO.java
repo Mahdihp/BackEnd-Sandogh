@@ -26,4 +26,9 @@ public class UserDTO extends BaseDTO {
 
     public UserDTO() {
     }
+
+    public UserDTO(Integer status, String message, String userId) {
+        super(status, message);
+        this.userId = userId;
+    }
 }

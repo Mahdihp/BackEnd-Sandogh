@@ -40,7 +40,7 @@ public class AppRunner implements ApplicationRunner {
         user1.setFirstName("mahdi");
         user1.setLastName("hosseinpour");
         user1.setUserName("mahdihp");
-        user1.setPassword("12345");
+        user1.setPassword("123456");
         user1.setActive(true);
 
         User user2=new User();

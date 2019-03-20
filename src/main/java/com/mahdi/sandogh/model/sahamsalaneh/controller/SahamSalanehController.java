@@ -31,7 +31,7 @@ public class SahamSalanehController {
     @Autowired
     private SahamSalanehService sahamSalanehService;
 
-    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createSahamSalaneh(@Valid @RequestBody SahamSalanehForm ssForm) {
         sahamSalanehService.create(ssForm);
         return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_SAHAMSALANEH));
@@ -53,7 +53,7 @@ public class SahamSalanehController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_SAHAMSALANEH));
     }
 
-    @PostMapping(value = "/", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findSahamSalaneh(@RequestParam("sahamsalanehid") String sahamsalanehId) {
         Optional<SahamSalanehDTO> sahamsalaneh = sahamSalanehService.findDTO(1, sahamsalanehId);
         if (sahamsalaneh.isPresent())

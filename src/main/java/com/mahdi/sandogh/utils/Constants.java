@@ -16,4 +16,7 @@ public class Constants {
     public static final String KEY_CREATE_SAHAMSALANEH = "سهم سالانه ثبت شد.";
     public static final String KEY_UPDATE_SAHAMSALANEH = "سهم سالانه بروز شد.";
     public static final String KEY_NOT_FOUND_SAHAMSALANEH = "سهم سالانه موجود نیست";
+    public static final String KEY_CREATE_USER = "کاربر جدید ثبت شد.";
+    public static final String KEY_UPDATE_USER = "کاربر بروز شد.";
+    public static final String KEY_NOT_FOUND_USER = "کاربری پیدا نشد.";
 }
