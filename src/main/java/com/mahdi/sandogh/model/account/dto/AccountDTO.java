@@ -26,4 +26,9 @@ public class AccountDTO extends BaseDTO {
 
     public AccountDTO() {
     }
+
+    public AccountDTO(Integer status, String message, String accountId) {
+        super(status, message);
+        this.accountId = accountId;
+    }
 }

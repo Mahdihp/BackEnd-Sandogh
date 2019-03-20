@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.service;
+package com.mahdi.sandogh.model.user.service;
 
 import com.mahdi.sandogh.model.user.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

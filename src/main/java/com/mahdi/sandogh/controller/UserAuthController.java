@@ -2,7 +2,7 @@ package com.mahdi.sandogh.controller;
 
 
 import com.mahdi.sandogh.model.account.dto.SignInForm;
-import com.mahdi.sandogh.service.UserService;
+import com.mahdi.sandogh.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

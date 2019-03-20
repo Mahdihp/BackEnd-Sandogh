@@ -27,11 +27,12 @@ public class AccountService {
     private String accountNumber;
 
 
-    public boolean create(AccountForm accountForm) {
+    public UUID create(AccountForm accountForm) {
         Boolean exists = accountRepo.existsByNationalCode(accountForm.getNationalCode());
+        UUID uid = UUID.randomUUID();
         if (!exists) {
             Account account = new Account();
-            account.setUid(UUID.randomUUID());
+            account.setUid(uid);
             Long accountNumber = accountRepo.findMaxAccountNumber();
             if (accountNumber != null) {
 
@@ -52,9 +53,9 @@ public class AccountService {
             account.setAdderss(accountForm.getAdderss());
             account.setCreationDate(System.currentTimeMillis());
             accountRepo.save(account);
-            return true;
+            return uid;
         }
-        return false;
+        return null;
     }
 
     public boolean update(AccountForm accountForm) {
