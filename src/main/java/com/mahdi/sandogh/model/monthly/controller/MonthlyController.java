@@ -31,7 +31,7 @@ public class MonthlyController {
     @Autowired
     private MonthlyService monthlyService;
 
-    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createMonthly(@Valid @RequestBody MonthlyForm monthlyForm) {
         if (monthlyService.create(monthlyForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_MONTHLY));
@@ -49,7 +49,7 @@ public class MonthlyController {
 
     }
 
-    @PostMapping(value = "/{monthlyid}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all/{monthlyid}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findAllAccount(@PathVariable(value = "monthlyid") String monthlyId) {
         Optional<ListMonthlyDTO> list = monthlyService.findAllDTO(monthlyId);
         if (list.isPresent())
@@ -58,7 +58,7 @@ public class MonthlyController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
     }
 
-    @PostMapping(value = "/", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("monthlyid") String monthlyid) {
         Optional<MonthlyDTO> monthlyDTO = monthlyService.findDTOById(monthlyid);
         if (monthlyDTO.isPresent())

@@ -23,8 +23,8 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseEntity<?> createAccount(@Valid @RequestBody LoanForm loanForm) {
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> createLoan(@Valid @RequestBody LoanForm loanForm) {
         if (loanService.create(loanForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_LOAN));
         else
@@ -32,7 +32,7 @@ public class LoanController {
     }
 
     @PostMapping(value = "/{loanid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseEntity<?> updateAccount(@PathVariable(value = "loanid") String loanId, @Valid @RequestBody LoanForm loanForm) {
+    public ResponseEntity<?> updateLoan(@PathVariable(value = "loanid") String loanId, @Valid @RequestBody LoanForm loanForm) {
         loanForm.setAccountId(loanId);
         if (loanService.update(loanForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_UPDATE_LOAN));
@@ -40,7 +40,7 @@ public class LoanController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
     }
 
-    @PostMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findAllLoan() {
         Optional<ListLoanDTO> list = loanService.findAllDTO();
         if (list.isPresent())
@@ -49,8 +49,8 @@ public class LoanController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_LOAN));
     }
 
-    @PostMapping(value = "/", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseEntity<?> findAccount(@RequestParam("type") int type, @RequestParam("loanid") String loanId) {
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<?> findLoan(@RequestParam("type") int type, @RequestParam("loanid") String loanId) {
         Optional<LoanDTO> loan = loanService.findDTOById(loanId);
         if (loan.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(loan.get());
