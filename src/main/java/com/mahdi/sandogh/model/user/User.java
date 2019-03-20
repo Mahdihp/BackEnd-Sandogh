@@ -34,11 +34,11 @@ public class User {
     @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "username")
-    @Size(min = 5, max = 30) //
+    @Column(name = "username", unique = true, nullable = false)
+    @Size(min = 5, max = 30)
     private String userName;
 
-    @Column(name = "password")
+    @Column(name = "password", unique = true, nullable = false)
     @Size(min = 5, max = 30)
     private String password;
 
