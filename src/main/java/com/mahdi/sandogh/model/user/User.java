@@ -42,6 +42,10 @@ public class User {
     @Size(min = 5, max = 30)
     private String password;
 
+    @Column(name = "mobilenumber")
+    @Size(min = 11, max = 11)
+    private String mobileNumber;
+
     @Column(name = "active")
     private boolean active;
 

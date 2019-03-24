@@ -8,9 +8,12 @@ import com.mahdi.sandogh.model.user.dto.ListUserDTO;
 import com.mahdi.sandogh.model.user.dto.UserDTO;
 import com.mahdi.sandogh.model.user.dto.UserForm;
 import com.mahdi.sandogh.model.user.repository.UserRepo;
+import com.mahdi.sandogh.security.jwt.JwtProvider;
 import com.mahdi.sandogh.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,6 +25,15 @@ public class UserService {
     private UserRepo userRepo;
     @Autowired
     private RoleRepo roleRepo;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
+    @Autowired
+    private JwtProvider jwtProvider;
 
     public UUID create(UserForm userForm) {
         Boolean exists = userRepo.existsByUserNameAndPassword(userForm.getUserName(), userForm.getPassword());

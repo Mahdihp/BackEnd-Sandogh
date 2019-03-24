@@ -1,7 +1,6 @@
 package com.mahdi.sandogh.utils;
 
 
-import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.repository.AccountRepo;
 import com.mahdi.sandogh.model.role.Role;
 import com.mahdi.sandogh.model.role.RoleName;
@@ -36,7 +35,7 @@ public class AppRunner implements ApplicationRunner {
 
     private void initDatabase() {
         User user1=new User();
-        user1.setUid(UUID.fromString("b1dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
+        user1.setUid(UUID.fromString("13981528-1d44-4ae3-9dc0-c3b8213d45a6"));
         user1.setFirstName("mahdi");
         user1.setLastName("hosseinpour");
         user1.setUserName("mahdihp");
@@ -44,7 +43,7 @@ public class AppRunner implements ApplicationRunner {
         user1.setActive(true);
 
         User user2=new User();
-        user2.setUid(UUID.fromString("b2dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
+        user2.setUid(UUID.fromString("13982528-1d44-4ae3-9dc0-c3b8213d45a6"));
         user2.setFirstName("abazar");
         user2.setLastName("jafari");
         user2.setUserName("jafari");
@@ -68,16 +67,16 @@ public class AppRunner implements ApplicationRunner {
         user1.setRoles(roles1);
         user2.setRoles(roles2);
 
-        Account account1=new Account();
-        account1.setUid(UUID.fromString("b3dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
-        account1.setCreationDate(System.currentTimeMillis());
-        account1.setFirstName("mahdi");
-        account1.setLastName("hosseinpour");
-        account1.setFatherName("ali");
-        int years = DataUtil.generateNumericRandomAccountNumber();
-        System.out.println("Log---initDatabase--------------------:" + String.valueOf("1000001000" + years));
-        account1.setAccountNumber(String.valueOf("1000001000" + years));
-        System.out.println("Log---initDatabase--------------------:" + DataUtil.longToDate(account1.getCreationDate()));
+//        Account account1=new Account();
+//        account1.setUid(UUID.fromString("b3dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
+//        account1.setCreationDate(System.currentTimeMillis());
+//        account1.setFirstName("mahdi");
+//        account1.setLastName("hosseinpour");
+//        account1.setFatherName("ali");
+//        int years = DataUtil.generateNumericRandomAccountNumber();
+//        System.out.println("Log---initDatabase--------------------:" + String.valueOf("1000001000" + years));
+//        account1.setAccountNumber(String.valueOf("1000001000" + years));
+//        System.out.println("Log---initDatabase--------------------:" + DataUtil.longToDate(account1.getCreationDate()));
 
 
         roleRepo.save(role1);
@@ -86,7 +85,7 @@ public class AppRunner implements ApplicationRunner {
         userRepo.save(user1);
         userRepo.save(user2);
 
-        accountRepo.save(account1);
+//        accountRepo.save(account1);
 
 
     }
