@@ -7,4 +7,4 @@ Programming: Mahdi Hosseinpour
 
 Date : 1397/12/17
 
-With: Java (Spring boot) & Mysql Database
+With: Java (Spring boot) & Postgresql Database
