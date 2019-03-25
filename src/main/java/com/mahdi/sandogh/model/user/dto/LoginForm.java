@@ -2,7 +2,7 @@ package com.mahdi.sandogh.model.user.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by mahdi
@@ -16,10 +16,10 @@ import javax.validation.constraints.Size;
 @Data
 public class LoginForm {
 
-    @Size(min = 5, max = 30)
+    @NotNull
     private String userName;
 
-    @Size(min = 5, max = 30)
+    @NotNull
     private String password;
 
     public LoginForm() {

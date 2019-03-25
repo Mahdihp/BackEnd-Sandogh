@@ -2,6 +2,8 @@ package com.mahdi.sandogh.model.user.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by mahdi
  * User: mahdi
@@ -14,11 +16,22 @@ import lombok.Data;
 public class UserForm {
 
     private String userId;
-    private String firstName;
-    private String lastName;
+
+    @NotNull
+    private String name;
+
+    @NotNull
     private String userName;
+
+    @NotNull
     private String password;
+
+    private String nationalId;
+
+    @NotNull
     private Boolean active;
+
+    @NotNull
     private Boolean user;
 
     public UserForm() {

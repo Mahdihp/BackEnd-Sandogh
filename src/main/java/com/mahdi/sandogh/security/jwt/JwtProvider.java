@@ -10,15 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-/**
- * Created by mahdi
- * User: mahdi
- * Date: 3/24/19
- * Time: 12:38
- * https://github.com/mahdihp
- */
-
-
 @Component
 public class JwtProvider {
 
@@ -28,12 +19,12 @@ public class JwtProvider {
     private String jwtSecret;
 
     @Value("${sandogh.app.jwtExpiration}")
-    private int jwtExpiration;
+    private long jwtExpiration;
 
     public String generateJwtToken(Authentication authentication) {
 
         UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
-
+        System.out.println("Log---generateJwtToken11--------------------:" + userPrincipal.getUsername());
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())

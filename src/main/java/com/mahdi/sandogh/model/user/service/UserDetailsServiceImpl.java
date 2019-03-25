@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User Not Found with -> username or email : " + username)
                 );
-
+//         System.out.println("Log---loadUserByUsername--------------------:"+user);
         return UserPrinciple.build(user);
     }
 }

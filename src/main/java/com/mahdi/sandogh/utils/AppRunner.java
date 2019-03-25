@@ -10,6 +10,7 @@ import com.mahdi.sandogh.model.user.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -20,13 +21,16 @@ import java.util.UUID;
 public class AppRunner implements ApplicationRunner {
 
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
 
     @Autowired
-    RoleRepo roleRepo;
+    private RoleRepo roleRepo;
 
     @Autowired
-    AccountRepo accountRepo;
+    private AccountRepo accountRepo;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -36,54 +40,35 @@ public class AppRunner implements ApplicationRunner {
     private void initDatabase() {
         User user1=new User();
         user1.setUid(UUID.fromString("13981528-1d44-4ae3-9dc0-c3b8213d45a6"));
-        user1.setFirstName("mahdi");
-        user1.setLastName("hosseinpour");
+        user1.setDisplayName("hosseinpour");
         user1.setUserName("mahdihp");
-        user1.setPassword("123456");
+        user1.setNationalId("0386007551");
+        user1.setPassword(encoder.encode("123456"));
         user1.setActive(true);
 
-        User user2=new User();
-        user2.setUid(UUID.fromString("13982528-1d44-4ae3-9dc0-c3b8213d45a6"));
-        user2.setFirstName("abazar");
-        user2.setLastName("jafari");
-        user2.setUserName("jafari");
-        user2.setPassword("12345");
-        user2.setActive(true);
+//        User user2=new User();
+//        user2.setUid(UUID.fromString("13982528-1d44-4ae3-9dc0-c3b8213d45a6"));
+//        user2.setDisplayName("abazar");
+//        user2.setUserName("jafari");
+//        user2.setNationalId("0386007551");
+//        user2.setPassword(encoder.encode("123456"));
+//        user2.setActive(true);
 
         Role role1 = new Role();
         role1.setName(RoleName.ROLE_ADMIN);
 
-        Role role2 = new Role();
-        role2.setName(RoleName.ROLE_USER);
 
         Set<Role> roles1 = new HashSet<>();
         roles1.add(role1);
-        roles1.add(role2);
 
-        Set<Role> roles2 = new HashSet<>();
-        roles2.add(role1);
-        roles2.add(role2);
-
+        System.out.println("Log---initDatabase--------------------:" + user1.getPassword());
         user1.setRoles(roles1);
-        user2.setRoles(roles2);
-
-//        Account account1=new Account();
-//        account1.setUid(UUID.fromString("b3dc7528-1d44-4ae3-9dc0-c3b8213d45a6"));
-//        account1.setCreationDate(System.currentTimeMillis());
-//        account1.setFirstName("mahdi");
-//        account1.setLastName("hosseinpour");
-//        account1.setFatherName("ali");
-//        int years = DataUtil.generateNumericRandomAccountNumber();
-//        System.out.println("Log---initDatabase--------------------:" + String.valueOf("1000001000" + years));
-//        account1.setAccountNumber(String.valueOf("1000001000" + years));
-//        System.out.println("Log---initDatabase--------------------:" + DataUtil.longToDate(account1.getCreationDate()));
-
+//        user2.setRoles(roles1);
 
         roleRepo.save(role1);
-        roleRepo.save(role2);
 
         userRepo.save(user1);
-        userRepo.save(user2);
+//        userRepo.save(user2);
 
 //        accountRepo.save(account1);
 

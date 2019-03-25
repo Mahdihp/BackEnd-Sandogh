@@ -2,6 +2,8 @@ package com.mahdi.sandogh.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.user.User;
+import com.mahdi.sandogh.security.jwt.JwtResponse;
 import lombok.Data;
 
 /**
@@ -18,11 +20,12 @@ import lombok.Data;
 public class UserDTO extends BaseDTO {
 
     private String userId;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String nationalId;
     private String userName;
     private String password;
     private Boolean active;
+    private JwtResponse jwtResponse;
 
     public UserDTO() {
     }
@@ -30,5 +33,16 @@ public class UserDTO extends BaseDTO {
     public UserDTO(Integer status, String message, String userId) {
         super(status, message);
         this.userId = userId;
+    }
+
+    public static UserDTO convertToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserId(user.getUid().toString());
+        userDTO.setName(user.getDisplayName());
+        userDTO.setNationalId(user.getNationalId());
+        userDTO.setUserName(user.getUserName());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setActive(user.isActive());
+        return userDTO;
     }
 }

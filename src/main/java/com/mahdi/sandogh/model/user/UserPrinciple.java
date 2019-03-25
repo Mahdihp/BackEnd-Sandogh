@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -25,18 +26,24 @@ public class UserPrinciple implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    private UUID uid;
+    private String name;
     private String username;
-    private String mobileNumber;
+    private String nationalId;
+    private Boolean active;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String username, String mobileNumber, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(Long id, UUID uid, String name, String username, String nationalId, Boolean active, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
+        this.uid = uid;
+        this.name = name;
         this.username = username;
-        this.mobileNumber = mobileNumber;
+        this.nationalId = nationalId;
+        this.active = active;
         this.password = password;
         this.authorities = authorities;
     }
@@ -48,9 +55,12 @@ public class UserPrinciple implements UserDetails {
 
         return new UserPrinciple(
                 user.getId(),
+                user.getUid(),
+                user.getDisplayName(),
                 user.getUserName(),
+                user.getNationalId(),
+                user.isActive(),
                 user.getPassword(),
-                user.getMobileNumber(),
                 authorities
         );
     }

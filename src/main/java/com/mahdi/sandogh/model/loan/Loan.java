@@ -28,7 +28,7 @@ public class Loan { //جدول وام ها
     @Column(name = "countloan")
     private int countLoan; // تعداد وام
 
-//    @Column(name = "sumloan")
+//    @Column(displayName = "sumloan")
 //    private long sumLoan; // مجموع تعداد وام
 
     @Column(name = "currentloanamount")

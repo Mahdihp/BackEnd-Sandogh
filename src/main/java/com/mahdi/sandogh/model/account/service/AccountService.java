@@ -21,10 +21,10 @@ import java.util.UUID;
 public class AccountService {
 
     @Autowired
-    AccountRepo accountRepo;
+    private AccountRepo accountRepo;
 
-    @Value("${mostashar.app.accountNumber}")
-    private String accountNumber;
+    @Value("${sandogh.app.accountNumber}")
+    private long accountNumber;
 
 
     public UUID create(AccountForm accountForm) {

@@ -12,7 +12,6 @@ import com.mahdi.sandogh.security.jwt.JwtProvider;
 import com.mahdi.sandogh.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +25,6 @@ public class UserService {
     @Autowired
     private RoleRepo roleRepo;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -35,16 +32,17 @@ public class UserService {
     @Autowired
     private JwtProvider jwtProvider;
 
+
     public UUID create(UserForm userForm) {
         Boolean exists = userRepo.existsByUserNameAndPassword(userForm.getUserName(), userForm.getPassword());
         UUID uid = UUID.randomUUID();
         if (!exists) {
             User user = new User();
             user.setUid(uid);
-            user.setFirstName(userForm.getFirstName());
-            user.setLastName(userForm.getLastName());
+            user.setDisplayName(userForm.getName());
+            user.setNationalId(userForm.getNationalId());
             user.setUserName(userForm.getUserName());
-            user.setPassword(userForm.getPassword());
+            user.setPassword(encoder.encode(userForm.getPassword()));
             user.setActive(userForm.getActive());
 
             Set<Role> roles = new HashSet<>();
@@ -67,8 +65,8 @@ public class UserService {
     public boolean update(UserForm userForm) {
         Optional<User> user = userRepo.findByUid(UUID.fromString(userForm.getUserId()));
         if (user.isPresent()) {
-            user.get().setFirstName(userForm.getFirstName());
-            user.get().setLastName(userForm.getLastName());
+            user.get().setNationalId(userForm.getName());
+            user.get().setNationalId(userForm.getNationalId());
             user.get().setUserName(userForm.getUserName());
             user.get().setPassword(userForm.getPassword());
             user.get().setActive(userForm.getActive());
@@ -92,8 +90,8 @@ public class UserService {
 
             userDTO.setUserId(user.get().getUid().toString());
 
-            userDTO.setFirstName(user.get().getFirstName());
-            userDTO.setLastName(user.get().getLastName());
+            userDTO.setName(user.get().getDisplayName());
+            userDTO.setNationalId(user.get().getNationalId());
             userDTO.setUserName(user.get().getUserName());
             userDTO.setPassword(user.get().getPassword());
             userDTO.setActive(user.get().isActive());
@@ -112,8 +110,8 @@ public class UserService {
             for (User user : list) {
                 UserDTO userDTO = new UserDTO();
                 userDTO.setUserId(user.getUid().toString());
-                userDTO.setFirstName(user.getFirstName());
-                userDTO.setLastName(user.getLastName());
+                userDTO.setNationalId(user.getNationalId());
+                userDTO.setName(user.getDisplayName());
                 userDTO.setUserName(user.getUserName());
                 userDTO.setPassword(user.getPassword());
                 userDTO.setActive(user.isActive());
@@ -126,4 +124,8 @@ public class UserService {
     }
 
 
+    public Optional<User> findByUsername(String userName) {
+        Optional<User> user = userRepo.findByUserName(userName);
+        return user;
+    }
 }

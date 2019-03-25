@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,24 +28,21 @@ public class User {
     private UUID uid;
 
     @Size(max = 50)
-    @Column(name = "firstname")
-    private String firstName;
-
-    @Size(max = 50)
-    @Column(name = "lastname")
-    private String lastName;
+    @Column(name = "displayname")
+    private String displayName;
 
     @Column(name = "username", unique = true, nullable = false)
     @Size(min = 5, max = 30)
     private String userName;
 
     @Column(name = "password", unique = true, nullable = false)
-    @Size(min = 5, max = 30)
+    @NotBlank
+    @Size(min = 6, max = 100)
     private String password;
 
-    @Column(name = "mobilenumber")
-    @Size(min = 11, max = 11)
-    private String mobileNumber;
+    @Column(name = "nationalId")
+    @Size(min = 10, max = 10)
+    private String nationalId;
 
     @Column(name = "active")
     private boolean active;
