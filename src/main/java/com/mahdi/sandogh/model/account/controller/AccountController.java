@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);
@@ -35,6 +37,7 @@ public class AccountController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/{accountid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> updateAccount(@PathVariable(value = "accountid") String accountid, @Valid @RequestBody AccountForm accountForm) {
         accountForm.setAccountId(accountid);
@@ -45,6 +48,7 @@ public class AccountController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findAllAccount() {
         Optional<ListAccountDTO> list = accountService.findAllDTO();
@@ -54,6 +58,7 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("type") int type, @RequestParam("accountid") String accountid) {
         Optional<AccountDTO> accountDTO = accountService.findDTOByUid(type, accountid);

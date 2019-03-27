@@ -55,7 +55,7 @@ public class AppRunner implements ApplicationRunner {
 //        user2.setActive(true);
 
         Role role1 = new Role();
-        role1.setName(RoleName.ROLE_ADMIN);
+        role1.setName(RoleName.ROLE_USER);
 
 
         Set<Role> roles1 = new HashSet<>();
