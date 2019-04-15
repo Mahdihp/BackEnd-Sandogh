@@ -1,8 +1,6 @@
 package com.mahdi.sandogh.security;
 
 import com.mahdi.sandogh.model.user.service.UserDetailsServiceImpl;
-import com.mahdi.sandogh.security.jwt.JwtAuthEntryPoint;
-import com.mahdi.sandogh.security.jwt.JwtAuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * Created by mahdi
@@ -35,31 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
 
     @Bean
-    public JwtAuthTokenFilter authenticationJwtTokenFilter() {
-        return new JwtAuthTokenFilter();
-    }
-
-    @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -69,9 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }
