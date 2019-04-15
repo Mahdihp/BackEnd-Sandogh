@@ -26,7 +26,8 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);
