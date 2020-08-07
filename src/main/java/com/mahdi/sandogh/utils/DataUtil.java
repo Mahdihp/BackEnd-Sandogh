@@ -4,7 +4,6 @@ package com.mahdi.sandogh.utils;
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.util.Calendar;
 import com.ibm.icu.util.ULocale;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -42,12 +41,12 @@ public class DataUtil {
         long round = Math.round(Math.random() * 100000);
         return String.valueOf(round);
     }
-    public static String generateOffPackCode(int count) {
-        return  RandomStringUtils.randomAlphanumeric(count);
-    }
-    public static String generateAlphaNumericRandomUserPass(int count) {
-        return RandomStringUtils.randomAlphanumeric(count);
-    }
+//    public static String generateOffPackCode(int count) {
+//        return  RandomStringUtils.randomAlphanumeric(count);
+//    }
+//    public static String generateAlphaNumericRandomUserPass(int count) {
+//        return RandomStringUtils.randomAlphanumeric(count);
+//    }
 
     public static String longToDate(long date) {
         ULocale locale = new ULocale("fa_IR@calendar=persian");
