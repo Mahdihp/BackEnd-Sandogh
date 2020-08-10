@@ -8,7 +8,7 @@ import com.mahdi.sandogh.model.loan.dto.ListLoanDTO;
 import com.mahdi.sandogh.model.loan.dto.LoanDTO;
 import com.mahdi.sandogh.model.loan.dto.LoanForm;
 import com.mahdi.sandogh.model.loan.repository.LoanRepo;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -69,7 +69,7 @@ public class LoanService {
         if (list != null) {
             ListLoanDTO llDTO = new ListLoanDTO();
             llDTO.setStatus(HttpStatus.OK.value());
-            llDTO.setMessage(Constants.KEY_SUCESSE);
+            llDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<LoanDTO> dtoList = new ArrayList<>();
             for (Loan loan : list) {
                 LoanDTO loanDTO = new LoanDTO();
@@ -103,7 +103,7 @@ public class LoanService {
         if (loan.isPresent()) {
             LoanDTO loanDTO = new LoanDTO();
             loanDTO.setStatus(HttpStatus.OK.value());
-            loanDTO.setMessage(Constants.KEY_SUCESSE);
+            loanDTO.setMessage(AppConstants.KEY_SUCESSE);
 
             loanDTO.setLoanId(loan.get().getUid().toString());
             loanDTO.setCountLoan(loan.get().getCountLoan());
@@ -124,7 +124,7 @@ public class LoanService {
         if (list.isPresent()) {
             ListLoanDTO llDTO = new ListLoanDTO();
             llDTO.setStatus(HttpStatus.OK.value());
-            llDTO.setMessage(Constants.KEY_SUCESSE);
+            llDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<LoanDTO> dtoList = new ArrayList<>();
             for (Loan loan : list.get()) {
                 LoanDTO loanDTO = new LoanDTO();

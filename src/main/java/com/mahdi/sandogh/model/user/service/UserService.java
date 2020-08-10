@@ -9,7 +9,7 @@ import com.mahdi.sandogh.model.user.dto.UserDTO;
 import com.mahdi.sandogh.model.user.dto.UserForm;
 import com.mahdi.sandogh.model.user.repository.UserRepo;
 import com.mahdi.sandogh.security.jwt.JwtProvider;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -86,7 +86,7 @@ public class UserService {
         if (user.isPresent()) {
             UserDTO userDTO = new UserDTO();
             userDTO.setStatus(HttpStatus.OK.value());
-            userDTO.setMessage(Constants.KEY_SUCESSE);
+            userDTO.setMessage(AppConstants.KEY_SUCESSE);
 
             userDTO.setUserId(user.get().getUid().toString());
 
@@ -105,7 +105,7 @@ public class UserService {
         if (list != null) {
             ListUserDTO luDTO = new ListUserDTO();
             luDTO.setStatus(HttpStatus.OK.value());
-            luDTO.setMessage(Constants.KEY_SUCESSE);
+            luDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<UserDTO> dtoList = new ArrayList<>();
             for (User user : list) {
                 UserDTO userDTO = new UserDTO();

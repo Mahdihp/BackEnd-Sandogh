@@ -1,10 +1,14 @@
 package com.mahdi.sandogh.model.account;
 
 
+import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
 import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.monthly.Monthly;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Nationalized;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,10 +18,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "accounts")
-@Data
-public class Account {
+public class Account extends DateAudit {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,8 +38,11 @@ public class Account {
     @Column(name = "accountnumber", unique = true)
     private String accountNumber;
 
-    @Column(name = "firstname")
+    @Column(name = "firstname", columnDefinition = "nvarchar")
     private String firstName;
+
+    @Column(name = "firstname2", columnDefinition = "nvarchar")
+    private String firstName2;
 
     @Column(name = "lastname")
     private String lastName;
@@ -59,14 +67,6 @@ public class Account {
 
     @Column(name = "countloan")
     private int countLoan;
-
-    @Column(name = "creationdate", updatable = false)
-    @CreatedDate
-    private long creationDate;
-
-    @Column(name = "modificationdate", updatable = true)
-    @LastModifiedDate
-    private long modificationDate;
 
     @OneToMany(mappedBy = "account")
     private Set<Loan> loans = new HashSet<>();

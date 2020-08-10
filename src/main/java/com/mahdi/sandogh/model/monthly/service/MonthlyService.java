@@ -7,7 +7,7 @@ import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDTO;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyDTO;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyForm;
 import com.mahdi.sandogh.model.monthly.repository.MonthlyRepo;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -69,7 +69,7 @@ public class MonthlyService {
         if (monthly.isPresent()) {
             MonthlyDTO monthlyDTO = new MonthlyDTO();
             monthlyDTO.setStatus(HttpStatus.OK.value());
-            monthlyDTO.setMessage(Constants.KEY_SUCESSE);
+            monthlyDTO.setMessage(AppConstants.KEY_SUCESSE);
 
             monthlyDTO.setMonthlyId(monthly.get().getUid().toString());
             monthlyDTO.setAmountPerMonth(monthly.get().getAmountPerMonth());
@@ -86,7 +86,7 @@ public class MonthlyService {
         if (list.isPresent()) {
             ListMonthlyDTO lmDTO = new ListMonthlyDTO();
             lmDTO.setStatus(HttpStatus.OK.value());
-            lmDTO.setMessage(Constants.KEY_SUCESSE);
+            lmDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<MonthlyDTO> dtoList = new ArrayList<>();
             for (Monthly monthly : list.get()) {
                 MonthlyDTO monthlyDTO = new MonthlyDTO();

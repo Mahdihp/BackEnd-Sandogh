@@ -5,7 +5,7 @@ import com.mahdi.sandogh.model.sahamsalaneh.dto.ListSahamSalanehDTO;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehDTO;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehForm;
 import com.mahdi.sandogh.model.sahamsalaneh.service.SahamSalanehService;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,14 +34,14 @@ public class SahamSalanehController {
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createSahamSalaneh(@Valid @RequestBody SahamSalanehForm ssForm) {
         sahamSalanehService.create(ssForm);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_SAHAMSALANEH));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_SAHAMSALANEH));
     }
 
     @PostMapping(value = "/{sahamsalanehid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> updateSahamSalaneh(@PathVariable(value = "sahamsalanehid") String sahamsalanehId, @Valid @RequestBody SahamSalanehForm ssForm) {
         ssForm.setSahamSalanehId(sahamsalanehId);
         sahamSalanehService.update(ssForm);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_UPDATE_SAHAMSALANEH));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_SAHAMSALANEH));
     }
 
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -50,7 +50,7 @@ public class SahamSalanehController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_SAHAMSALANEH));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_SAHAMSALANEH));
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -59,6 +59,6 @@ public class SahamSalanehController {
         if (sahamsalaneh.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(sahamsalaneh.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_SAHAMSALANEH));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_SAHAMSALANEH));
     }
 }

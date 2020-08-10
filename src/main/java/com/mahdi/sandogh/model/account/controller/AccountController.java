@@ -6,7 +6,7 @@ import com.mahdi.sandogh.model.account.dto.AccountDTO;
 import com.mahdi.sandogh.model.account.dto.AccountForm;
 import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
 import com.mahdi.sandogh.model.account.service.AccountService;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,9 +32,9 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);
         if (uid != null)
-            return ResponseEntity.status(HttpStatus.OK).body(new AccountDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_ACCOUNT, uid.toString()));
+            return ResponseEntity.status(HttpStatus.OK).body(new AccountDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_ACCOUNT, uid.toString()));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
 
     }
 
@@ -43,9 +43,9 @@ public class AccountController {
     public ResponseEntity<?> updateAccount(@PathVariable(value = "accountid") String accountid, @Valid @RequestBody AccountForm accountForm) {
         accountForm.setAccountId(accountid);
         if (accountService.update(accountForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_UPDATE_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_ACCOUNT));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
 
     }
 
@@ -56,7 +56,7 @@ public class AccountController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -66,7 +66,7 @@ public class AccountController {
         if (accountDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(accountDTO.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
 
 }

@@ -5,7 +5,7 @@ import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDTO;
 import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanForm;
 import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDTO;
 import com.mahdi.sandogh.model.installmentloan.service.InstallmentLoanService;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,18 +34,18 @@ public class InstallmentLoanController {
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> createInstallmentLoan(@Valid @RequestBody InstallmentLoanForm ilForm) {
         if (installmentLoanService.create(ilForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_CREATE_INSTALLMENTLOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_INSTALLMENTLOAN));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_LOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
     @PostMapping(value = "/{installmentloanid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
     public ResponseEntity<?> updateInstallmentLoan(@PathVariable(value = "installmentloanid") String installmentloanid, @Valid @RequestBody InstallmentLoanForm ilForm) {
         ilForm.setAccountId(installmentloanid);
         if (installmentLoanService.update(ilForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_UPDATE_INSTALLMENTLOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_INSTALLMENTLOAN));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_LOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -54,7 +54,7 @@ public class InstallmentLoanController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_LOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -63,7 +63,7 @@ public class InstallmentLoanController {
         if (installmentLoanDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(installmentLoanDTO.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_LOAN));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
 }

@@ -5,7 +5,7 @@ import com.mahdi.sandogh.model.sahamsalaneh.dto.ListSahamSalanehDTO;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehDTO;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehForm;
 import com.mahdi.sandogh.model.sahamsalaneh.repository.SahamSalanehRepo;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -71,7 +71,7 @@ public class SahamSalanehService {
         if (sahamSalaneh.isPresent()) {
             SahamSalanehDTO ssDTO = new SahamSalanehDTO();
             ssDTO.setStatus(HttpStatus.OK.value());
-            ssDTO.setMessage(Constants.KEY_SUCESSE);
+            ssDTO.setMessage(AppConstants.KEY_SUCESSE);
 
             ssDTO.setSahamSalanehId(sahamSalaneh.get().getUid().toString());
             ssDTO.setMembershipFee(sahamSalaneh.get().getMembershipFee());
@@ -87,7 +87,7 @@ public class SahamSalanehService {
         if (list.isEmpty()) {
             ListSahamSalanehDTO lssDTO = new ListSahamSalanehDTO();
             lssDTO.setStatus(HttpStatus.OK.value());
-            lssDTO.setMessage(Constants.KEY_SUCESSE);
+            lssDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<SahamSalanehDTO> dtoList = new ArrayList<>();
             for (SahamSalaneh sahamSalaneh : list) {
                 SahamSalanehDTO ssDTO = new SahamSalanehDTO();

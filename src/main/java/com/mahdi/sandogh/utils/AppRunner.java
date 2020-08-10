@@ -34,7 +34,9 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        initDatabase();
+      //  initDatabase();
+
+        System.out.println(accountRepo.count());
     }
 
     private void initDatabase() {

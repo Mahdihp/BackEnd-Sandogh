@@ -5,7 +5,7 @@ import com.mahdi.sandogh.model.account.dto.AccountDTO;
 import com.mahdi.sandogh.model.account.dto.AccountForm;
 import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
 import com.mahdi.sandogh.model.account.repository.AccountRepo;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import com.mahdi.sandogh.utils.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -103,7 +103,7 @@ public class AccountService {
         if (account.isPresent()) {
             AccountDTO accountDTO = new AccountDTO();
             accountDTO.setStatus(HttpStatus.OK.value());
-            accountDTO.setMessage(Constants.KEY_SUCESSE);
+            accountDTO.setMessage(AppConstants.KEY_SUCESSE);
             accountDTO.setAccountId(account.get().getUid().toString());
             accountDTO.setActive(account.get().isActive());
             accountDTO.setFirstName(account.get().getFirstName());
@@ -125,7 +125,7 @@ public class AccountService {
         if (list != null) {
             ListAccountDTO laDTO = new ListAccountDTO();
             laDTO.setStatus(HttpStatus.OK.value());
-            laDTO.setMessage(Constants.KEY_SUCESSE);
+            laDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<AccountDTO> dtoList = new ArrayList<>();
             for (Account account : list) {
                 AccountDTO accountDTO = new AccountDTO();
@@ -153,7 +153,7 @@ public class AccountService {
         if (list.isPresent()) {
             ListAccountDTO laDTO = new ListAccountDTO();
             laDTO.setStatus(HttpStatus.OK.value());
-            laDTO.setMessage(Constants.KEY_SUCESSE);
+            laDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<AccountDTO> dtoList = new ArrayList<>();
             for (Account account : list.get()) {
                 AccountDTO accountDTO = new AccountDTO();

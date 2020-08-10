@@ -6,7 +6,7 @@ import com.mahdi.sandogh.model.user.dto.LoginForm;
 import com.mahdi.sandogh.model.user.dto.UserDTO;
 import com.mahdi.sandogh.model.user.service.UserService;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import com.mahdi.sandogh.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,12 +44,12 @@ public class AuthUserController {
             if (jwtResponse != null) {
                 UserDTO userDTO = UserDTO.convertToUserDTO(user.get());
                 userDTO.setStatus(HttpStatus.OK.value());
-                userDTO.setMessage(Constants.KEY_SUCESSE);
+                userDTO.setMessage(AppConstants.KEY_SUCESSE);
                 userDTO.setJwtResponse(jwtResponse);
                 return ResponseEntity.status(HttpStatus.OK).body(userDTO);
             }
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), Constants.KEY_NOT_FOUND_USER));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
     }
 }

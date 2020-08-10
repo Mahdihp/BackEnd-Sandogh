@@ -7,7 +7,7 @@ import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDTO;
 import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanForm;
 import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDTO;
 import com.mahdi.sandogh.model.installmentloan.repository.InstallmentLoanRepo;
-import com.mahdi.sandogh.utils.Constants;
+import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -67,7 +67,7 @@ public class InstallmentLoanService {
         if (installmentLoan.isPresent()) {
             InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
             ilDTO.setStatus(HttpStatus.OK.value());
-            ilDTO.setMessage(Constants.KEY_SUCESSE);
+            ilDTO.setMessage(AppConstants.KEY_SUCESSE);
 
             ilDTO.setInstallmentLoanId(installmentLoan.get().getUid().toString());
             ilDTO.setAmountInstallment(installmentLoan.get().getAmountInstallment());
@@ -84,7 +84,7 @@ public class InstallmentLoanService {
         if (list.isPresent()) {
             ListInstallmentLoanDTO lilDTO = new ListInstallmentLoanDTO();
             lilDTO.setStatus(HttpStatus.OK.value());
-            lilDTO.setMessage(Constants.KEY_SUCESSE);
+            lilDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<InstallmentLoanDTO> dtoList = new ArrayList<>();
             for (InstallmentLoan installmentLoan : list.get()) {
                 InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
@@ -107,7 +107,7 @@ public class InstallmentLoanService {
         if (list != null) {
             ListInstallmentLoanDTO lilDTO = new ListInstallmentLoanDTO();
             lilDTO.setStatus(HttpStatus.OK.value());
-            lilDTO.setMessage(Constants.KEY_SUCESSE);
+            lilDTO.setMessage(AppConstants.KEY_SUCESSE);
             List<InstallmentLoanDTO> dtoList = new ArrayList<>();
             for (InstallmentLoan installmentLoan : list) {
                 InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
