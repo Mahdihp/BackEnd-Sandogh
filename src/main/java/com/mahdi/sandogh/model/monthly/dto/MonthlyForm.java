@@ -14,10 +14,10 @@ import lombok.Data;
 @Data
 public class MonthlyForm {
 
-    private String monthlyId;
+    private Long monthlyId;
     private long amountPerMonth; // مبلغ سهم هر ماه
     private long creationDate; // تاریخ
-    private String accountId;
+    private Long accountId;
 
     public MonthlyForm() {
     }

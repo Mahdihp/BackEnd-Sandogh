@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LoanForm {
 
-    private String loanId;
+    private Long loanId;
     private Integer countLoan; // تعداد وام
     private Long sumLoan; // مجموع تعداد وام
     private Long currentLoanAmount; // مبلغ وام جاری
@@ -13,7 +13,7 @@ public class LoanForm {
     private Integer countInstallments; // تعداد اقساط
     private Long amountPerInstallment; // مبلغ هر قسط
     private Long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
-    private String accountId;
+    private Long accountId;
 
     public LoanForm() {
     }

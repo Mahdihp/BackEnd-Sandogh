@@ -20,7 +20,7 @@ import java.util.UUID;
 @Repository
 public interface MonthlyRepo extends JpaRepository<Monthly, Long> {
 
-    Optional<Monthly> findByUid(UUID uid);
+    Optional<Monthly> findById(Long uid);
 
-    Optional<List<Monthly>> findAllByAccountUid(UUID uid);
+    Optional<List<Monthly>> findAllByAccountId(Long id);
 }

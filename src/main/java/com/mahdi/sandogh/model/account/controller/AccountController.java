@@ -28,7 +28,7 @@ public class AccountController {
 
     //    @PreAuthorize("hasRole('ADMIN')")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);
         if (uid != null)
@@ -39,9 +39,9 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = "/{accountid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/{accountid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateAccount(@PathVariable(value = "accountid") String accountid, @Valid @RequestBody AccountForm accountForm) {
-        accountForm.setAccountId(accountid);
+        accountForm.setAccountId(Long.valueOf(accountid));
         if (accountService.update(accountForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_ACCOUNT));
         else
@@ -50,7 +50,7 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllAccount() {
         Optional<ListAccountDTO> list = accountService.findAllDTO();
         if (list.isPresent())
@@ -60,7 +60,7 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("type") int type, @RequestParam("accountid") String accountid) {
         Optional<AccountDTO> accountDTO = accountService.findDTOByUid(type, accountid);
         if (accountDTO.isPresent())

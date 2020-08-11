@@ -32,25 +32,25 @@ public class SahamSalanehService {
 
     public void create(SahamSalanehForm sahamSalanehForm) {
         SahamSalaneh sahamSalaneh = new SahamSalaneh();
-        sahamSalaneh.setUid(UUID.randomUUID());
+//        sahamSalaneh.setUid(UUID.randomUUID());
         sahamSalaneh.setYesrs(sahamSalanehForm.getYesrs());
         sahamSalaneh.setMembershipFee(sahamSalanehForm.getMembershipFee());
-        sahamSalaneh.setCreationDate(System.currentTimeMillis());
+//        sahamSalaneh.setCreationDate(System.currentTimeMillis());
         sahamSalanehRepo.save(sahamSalaneh);
     }
 
     public void update(SahamSalanehForm sahamSalanehForm) {
-        Optional<SahamSalaneh> sahamSalaneh = sahamSalanehRepo.findByUid(UUID.fromString(sahamSalanehForm.getSahamSalanehId()));
+        Optional<SahamSalaneh> sahamSalaneh = sahamSalanehRepo.findById((sahamSalanehForm.getSahamSalanehId()));
         if (sahamSalaneh.isPresent()) {
             sahamSalaneh.get().setYesrs(sahamSalanehForm.getYesrs());
             sahamSalaneh.get().setMembershipFee(sahamSalanehForm.getMembershipFee());
-            sahamSalaneh.get().setModificationDate(System.currentTimeMillis());
+//            sahamSalaneh.get().setModificationDate(System.currentTimeMillis());
             sahamSalanehRepo.save(sahamSalaneh.get());
         }
     }
 
-    public Optional<SahamSalaneh> findById(String sahamSalanehId) {
-        Optional<SahamSalaneh> sahamSalaneh = sahamSalanehRepo.findByUid(UUID.fromString(sahamSalanehId));
+    public Optional<SahamSalaneh> findById(Long sahamSalanehId) {
+        Optional<SahamSalaneh> sahamSalaneh = sahamSalanehRepo.findById((sahamSalanehId));
         return sahamSalaneh;
     }
 
@@ -58,7 +58,7 @@ public class SahamSalanehService {
         Optional<SahamSalaneh> sahamSalaneh = Optional.empty();
         switch (queryType) {
             case 1:
-                sahamSalaneh = sahamSalanehRepo.findByUid(UUID.fromString(item));
+                sahamSalaneh = sahamSalanehRepo.findById(Long.valueOf((item)));
                 break;
             case 2:
                 sahamSalaneh = sahamSalanehRepo.findByYesrs(Integer.parseInt(item));
@@ -73,10 +73,10 @@ public class SahamSalanehService {
             ssDTO.setStatus(HttpStatus.OK.value());
             ssDTO.setMessage(AppConstants.KEY_SUCESSE);
 
-            ssDTO.setSahamSalanehId(sahamSalaneh.get().getUid().toString());
+//            ssDTO.setSahamSalanehId(sahamSalaneh.get().getUid().toString());
             ssDTO.setMembershipFee(sahamSalaneh.get().getMembershipFee());
-            ssDTO.setCreationDate(sahamSalaneh.get().getCreationDate());
-            ssDTO.setModificationDate(sahamSalaneh.get().getModificationDate());
+//            ssDTO.setCreationDate(sahamSalaneh.get().getCreationDate());
+//            ssDTO.setModificationDate(sahamSalaneh.get().getModificationDate());
             return Optional.ofNullable(ssDTO);
         }
         return Optional.empty();
@@ -92,10 +92,10 @@ public class SahamSalanehService {
             for (SahamSalaneh sahamSalaneh : list) {
                 SahamSalanehDTO ssDTO = new SahamSalanehDTO();
 
-                ssDTO.setSahamSalanehId(sahamSalaneh.getUid().toString());
+//                ssDTO.setSahamSalanehId(sahamSalaneh.getUid().toString());
                 ssDTO.setMembershipFee(sahamSalaneh.getMembershipFee());
-                ssDTO.setCreationDate(sahamSalaneh.getCreationDate());
-                ssDTO.setModificationDate(sahamSalaneh.getModificationDate());
+//                ssDTO.setCreationDate(sahamSalaneh.getCreationDate());
+//                ssDTO.setModificationDate(sahamSalaneh.getModificationDate());
                 dtoList.add(ssDTO);
             }
             lssDTO.setData(dtoList);

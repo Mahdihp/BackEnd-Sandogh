@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 public class InstallmentLoanForm {
 
-    private String installmentLoanId;
+    private Long installmentLoanId;
     private Long amountInstallment; // مبلغ قسط
     private Integer numberLoan; // شماره قسط
-    private String accountId;
+    private Long accountId;
 
     public InstallmentLoanForm() {
     }

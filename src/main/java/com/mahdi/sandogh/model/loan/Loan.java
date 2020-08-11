@@ -18,12 +18,7 @@ public class Loan { //جدول وام ها
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
 
     @Column(name = "countloan")
     private int countLoan; // تعداد وام
@@ -49,7 +44,7 @@ public class Loan { //جدول وام ها
     private long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "accountid", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     public Loan() {

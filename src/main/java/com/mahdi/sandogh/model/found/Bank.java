@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/*
+/**
 
 بانک ها
  */
@@ -20,7 +20,6 @@ public class Bank  extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Integer id;
 
     @NotNull
@@ -36,6 +35,15 @@ public class Bank  extends DateAudit {
     @NotNull
     @Column(name = "accountnumber", unique = true)
     private String accountNumber;  //شماره حساب
+
+    @Column(name = "customerNumber", unique = true)
+    private String customerNumber;  //شماره مشتری
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
 
     @NotNull
     @Column(name = "cardNumber", unique = true)

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UserForm {
 
-    private String userId;
+    private Long userId;
 
     @NotNull
     private String name;

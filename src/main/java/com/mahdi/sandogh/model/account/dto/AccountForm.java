@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AccountForm {
 
-    private String accountId;
+    private Long accountId;
 
     @NotNull
     private String firstName;

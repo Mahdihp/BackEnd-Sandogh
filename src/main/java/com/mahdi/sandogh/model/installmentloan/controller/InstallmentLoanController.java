@@ -31,7 +31,7 @@ public class InstallmentLoanController {
     @Autowired
     private InstallmentLoanService installmentLoanService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createInstallmentLoan(@Valid @RequestBody InstallmentLoanForm ilForm) {
         if (installmentLoanService.create(ilForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_INSTALLMENTLOAN));
@@ -39,16 +39,16 @@ public class InstallmentLoanController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
-    @PostMapping(value = "/{installmentloanid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/{installmentloanid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateInstallmentLoan(@PathVariable(value = "installmentloanid") String installmentloanid, @Valid @RequestBody InstallmentLoanForm ilForm) {
-        ilForm.setAccountId(installmentloanid);
+        ilForm.setAccountId(Long.valueOf(installmentloanid));
         if (installmentLoanService.update(ilForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_INSTALLMENTLOAN));
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
-    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllInstallmentLoan() {
         Optional<ListInstallmentLoanDTO> list = installmentLoanService.findAllDTO();
         if (list.isPresent())
@@ -57,9 +57,9 @@ public class InstallmentLoanController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
-    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findInstallmentLoan(@RequestParam("installmentloanid") String installmentloanid) {
-        Optional<InstallmentLoanDTO> installmentLoanDTO = installmentLoanService.findDTOById(installmentloanid);
+        Optional<InstallmentLoanDTO> installmentLoanDTO = installmentLoanService.findDTOById(Long.valueOf(installmentloanid));
         if (installmentLoanDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(installmentLoanDTO.get());
         else

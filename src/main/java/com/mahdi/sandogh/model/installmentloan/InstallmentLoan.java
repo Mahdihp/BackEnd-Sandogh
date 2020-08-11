@@ -2,28 +2,24 @@ package com.mahdi.sandogh.model.installmentloan;
 
 
 import com.mahdi.sandogh.model.account.Account;
-import lombok.Data;
-import org.hibernate.annotations.Type;
+import com.mahdi.sandogh.model.audit.DateAudit;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "installmentloan")
-@Data
-public class InstallmentLoan { // جدول اقساط وام
+public class InstallmentLoan extends DateAudit { // جدول اقساط وام
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
 
     @Column(name = "amountinstallment")
     private long amountInstallment; // مبلغ قسط
@@ -36,7 +32,7 @@ public class InstallmentLoan { // جدول اقساط وام
     private int numberLoan; // شماره قسط
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "accountid", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
 }

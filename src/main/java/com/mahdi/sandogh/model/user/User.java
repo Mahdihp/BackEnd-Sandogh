@@ -1,7 +1,10 @@
 package com.mahdi.sandogh.model.user;
 
+import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.role.Role;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,10 +14,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
-@Data
-public class User {
+public class User extends DateAudit {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,10 +26,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
 
     @Size(max = 50)
     @Column(name = "displayname")

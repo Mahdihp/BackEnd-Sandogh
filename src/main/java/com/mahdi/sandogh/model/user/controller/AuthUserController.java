@@ -36,7 +36,7 @@ public class AuthUserController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping(value = "/signin", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/signin", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> signIn(@Valid @RequestBody LoginForm loginRequest) {
         Optional<User> user = userService.findByUsername(loginRequest.getUserName());
         if (user.isPresent()) {

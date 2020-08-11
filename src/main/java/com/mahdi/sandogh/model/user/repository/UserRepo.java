@@ -8,13 +8,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserRepo extends JpaRepository<User,Long> {
+public interface UserRepo extends JpaRepository<User, Integer> {
 
     Optional<User> findByUserName(String username);
 
-    Optional<User> findByUid(UUID uid);
+    Optional<User> findById(Long uid);
 
     Optional<User> findByUserNameAndPassword(String userName, String password);
+
     Boolean existsByUserName(String username);
 
     Boolean existsByUserNameAndPassword(String username, String pass);

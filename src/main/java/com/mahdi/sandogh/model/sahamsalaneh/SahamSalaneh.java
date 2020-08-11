@@ -1,28 +1,20 @@
 package com.mahdi.sandogh.model.sahamsalaneh;
 
 
-import lombok.Data;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.mahdi.sandogh.model.audit.DateAudit;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "sahamsalanehs")
-@Data
-public class SahamSalaneh { // سهام سالانه
-
-
+public class SahamSalaneh extends DateAudit { // سهام سالانه
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
 
     @Column(name = "yesrs")
     private int yesrs; //سال
@@ -30,11 +22,4 @@ public class SahamSalaneh { // سهام سالانه
     @Column(name = "membershipfee")
     private long membershipFee; // حق عضویت
 
-    @Column(name = "creationdate", updatable = false)
-    @CreatedDate
-    private long creationDate;
-
-    @Column(name = "modificationdate", updatable = true)
-    @LastModifiedDate
-    private long modificationDate;
 }

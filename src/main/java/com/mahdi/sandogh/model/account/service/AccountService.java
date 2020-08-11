@@ -32,16 +32,16 @@ public class AccountService {
         UUID uid = UUID.randomUUID();
         if (!exists) {
             Account account = new Account();
-            account.setUid(uid);
+//            account.setUid(uid);
             Long accountNumber = accountRepo.findMaxAccountNumber();
             if (accountNumber != null) {
 
                 accountNumber++;
-                int years = DataUtil.generateNumericRandomAccountNumber();
-                account.setAccountNumber(String.valueOf(accountNumber) + years);
+//                int years = DataUtil.generateNumericRandomAccountNumber();
+//                account.setAccountNumber(String.valueOf(accountNumber) + years);
             } else {
-                int years = DataUtil.generateNumericRandomAccountNumber();
-                account.setAccountNumber(String.valueOf(this.accountNumber) + years);
+//                int years = DataUtil.generateNumericRandomAccountNumber();
+//                account.setAccountNumber(String.valueOf(this.accountNumber) + years);
             }
             account.setActive(true);
             account.setFirstName(accountForm.getFirstName());
@@ -51,7 +51,7 @@ public class AccountService {
             account.setNationalCode(accountForm.getNationalCode());
             account.setCity(accountForm.getCity());
             account.setAdderss(accountForm.getAdderss());
-            account.setCreationDate(System.currentTimeMillis());
+//            account.setCreationDate(System.currentTimeMillis());
             accountRepo.save(account);
             return uid;
         }
@@ -59,7 +59,7 @@ public class AccountService {
     }
 
     public boolean update(AccountForm accountForm) {
-        Optional<Account> account = accountRepo.findByUid(UUID.fromString(accountForm.getAccountId()));
+        Optional<Account> account = accountRepo.findById(accountForm.getAccountId());
         if (account.isPresent()) {
             account.get().setFirstName(accountForm.getFirstName());
             account.get().setLastName(accountForm.getLastName());
@@ -68,16 +68,16 @@ public class AccountService {
             account.get().setNationalCode(accountForm.getNationalCode());
             account.get().setCity(accountForm.getCity());
             account.get().setAdderss(accountForm.getAdderss());
-            account.get().setModificationDate(System.currentTimeMillis());
-            account.get().setModificationDate(System.currentTimeMillis());
+//            account.get().setModificationDate(System.currentTimeMillis());
+//            account.get().setModificationDate(System.currentTimeMillis());
             accountRepo.save(account.get());
             return true;
         }
         return false;
     }
 
-    public Optional<Account> findById(String uid) {
-        Optional<Account> account = accountRepo.findByUid(UUID.fromString(uid));
+    public Optional<Account> findById(Long id) {
+        Optional<Account> account = accountRepo.findById(id);
         if (account.isPresent())
             return Optional.ofNullable(account.get());
         else
@@ -88,7 +88,7 @@ public class AccountService {
         Optional<Account> account = Optional.empty();
         switch (queryType) {
             case 1:
-                account = accountRepo.findByUid(UUID.fromString(uid));
+                account = accountRepo.findById(Long.valueOf(uid));
                 break;
             case 2:
                 account = accountRepo.findByAccountNumber(uid);
@@ -104,7 +104,7 @@ public class AccountService {
             AccountDTO accountDTO = new AccountDTO();
             accountDTO.setStatus(HttpStatus.OK.value());
             accountDTO.setMessage(AppConstants.KEY_SUCESSE);
-            accountDTO.setAccountId(account.get().getUid().toString());
+//            accountDTO.setAccountId(account.get().getUid().toString());
             accountDTO.setActive(account.get().isActive());
             accountDTO.setFirstName(account.get().getFirstName());
             accountDTO.setLastName(account.get().getLastName());
@@ -114,7 +114,7 @@ public class AccountService {
             accountDTO.setNationalCode(account.get().getNationalCode());
             accountDTO.setCity(account.get().getCity());
             accountDTO.setAdderss(account.get().getAdderss());
-            accountDTO.setCreationDate(account.get().getCreationDate());
+//            accountDTO.setCreationDate(account.get().getCreationDate());
             return Optional.ofNullable(accountDTO);
         }
         return Optional.empty();
@@ -129,7 +129,7 @@ public class AccountService {
             List<AccountDTO> dtoList = new ArrayList<>();
             for (Account account : list) {
                 AccountDTO accountDTO = new AccountDTO();
-                accountDTO.setAccountId(account.getUid().toString());
+//                accountDTO.setAccountId(account.getUid().toString());
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());
                 accountDTO.setAccountNumber(account.getAccountNumber());
@@ -139,7 +139,7 @@ public class AccountService {
                 accountDTO.setNationalCode(account.getNationalCode());
                 accountDTO.setCity(account.getCity());
                 accountDTO.setAdderss(account.getAdderss());
-                accountDTO.setCreationDate(account.getCreationDate());
+//                accountDTO.setCreationDate(account.getCreationDate());
                 dtoList.add(accountDTO);
             }
             laDTO.setData(dtoList);
@@ -157,7 +157,7 @@ public class AccountService {
             List<AccountDTO> dtoList = new ArrayList<>();
             for (Account account : list.get()) {
                 AccountDTO accountDTO = new AccountDTO();
-                accountDTO.setAccountId(account.getUid().toString());
+//                accountDTO.setAccountId(account.getUid().toString());
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());
                 accountDTO.setAccountNumber(account.getAccountNumber());
@@ -167,7 +167,7 @@ public class AccountService {
                 accountDTO.setNationalCode(account.getNationalCode());
                 accountDTO.setCity(account.getCity());
                 accountDTO.setAdderss(account.getAdderss());
-                accountDTO.setCreationDate(account.getCreationDate());
+//                accountDTO.setCreationDate(account.getCreationDate());
                 dtoList.add(accountDTO);
             }
             laDTO.setData(dtoList);

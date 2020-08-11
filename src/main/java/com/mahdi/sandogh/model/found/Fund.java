@@ -1,6 +1,7 @@
 package com.mahdi.sandogh.model.found;
 
 
+import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.audit.DateAudit;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *  صندوق ها
+ * صندوق ها
  */
 @Setter
 @Getter
@@ -23,7 +24,6 @@ public class Fund extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -46,5 +46,15 @@ public class Fund extends DateAudit {
             fetch = FetchType.LAZY,
             mappedBy = "fund")
     private Set<Bank> banks = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "fund_account",
+            joinColumns = {@JoinColumn(name = "fund_id")},
+            inverseJoinColumns = {@JoinColumn(name = "account_id")})
+    private Set<Account> accounts = new HashSet<>();
 
 }

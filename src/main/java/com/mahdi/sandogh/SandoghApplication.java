@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.TimeZone;
 
-@EnableJpaAuditing
 @SpringBootApplication
 public class SandoghApplication {
 
@@ -17,6 +17,7 @@ public class SandoghApplication {
 
     @PostConstruct
     void init() {
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+       // TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        System.out.println("Date in UTC: " + new Date().toString());
     }
 }

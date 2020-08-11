@@ -32,7 +32,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserForm userForm) {
         UUID uid = userService.create(userForm);
         if (uid != null)
@@ -41,16 +41,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_FAIL));
     }
 
-    @PostMapping(value = "/{userid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/{userid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateUser(@PathVariable(value = "userid") String userId, @Valid @RequestBody UserForm userForm) {
-        userForm.setUserId(userId);
+        userForm.setUserId(Long.valueOf(userId));
         if (userService.update(userForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_USER));
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
     }
 
-    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllUser() {
         Optional<ListUserDTO> list = userService.findAllDTO();
         if (list.isPresent())
@@ -59,9 +59,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
     }
 
-    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findUser(@RequestParam("userid") String userId) {
-        Optional<UserDTO> user = userService.findDTOById(userId);
+        Optional<UserDTO> user = userService.findDTOById(Long.valueOf(userId));
         if (user.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(user.get());
         else

@@ -2,43 +2,29 @@ package com.mahdi.sandogh.model.monthly;
 
 
 import com.mahdi.sandogh.model.account.Account;
-import lombok.Data;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import com.mahdi.sandogh.model.audit.DateAudit;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "monthlys")
-@Data
-public class Monthly { // جدول ماهانه ها
+public class Monthly extends DateAudit { // جدول ماهانه ها
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
 
     @Column(name = "amountpermonth")
     private long amountPerMonth; // مبلغ سهم هر ماه
 
-    @Column(name = "creationdate", updatable = false)
-    @CreatedDate
-    private long creationDate; // تاریخ
-
-    @Column(name = "modificationdate", updatable = true)
-    @LastModifiedDate
-    private long modificationDate;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "accountid", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     public Monthly() {

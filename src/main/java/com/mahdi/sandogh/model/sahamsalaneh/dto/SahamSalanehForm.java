@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class SahamSalanehForm {
 
-    private String sahamSalanehId;
+    private Long sahamSalanehId;
 
     @NotNull
     private Integer yesrs; //سال

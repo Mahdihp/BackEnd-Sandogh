@@ -19,7 +19,7 @@ import java.util.UUID;
 @Repository
 public interface SahamSalanehRepo extends JpaRepository<SahamSalaneh, Long> {
 
-    Optional<SahamSalaneh> findByUid(UUID uid);
+    Optional<SahamSalaneh> findById(Long id);
 
     Optional<SahamSalaneh> findByYesrs(int years);
 

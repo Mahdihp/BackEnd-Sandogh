@@ -31,20 +31,20 @@ public class SahamSalanehController {
     @Autowired
     private SahamSalanehService sahamSalanehService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createSahamSalaneh(@Valid @RequestBody SahamSalanehForm ssForm) {
         sahamSalanehService.create(ssForm);
         return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_SAHAMSALANEH));
     }
 
-    @PostMapping(value = "/{sahamsalanehid}", consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/{sahamsalanehid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateSahamSalaneh(@PathVariable(value = "sahamsalanehid") String sahamsalanehId, @Valid @RequestBody SahamSalanehForm ssForm) {
-        ssForm.setSahamSalanehId(sahamsalanehId);
+        ssForm.setSahamSalanehId(Long.valueOf(sahamsalanehId));
         sahamSalanehService.update(ssForm);
         return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_SAHAMSALANEH));
     }
 
-    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllSahamSalaneh() {
         Optional<ListSahamSalanehDTO> list = sahamSalanehService.findAllDTO();
         if (list.isPresent())
@@ -53,7 +53,7 @@ public class SahamSalanehController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_SAHAMSALANEH));
     }
 
-    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findSahamSalaneh(@RequestParam("sahamsalanehid") String sahamsalanehId) {
         Optional<SahamSalanehDTO> sahamsalaneh = sahamSalanehService.findDTO(1, sahamsalanehId);
         if (sahamsalaneh.isPresent())

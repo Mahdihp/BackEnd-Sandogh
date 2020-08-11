@@ -30,7 +30,7 @@ public class InstallmentLoanService {
         Optional<Account> account = accountService.findById(ilForm.getAccountId());
         if (account.isPresent()) {
             InstallmentLoan installmentLoan = new InstallmentLoan();
-            installmentLoan.setUid(UUID.randomUUID());
+//            installmentLoan.setUid(UUID.randomUUID());
             installmentLoan.setAmountInstallment(ilForm.getAmountInstallment());
             installmentLoan.setCreationDate(System.currentTimeMillis());
             installmentLoan.setNumberLoan(ilForm.getNumberLoan());
@@ -42,7 +42,7 @@ public class InstallmentLoanService {
     }
 
     public boolean update(InstallmentLoanForm ilForm) {
-        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findByUid(UUID.fromString(ilForm.getInstallmentLoanId()));
+        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findById((ilForm.getInstallmentLoanId()));
         if (installmentLoan.isPresent()) {
             installmentLoan.get().setAmountInstallment(ilForm.getAmountInstallment());
             installmentLoan.get().setCreationDate(System.currentTimeMillis());
@@ -54,33 +54,33 @@ public class InstallmentLoanService {
         return false;
     }
 
-    public Optional<InstallmentLoan> findById(String installmentLoanId) {
-        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findByUid(UUID.fromString(installmentLoanId));
+    public Optional<InstallmentLoan> findById(Long installmentLoanId) {
+        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findById((installmentLoanId));
         if (installmentLoan.isPresent())
             return Optional.ofNullable(installmentLoan.get());
         else
             return Optional.empty();
     }
 
-    public Optional<InstallmentLoanDTO> findDTOById(String installmentLoanId) {
-        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findByUid(UUID.fromString(installmentLoanId));
+    public Optional<InstallmentLoanDTO> findDTOById(Long installmentLoanId) {
+        Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findById((installmentLoanId));
         if (installmentLoan.isPresent()) {
             InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
             ilDTO.setStatus(HttpStatus.OK.value());
             ilDTO.setMessage(AppConstants.KEY_SUCESSE);
 
-            ilDTO.setInstallmentLoanId(installmentLoan.get().getUid().toString());
+//            ilDTO.setInstallmentLoanId(installmentLoan.get().getUid().toString());
             ilDTO.setAmountInstallment(installmentLoan.get().getAmountInstallment());
             ilDTO.setCreationDate(installmentLoan.get().getCreationDate());
             ilDTO.setNumberLoan(installmentLoan.get().getNumberLoan());
-            ilDTO.setAccountId(installmentLoan.get().getAccount().getUid().toString());
+//            ilDTO.setAccountId(installmentLoan.get().getAccount().getUid().toString());
             return Optional.ofNullable(ilDTO);
         }
         return Optional.empty();
     }
 
-    public Optional<ListInstallmentLoanDTO> findAllDTOByAccountId(String installmentLoanId) {
-        Optional<List<InstallmentLoan>> list = installmentLoanRepo.findByAccountUid(UUID.fromString(installmentLoanId));
+    public Optional<ListInstallmentLoanDTO> findAllDTOByAccountId(Long installmentLoanId) {
+        Optional<List<InstallmentLoan>> list = installmentLoanRepo.findByAccountId((installmentLoanId));
         if (list.isPresent()) {
             ListInstallmentLoanDTO lilDTO = new ListInstallmentLoanDTO();
             lilDTO.setStatus(HttpStatus.OK.value());
@@ -89,11 +89,11 @@ public class InstallmentLoanService {
             for (InstallmentLoan installmentLoan : list.get()) {
                 InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
 
-                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
+//                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
                 ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());
                 ilDTO.setCreationDate(installmentLoan.getCreationDate());
                 ilDTO.setNumberLoan(installmentLoan.getNumberLoan());
-                ilDTO.setAccountId(installmentLoan.getAccount().getUid().toString());
+//                ilDTO.setAccountId(installmentLoan.getAccount().getUid().toString());
                 dtoList.add(ilDTO);
             }
             lilDTO.setData(dtoList);
@@ -112,11 +112,11 @@ public class InstallmentLoanService {
             for (InstallmentLoan installmentLoan : list) {
                 InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
 
-                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
+//                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
                 ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());
                 ilDTO.setCreationDate(installmentLoan.getCreationDate());
                 ilDTO.setNumberLoan(installmentLoan.getNumberLoan());
-                ilDTO.setAccountId(installmentLoan.getAccount().getUid().toString());
+//                ilDTO.setAccountId(installmentLoan.getAccount().getUid().toString());
                 dtoList.add(ilDTO);
             }
             lilDTO.setData(dtoList);

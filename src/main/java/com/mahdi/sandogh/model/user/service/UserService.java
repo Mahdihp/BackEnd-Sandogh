@@ -38,7 +38,7 @@ public class UserService {
         UUID uid = UUID.randomUUID();
         if (!exists) {
             User user = new User();
-            user.setUid(uid);
+//            user.setUid(uid);
             user.setDisplayName(userForm.getName());
             user.setNationalId(userForm.getNationalId());
             user.setUserName(userForm.getUserName());
@@ -63,7 +63,7 @@ public class UserService {
     }
 
     public boolean update(UserForm userForm) {
-        Optional<User> user = userRepo.findByUid(UUID.fromString(userForm.getUserId()));
+        Optional<User> user = userRepo.findById((userForm.getUserId()));
         if (user.isPresent()) {
             user.get().setNationalId(userForm.getName());
             user.get().setNationalId(userForm.getNationalId());
@@ -76,19 +76,19 @@ public class UserService {
         return false;
     }
 
-    public Optional<User> findById(String userId) {
-        Optional<User> user = userRepo.findByUid(UUID.fromString(userId));
+    public Optional<User> findById(Long userId) {
+        Optional<User> user = userRepo.findById((userId));
         return user;
     }
 
-    public Optional<UserDTO> findDTOById(String userId) {
-        Optional<User> user = userRepo.findByUid(UUID.fromString(userId));
+    public Optional<UserDTO> findDTOById(Long userId) {
+        Optional<User> user = userRepo.findById((userId));
         if (user.isPresent()) {
             UserDTO userDTO = new UserDTO();
             userDTO.setStatus(HttpStatus.OK.value());
             userDTO.setMessage(AppConstants.KEY_SUCESSE);
 
-            userDTO.setUserId(user.get().getUid().toString());
+//            userDTO.setUserId(user.get().getUid().toString());
 
             userDTO.setName(user.get().getDisplayName());
             userDTO.setNationalId(user.get().getNationalId());
@@ -109,7 +109,7 @@ public class UserService {
             List<UserDTO> dtoList = new ArrayList<>();
             for (User user : list) {
                 UserDTO userDTO = new UserDTO();
-                userDTO.setUserId(user.getUid().toString());
+//                userDTO.setUserId(user.getUid().toString());
                 userDTO.setNationalId(user.getNationalId());
                 userDTO.setName(user.getDisplayName());
                 userDTO.setUserName(user.getUserName());

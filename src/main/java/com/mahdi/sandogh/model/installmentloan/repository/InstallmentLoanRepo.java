@@ -11,10 +11,10 @@ import java.util.UUID;
 @Repository
 public interface InstallmentLoanRepo extends JpaRepository<InstallmentLoan, Long> {
 
-    Optional<InstallmentLoan> findByUid(UUID uid);
+    Optional<InstallmentLoan> findById(Long uid);
 
     Optional<InstallmentLoan> findByAmountInstallment(long amount);
 
-    Optional<List<InstallmentLoan>> findByAccountUid(UUID uid);
+    Optional<List<InstallmentLoan>> findByAccountId(Long uid);
 
 }

@@ -38,9 +38,8 @@ public class MonthlyService {
         Optional<Account> account = accountService.findById(monthlyForm.getAccountId());
         if (account.isPresent()) {
             Monthly monthly = new Monthly();
-            monthly.setUid(UUID.randomUUID());
+//            monthly.setUid(UUID.randomUUID());
             monthly.setAmountPerMonth(monthlyForm.getAmountPerMonth());
-            monthly.setCreationDate(System.currentTimeMillis());
             monthly.setAccount(account.get());
             monthlyRepo.save(monthly);
             return true;
@@ -49,40 +48,39 @@ public class MonthlyService {
     }
 
     public boolean update(MonthlyForm monthlyForm) {
-        Optional<Monthly> monthly = monthlyRepo.findByUid(UUID.fromString(monthlyForm.getMonthlyId()));
+        Optional<Monthly> monthly = monthlyRepo.findById(monthlyForm.getMonthlyId());
         if (monthly.isPresent()) {
             monthly.get().setAmountPerMonth(monthlyForm.getAmountPerMonth());
-            monthly.get().setModificationDate(System.currentTimeMillis());
             monthlyRepo.save(monthly.get());
             return true;
         }
         return false;
     }
 
-    public Optional<Monthly> findById(String monthlyId) {
-        Optional<Monthly> monthly = monthlyRepo.findByUid(UUID.fromString(monthlyId));
+    public Optional<Monthly> findById(Long monthlyId) {
+        Optional<Monthly> monthly = monthlyRepo.findById((monthlyId));
         return monthly;
     }
 
-    public Optional<MonthlyDTO> findDTOById(String monthlyId) {
-        Optional<Monthly> monthly = monthlyRepo.findByUid(UUID.fromString(monthlyId));
+    public Optional<MonthlyDTO> findDTOById(Long monthlyId) {
+        Optional<Monthly> monthly = monthlyRepo.findById((monthlyId));
         if (monthly.isPresent()) {
             MonthlyDTO monthlyDTO = new MonthlyDTO();
             monthlyDTO.setStatus(HttpStatus.OK.value());
             monthlyDTO.setMessage(AppConstants.KEY_SUCESSE);
 
-            monthlyDTO.setMonthlyId(monthly.get().getUid().toString());
+//            monthlyDTO.setMonthlyId(monthly.get().getUid().toString());
             monthlyDTO.setAmountPerMonth(monthly.get().getAmountPerMonth());
-            monthlyDTO.setCreationDate(monthly.get().getCreationDate());
-            monthlyDTO.setModificationDate(monthly.get().getModificationDate());
-            monthlyDTO.setAccountId(monthly.get().getAccount().getUid().toString());
+//            monthlyDTO.setCreationDate(monthly.get().getCreationDate());
+//            monthlyDTO.setModificationDate(monthly.get().getModificationDate());
+//            monthlyDTO.setAccountId(monthly.get().getAccount().getUid().toString());
             return Optional.ofNullable(monthlyDTO);
         }
         return Optional.empty();
     }
 
-    public Optional<ListMonthlyDTO> findAllDTO(String accountId) {
-        Optional<List<Monthly>> list = monthlyRepo.findAllByAccountUid(UUID.fromString(accountId));
+    public Optional<ListMonthlyDTO> findAllDTO(Long accountId) {
+        Optional<List<Monthly>> list = monthlyRepo.findAllByAccountId(accountId);
         if (list.isPresent()) {
             ListMonthlyDTO lmDTO = new ListMonthlyDTO();
             lmDTO.setStatus(HttpStatus.OK.value());
@@ -91,11 +89,11 @@ public class MonthlyService {
             for (Monthly monthly : list.get()) {
                 MonthlyDTO monthlyDTO = new MonthlyDTO();
 
-                monthlyDTO.setMonthlyId(monthly.getUid().toString());
+//                monthlyDTO.setMonthlyId(monthly.getUid().toString());
                 monthlyDTO.setAmountPerMonth(monthly.getAmountPerMonth());
-                monthlyDTO.setCreationDate(monthly.getCreationDate());
-                monthlyDTO.setModificationDate(monthly.getModificationDate());
-                monthlyDTO.setAccountId(monthly.getAccount().getUid().toString());
+//                monthlyDTO.setCreationDate(monthly.getCreationDate());
+//                monthlyDTO.setModificationDate(monthly.getModificationDate());
+//                monthlyDTO.setAccountId(monthly.getAccount().getUid().toString());
                 dtoList.add(monthlyDTO);
             }
             lmDTO.setData(dtoList);

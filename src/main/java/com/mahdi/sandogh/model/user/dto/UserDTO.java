@@ -37,7 +37,7 @@ public class UserDTO extends BaseDTO {
 
     public static UserDTO convertToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(user.getUid().toString());
+//        userDTO.setUserId(user.getUid().toString());
         userDTO.setName(user.getDisplayName());
         userDTO.setNationalId(user.getNationalId());
         userDTO.setUserName(user.getUserName());

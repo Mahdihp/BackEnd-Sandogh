@@ -3,14 +3,16 @@ package com.mahdi.sandogh.model.audit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.joda.time.DateTime;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Setter
 @Getter
@@ -23,12 +25,11 @@ import java.io.Serializable;
 public abstract class DateAudit implements Serializable {
 
     @CreatedDate
-    private DateTime createdAt;
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
 
     @LastModifiedDate
-    private DateTime updatedAt;
+    @Column(nullable = false)
+    private Instant updatedAt;
 
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
 }

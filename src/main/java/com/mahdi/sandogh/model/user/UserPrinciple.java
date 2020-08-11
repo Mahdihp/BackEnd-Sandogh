@@ -2,6 +2,8 @@ package com.mahdi.sandogh.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +22,13 @@ import java.util.stream.Collectors;
  * https://github.com/mahdihp
  */
 
-@Data
+@Setter
+@Getter
 public class UserPrinciple implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private UUID uid;
     private String name;
     private String username;
     private String nationalId;
@@ -37,9 +39,8 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, UUID uid, String name, String username, String nationalId, Boolean active, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(Long id, String name, String username, String nationalId, Boolean active, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.uid = uid;
         this.name = name;
         this.username = username;
         this.nationalId = nationalId;
@@ -55,7 +56,6 @@ public class UserPrinciple implements UserDetails {
 
         return new UserPrinciple(
                 user.getId(),
-                user.getUid(),
                 user.getDisplayName(),
                 user.getUserName(),
                 user.getNationalId(),

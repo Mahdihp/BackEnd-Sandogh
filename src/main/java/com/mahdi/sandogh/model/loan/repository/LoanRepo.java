@@ -12,11 +12,11 @@ import java.util.UUID;
 public interface LoanRepo extends JpaRepository<Loan, Long> {
 
 
-    Optional<Loan> findByUid(UUID uid);
+    Optional<Loan> findById(Long id);
 
     Optional<Loan> findByCurrentLoanAmount(long amount);
 
-    Optional<List<Loan>> findAllByAccountUid(UUID uid);
+    Optional<List<Loan>> findAllByAccountId(Long id);
 
 
 }
