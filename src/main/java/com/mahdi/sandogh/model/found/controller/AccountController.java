@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.account.controller;
+package com.mahdi.sandogh.model.found.controller;
 
 
 import com.mahdi.sandogh.model.BaseDto;
@@ -18,16 +18,13 @@ import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/v1/accounts")
+@RequestMapping(AppConstants.KEY_API_ACCOUNT)
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    //    @PreAuthorize("hasRole('ADMIN')")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);

@@ -3,6 +3,11 @@ package com.mahdi.sandogh.utils;
 
 public class AppConstants {
 
+
+    public static final String KEY_API_VER = "/api/v1";
+    public static final String KEY_API_FUND = KEY_API_VER + "/funds";
+    public static final String KEY_API_ACCOUNT = KEY_API_VER + "/account";
+
     public static final String KEY_SUCESSE = "sucesse!";
     public static final String KEY_FAIL = "fail";
     public static final String KEY_NOT_FOUND_ACCOUNT = "حسابی موجود نیست.";
@@ -21,4 +26,8 @@ public class AppConstants {
     public static final String KEY_NOT_FOUND_USER = "کاربری پیدا نشد.";
     public static final String KEY_CREATE_INSTALLMENTLOAN = "قسط مورد نظر ثبت شد.";
     public static final String KEY_UPDATE_INSTALLMENTLOAN = "قسط مورد نظر بروز شد.";
+    public static final String KEY_CREATE_FUND = "صندوق ساخته شد.";
+    public static final String KEY_UPDATE_FUND = "صندوق بروز شد.";
+    public static final String KEY_NOT_FOUND_FUND = "صندوقی پیدا نشد.";
+    public static final String KEY_REMOVE_FUND = "صندوق حذف شد.";
 }
