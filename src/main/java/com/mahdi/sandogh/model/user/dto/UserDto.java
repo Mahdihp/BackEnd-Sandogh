@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDTO extends BaseDTO {
+public class UserDto extends BaseDto {
 
     private String userId;
     private String name;
@@ -27,16 +27,16 @@ public class UserDTO extends BaseDTO {
     private Boolean active;
     private JwtResponse jwtResponse;
 
-    public UserDTO() {
+    public UserDto() {
     }
 
-    public UserDTO(Integer status, String message, String userId) {
+    public UserDto(Integer status, String message, String userId) {
         super(status, message);
         this.userId = userId;
     }
 
-    public static UserDTO convertToUserDTO(User user) {
-        UserDTO userDTO = new UserDTO();
+    public static UserDto convertToUserDTO(User user) {
+        UserDto userDTO = new UserDto();
 //        userDTO.setUserId(user.getUid().toString());
         userDTO.setName(user.getDisplayName());
         userDTO.setNationalId(user.getNationalId());

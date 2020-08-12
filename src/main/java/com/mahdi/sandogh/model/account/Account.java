@@ -62,6 +62,9 @@ public class Account extends DateAudit {
     @Column(name = "countloan")
     private int countLoan;
 
+    @Column(name = "deleted")
+    private boolean deleted = false;
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,

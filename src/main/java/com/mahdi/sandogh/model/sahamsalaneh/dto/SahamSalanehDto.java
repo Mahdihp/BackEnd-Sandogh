@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.model.sahamsalaneh.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SahamSalanehDTO extends BaseDTO {
+public class SahamSalanehDto extends BaseDto {
 
     private String sahamSalanehId;
 
@@ -27,6 +27,6 @@ public class SahamSalanehDTO extends BaseDTO {
     private Long creationDate;
     private Long modificationDate;
 
-    public SahamSalanehDTO() {
+    public SahamSalanehDto() {
     }
 }

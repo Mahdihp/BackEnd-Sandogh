@@ -3,6 +3,7 @@ package com.mahdi.sandogh.model.found;
 
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.audit.DateAudit;
+import com.mahdi.sandogh.model.bank.Bank;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -24,11 +25,7 @@ public class Fund extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true, nullable = false)
-    @Type(type = "uuid-char")
-    private UUID uid;
+    private Integer id;
 
     @NotNull
     @Column(name = "displayName", unique = true)
@@ -41,6 +38,8 @@ public class Fund extends DateAudit {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,

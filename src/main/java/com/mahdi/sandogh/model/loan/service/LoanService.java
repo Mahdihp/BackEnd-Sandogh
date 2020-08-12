@@ -4,8 +4,8 @@ package com.mahdi.sandogh.model.loan.service;
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.model.loan.Loan;
-import com.mahdi.sandogh.model.loan.dto.ListLoanDTO;
-import com.mahdi.sandogh.model.loan.dto.LoanDTO;
+import com.mahdi.sandogh.model.loan.dto.ListLoanDto;
+import com.mahdi.sandogh.model.loan.dto.LoanDto;
 import com.mahdi.sandogh.model.loan.dto.LoanForm;
 import com.mahdi.sandogh.model.loan.repository.LoanRepo;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class LoanService {
@@ -64,15 +63,15 @@ public class LoanService {
         return false;
     }
 
-    public Optional<ListLoanDTO> findAllDTO() {
+    public Optional<ListLoanDto> findAllDTO() {
         List<Loan> list = loanRepo.findAll();
         if (list != null) {
-            ListLoanDTO llDTO = new ListLoanDTO();
+            ListLoanDto llDTO = new ListLoanDto();
             llDTO.setStatus(HttpStatus.OK.value());
             llDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<LoanDTO> dtoList = new ArrayList<>();
+            List<LoanDto> dtoList = new ArrayList<>();
             for (Loan loan : list) {
-                LoanDTO loanDTO = new LoanDTO();
+                LoanDto loanDTO = new LoanDto();
 //                loanDTO.setLoanId(loan.getUid().toString());
                 loanDTO.setCountLoan(loan.getCountLoan());
 //                loanDTO.setSumLoan(loan.getSumLoan());
@@ -98,10 +97,10 @@ public class LoanService {
             return Optional.empty();
     }
 
-    public Optional<LoanDTO> findDTOById(Long loanId) {
+    public Optional<LoanDto> findDTOById(Long loanId) {
         Optional<Loan> loan = loanRepo.findById((loanId));
         if (loan.isPresent()) {
-            LoanDTO loanDTO = new LoanDTO();
+            LoanDto loanDTO = new LoanDto();
             loanDTO.setStatus(HttpStatus.OK.value());
             loanDTO.setMessage(AppConstants.KEY_SUCESSE);
 
@@ -119,15 +118,15 @@ public class LoanService {
         return Optional.empty();
     }
 
-    public Optional<ListLoanDTO> findAllDTOByAccountId(Long accountId) {
+    public Optional<ListLoanDto> findAllDTOByAccountId(Long accountId) {
         Optional<List<Loan>> list = loanRepo.findAllByAccountId((accountId));
         if (list.isPresent()) {
-            ListLoanDTO llDTO = new ListLoanDTO();
+            ListLoanDto llDTO = new ListLoanDto();
             llDTO.setStatus(HttpStatus.OK.value());
             llDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<LoanDTO> dtoList = new ArrayList<>();
+            List<LoanDto> dtoList = new ArrayList<>();
             for (Loan loan : list.get()) {
-                LoanDTO loanDTO = new LoanDTO();
+                LoanDto loanDTO = new LoanDto();
 //                loanDTO.setLoanId(loan.getUid().toString());
                 loanDTO.setCountLoan(loan.getCountLoan());
 //                loanDTO.setSumLoan(loan.getSumLoan());

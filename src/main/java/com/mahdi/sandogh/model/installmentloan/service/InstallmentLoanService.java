@@ -3,9 +3,9 @@ package com.mahdi.sandogh.model.installmentloan.service;
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
-import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDTO;
+import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDto;
 import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanForm;
-import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDTO;
+import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDto;
 import com.mahdi.sandogh.model.installmentloan.repository.InstallmentLoanRepo;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class InstallmentLoanService {
@@ -62,10 +61,10 @@ public class InstallmentLoanService {
             return Optional.empty();
     }
 
-    public Optional<InstallmentLoanDTO> findDTOById(Long installmentLoanId) {
+    public Optional<InstallmentLoanDto> findDTOById(Long installmentLoanId) {
         Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findById((installmentLoanId));
         if (installmentLoan.isPresent()) {
-            InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
+            InstallmentLoanDto ilDTO = new InstallmentLoanDto();
             ilDTO.setStatus(HttpStatus.OK.value());
             ilDTO.setMessage(AppConstants.KEY_SUCESSE);
 
@@ -79,15 +78,15 @@ public class InstallmentLoanService {
         return Optional.empty();
     }
 
-    public Optional<ListInstallmentLoanDTO> findAllDTOByAccountId(Long installmentLoanId) {
+    public Optional<ListInstallmentLoanDto> findAllDTOByAccountId(Long installmentLoanId) {
         Optional<List<InstallmentLoan>> list = installmentLoanRepo.findByAccountId((installmentLoanId));
         if (list.isPresent()) {
-            ListInstallmentLoanDTO lilDTO = new ListInstallmentLoanDTO();
+            ListInstallmentLoanDto lilDTO = new ListInstallmentLoanDto();
             lilDTO.setStatus(HttpStatus.OK.value());
             lilDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<InstallmentLoanDTO> dtoList = new ArrayList<>();
+            List<InstallmentLoanDto> dtoList = new ArrayList<>();
             for (InstallmentLoan installmentLoan : list.get()) {
-                InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
+                InstallmentLoanDto ilDTO = new InstallmentLoanDto();
 
 //                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
                 ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());
@@ -102,15 +101,15 @@ public class InstallmentLoanService {
         return Optional.empty();
     }
 
-    public Optional<ListInstallmentLoanDTO> findAllDTO() {
+    public Optional<ListInstallmentLoanDto> findAllDTO() {
         List<InstallmentLoan> list = installmentLoanRepo.findAll();
         if (list != null) {
-            ListInstallmentLoanDTO lilDTO = new ListInstallmentLoanDTO();
+            ListInstallmentLoanDto lilDTO = new ListInstallmentLoanDto();
             lilDTO.setStatus(HttpStatus.OK.value());
             lilDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<InstallmentLoanDTO> dtoList = new ArrayList<>();
+            List<InstallmentLoanDto> dtoList = new ArrayList<>();
             for (InstallmentLoan installmentLoan : list) {
-                InstallmentLoanDTO ilDTO = new InstallmentLoanDTO();
+                InstallmentLoanDto ilDTO = new InstallmentLoanDto();
 
 //                ilDTO.setInstallmentLoanId(installmentLoan.getUid().toString());
                 ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());

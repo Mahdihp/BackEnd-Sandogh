@@ -1,21 +1,21 @@
 package com.mahdi.sandogh.model.installmentloan.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListInstallmentLoanDTO extends BaseDTO {
+public class ListInstallmentLoanDto extends BaseDto {
 
-    private List<InstallmentLoanDTO> data;
+    private List<InstallmentLoanDto> data;
 
-    public ListInstallmentLoanDTO() {
+    public ListInstallmentLoanDto() {
     }
 
-    public ListInstallmentLoanDTO(Integer status, String message) {
+    public ListInstallmentLoanDto(Integer status, String message) {
         super(status, message);
     }
 }

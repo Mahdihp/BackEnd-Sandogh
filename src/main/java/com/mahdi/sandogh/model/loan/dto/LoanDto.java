@@ -1,13 +1,15 @@
 package com.mahdi.sandogh.model.loan.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
-import lombok.Data;
+import com.mahdi.sandogh.model.BaseDto;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
+@Setter
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LoanDTO extends BaseDTO {
+public class LoanDto extends BaseDto {
 
     private String loanId;
     private Integer countLoan; // تعداد وام
@@ -19,10 +21,10 @@ public class LoanDTO extends BaseDTO {
     private Long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
     private String accountId;
 
-    public LoanDTO() {
+    public LoanDto() {
     }
 
-    public LoanDTO(Integer status, String message) {
+    public LoanDto(Integer status, String message) {
         super(status, message);
     }
 }

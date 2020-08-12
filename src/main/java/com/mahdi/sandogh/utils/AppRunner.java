@@ -31,8 +31,16 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        addPermission();
         addRoles();
         addUserAdmin();
+    }
+
+    private void addPermission() {
+        if (permissionRepo.count() <= 0) {
+
+        }
     }
 
     private void addRoles() {
@@ -52,19 +60,21 @@ public class AppRunner implements ApplicationRunner {
     }
 
     private void addUserAdmin() {
-        User user1 = new User();
-        user1.setDisplayName("مهدی حسین پور");
-        user1.setUserName("mahdihp");
-        user1.setNationalId("0386007551");
-        user1.setPassword(encoder.encode("123456"));
-        user1.setActive(true);
+        Optional<User> mahdihp = userRepo.findByUserName("mahdihp");
+        if (!mahdihp.isPresent()) {
+            User user1 = new User();
+            user1.setDisplayName("مهدی حسین پور");
+            user1.setUserName("mahdihp");
+            user1.setNationalId("0386007551");
+            user1.setPassword(encoder.encode("123456"));
+            user1.setActive(true);
 
-        Role role1 = roleRepo.findByName(RoleName.ROLE_ADMIN).get();
-        Set<Role> roles1 = new HashSet<>();
-        roles1.add(role1);
-        user1.setRoles(roles1);
-        roleRepo.save(role1);
-        userRepo.save(user1);
+            Role role1 = roleRepo.findByName(RoleName.ROLE_ADMIN).get();
+            Set<Role> roles1 = new HashSet<>();
+            roles1.add(role1);
+            user1.setRoles(roles1);
+            userRepo.save(user1);
 
+        }
     }
 }

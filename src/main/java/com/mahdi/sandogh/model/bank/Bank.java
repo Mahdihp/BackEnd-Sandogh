@@ -1,7 +1,8 @@
-package com.mahdi.sandogh.model.found;
+package com.mahdi.sandogh.model.bank;
 
 
 import com.mahdi.sandogh.model.audit.DateAudit;
+import com.mahdi.sandogh.model.found.Fund;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +53,9 @@ public class Bank  extends DateAudit {
     @NotNull
     @Column(name = "description")
     private String description;
+
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fund_id", nullable = false)

@@ -1,7 +1,7 @@
-package com.mahdi.sandogh.model.monthly.dto;
+package com.mahdi.sandogh.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 import java.util.List;
@@ -9,20 +9,17 @@ import java.util.List;
 /**
  * Created by mahdi
  * User: mahdi
- * Date: 3/18/19
- * Time: 21:52
+ * Date: 3/20/19
+ * Time: 13:12
  * https://github.com/mahdihp
  */
 
-
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListMonthlyDTO extends BaseDTO {
+public class ListUserDto extends BaseDto {
 
-    private List<MonthlyDTO> data;
+    private List<UserDto> data;
 
-    public ListMonthlyDTO() {
+    public ListUserDto() {
     }
-
-
 }

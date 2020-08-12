@@ -1,12 +1,11 @@
 package com.mahdi.sandogh.model.account.service;
 
 import com.mahdi.sandogh.model.account.Account;
-import com.mahdi.sandogh.model.account.dto.AccountDTO;
+import com.mahdi.sandogh.model.account.dto.AccountDto;
 import com.mahdi.sandogh.model.account.dto.AccountForm;
-import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
+import com.mahdi.sandogh.model.account.dto.ListAccountDto;
 import com.mahdi.sandogh.model.account.repository.AccountRepo;
 import com.mahdi.sandogh.utils.AppConstants;
-import com.mahdi.sandogh.utils.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -84,7 +83,7 @@ public class AccountService {
             return Optional.empty();
     }
 
-    public Optional<AccountDTO> findDTOByUid(int queryType, String uid) {
+    public Optional<AccountDto> findDTOByUid(int queryType, String uid) {
         Optional<Account> account = Optional.empty();
         switch (queryType) {
             case 1:
@@ -101,7 +100,7 @@ public class AccountService {
                 break;
         }
         if (account.isPresent()) {
-            AccountDTO accountDTO = new AccountDTO();
+            AccountDto accountDTO = new AccountDto();
             accountDTO.setStatus(HttpStatus.OK.value());
             accountDTO.setMessage(AppConstants.KEY_SUCESSE);
 //            accountDTO.setAccountId(account.get().getUid().toString());
@@ -120,15 +119,15 @@ public class AccountService {
         return Optional.empty();
     }
 
-    public Optional<ListAccountDTO> findAllDTO() {
+    public Optional<ListAccountDto> findAllDTO() {
         List<Account> list = accountRepo.findAll();
         if (list != null) {
-            ListAccountDTO laDTO = new ListAccountDTO();
+            ListAccountDto laDTO = new ListAccountDto();
             laDTO.setStatus(HttpStatus.OK.value());
             laDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<AccountDTO> dtoList = new ArrayList<>();
+            List<AccountDto> dtoList = new ArrayList<>();
             for (Account account : list) {
-                AccountDTO accountDTO = new AccountDTO();
+                AccountDto accountDTO = new AccountDto();
 //                accountDTO.setAccountId(account.getUid().toString());
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());
@@ -148,15 +147,15 @@ public class AccountService {
         return Optional.empty();
     }
 
-    public Optional<ListAccountDTO> findAllDTO(String firstName, String lastName) {
+    public Optional<ListAccountDto> findAllDTO(String firstName, String lastName) {
         Optional<List<Account>> list = accountRepo.findAllByFirstNameLikeOrLastNameLike(firstName, lastName);
         if (list.isPresent()) {
-            ListAccountDTO laDTO = new ListAccountDTO();
+            ListAccountDto laDTO = new ListAccountDto();
             laDTO.setStatus(HttpStatus.OK.value());
             laDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<AccountDTO> dtoList = new ArrayList<>();
+            List<AccountDto> dtoList = new ArrayList<>();
             for (Account account : list.get()) {
-                AccountDTO accountDTO = new AccountDTO();
+                AccountDto accountDTO = new AccountDto();
 //                accountDTO.setAccountId(account.getUid().toString());
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());

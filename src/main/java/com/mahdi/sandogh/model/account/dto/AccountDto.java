@@ -2,13 +2,13 @@ package com.mahdi.sandogh.model.account.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountDTO extends BaseDTO {
+public class AccountDto extends BaseDto {
 
     private String accountId;
     private String accountNumber;
@@ -24,10 +24,10 @@ public class AccountDTO extends BaseDTO {
     private Long creationDate;
 
 
-    public AccountDTO() {
+    public AccountDto() {
     }
 
-    public AccountDTO(Integer status, String message, String accountId) {
+    public AccountDto(Integer status, String message, String accountId) {
         super(status, message);
         this.accountId = accountId;
     }

@@ -1,9 +1,9 @@
 package com.mahdi.sandogh.model.user.controller;
 
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.model.user.dto.LoginForm;
-import com.mahdi.sandogh.model.user.dto.UserDTO;
+import com.mahdi.sandogh.model.user.dto.UserDto;
 import com.mahdi.sandogh.model.user.service.UserService;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -42,7 +42,7 @@ public class AuthUserController {
         if (user.isPresent()) {
             JwtResponse jwtResponse = jwtUtil.generateToken(loginRequest);
             if (jwtResponse != null) {
-                UserDTO userDTO = UserDTO.convertToUserDTO(user.get());
+                UserDto userDTO = UserDto.convertToUserDTO(user.get());
                 userDTO.setStatus(HttpStatus.OK.value());
                 userDTO.setMessage(AppConstants.KEY_SUCESSE);
                 userDTO.setJwtResponse(jwtResponse);
@@ -50,6 +50,6 @@ public class AuthUserController {
             }
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
     }
 }

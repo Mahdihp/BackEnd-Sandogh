@@ -1,10 +1,10 @@
 package com.mahdi.sandogh.model.account.controller;
 
 
-import com.mahdi.sandogh.model.BaseDTO;
-import com.mahdi.sandogh.model.account.dto.AccountDTO;
+import com.mahdi.sandogh.model.BaseDto;
+import com.mahdi.sandogh.model.account.dto.AccountDto;
 import com.mahdi.sandogh.model.account.dto.AccountForm;
-import com.mahdi.sandogh.model.account.dto.ListAccountDTO;
+import com.mahdi.sandogh.model.account.dto.ListAccountDto;
 import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@Valid @RequestBody AccountForm accountForm) {
         UUID uid = accountService.create(accountForm);
         if (uid != null)
-            return ResponseEntity.status(HttpStatus.OK).body(new AccountDTO(HttpStatus.OK.value(), AppConstants.KEY_CREATE_ACCOUNT, uid.toString()));
+            return ResponseEntity.status(HttpStatus.OK).body(new AccountDto(HttpStatus.OK.value(), AppConstants.KEY_CREATE_ACCOUNT, uid.toString()));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
 
     }
 
@@ -43,30 +43,30 @@ public class AccountController {
     public ResponseEntity<?> updateAccount(@PathVariable(value = "accountid") String accountid, @Valid @RequestBody AccountForm accountForm) {
         accountForm.setAccountId(Long.valueOf(accountid));
         if (accountService.update(accountForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_ACCOUNT));
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
 
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllAccount() {
-        Optional<ListAccountDTO> list = accountService.findAllDTO();
+        Optional<ListAccountDto> list = accountService.findAllDTO();
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("type") int type, @RequestParam("accountid") String accountid) {
-        Optional<AccountDTO> accountDTO = accountService.findDTOByUid(type, accountid);
+        Optional<AccountDto> accountDTO = accountService.findDTOByUid(type, accountid);
         if (accountDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(accountDTO.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDTO(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
 
 }

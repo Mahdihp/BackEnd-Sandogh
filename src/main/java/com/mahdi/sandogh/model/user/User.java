@@ -50,6 +50,9 @@ public class User extends DateAudit {
     @Column(name = "login")
     private boolean login;
 
+    @Column(name = "deleted")
+    private boolean deleted = false;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

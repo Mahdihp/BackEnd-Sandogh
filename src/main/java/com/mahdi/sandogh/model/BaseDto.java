@@ -5,28 +5,28 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseDTO {
+public class BaseDto {
 
     private Integer status;
     private String message;
     private String accountId;
     private Boolean active;
 
-    public BaseDTO() {
+    public BaseDto() {
     }
 
-    public BaseDTO(Integer status, String message) {
+    public BaseDto(Integer status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public BaseDTO(Integer status, String message, String accountId) {
+    public BaseDto(Integer status, String message, String accountId) {
         this.status = status;
         this.message = message;
         this.accountId = accountId;
     }
 
-    public BaseDTO(Integer status, String message, String accountId, Boolean active) {
+    public BaseDto(Integer status, String message, String accountId, Boolean active) {
         this.status = status;
         this.message = message;
         this.accountId = accountId;

@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.model.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListAccountDTO extends BaseDTO {
+public class ListAccountDto extends BaseDto {
 
-    private List<AccountDTO> data;
+    private List<AccountDto> data;
 
-    public ListAccountDTO() {
+    public ListAccountDto() {
     }
 }

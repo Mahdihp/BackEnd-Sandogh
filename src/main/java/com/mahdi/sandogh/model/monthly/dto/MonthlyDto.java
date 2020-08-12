@@ -1,7 +1,7 @@
 package com.mahdi.sandogh.model.monthly.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDTO;
+import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 /**
@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MonthlyDTO extends BaseDTO {
+public class MonthlyDto extends BaseDto {
 
     private String monthlyId;
     private Long amountPerMonth; // مبلغ سهم هر ماه
@@ -22,6 +22,6 @@ public class MonthlyDTO extends BaseDTO {
     private Long modificationDate;
     private String accountId;
 
-    public MonthlyDTO() {
+    public MonthlyDto() {
     }
 }

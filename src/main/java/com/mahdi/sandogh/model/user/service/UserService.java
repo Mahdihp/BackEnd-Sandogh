@@ -4,8 +4,8 @@ import com.mahdi.sandogh.model.role.Role;
 import com.mahdi.sandogh.model.role.RoleName;
 import com.mahdi.sandogh.model.role.repository.RoleRepo;
 import com.mahdi.sandogh.model.user.User;
-import com.mahdi.sandogh.model.user.dto.ListUserDTO;
-import com.mahdi.sandogh.model.user.dto.UserDTO;
+import com.mahdi.sandogh.model.user.dto.ListUserDto;
+import com.mahdi.sandogh.model.user.dto.UserDto;
 import com.mahdi.sandogh.model.user.dto.UserForm;
 import com.mahdi.sandogh.model.user.repository.UserRepo;
 import com.mahdi.sandogh.security.jwt.JwtProvider;
@@ -81,10 +81,10 @@ public class UserService {
         return user;
     }
 
-    public Optional<UserDTO> findDTOById(Long userId) {
+    public Optional<UserDto> findDTOById(Long userId) {
         Optional<User> user = userRepo.findById((userId));
         if (user.isPresent()) {
-            UserDTO userDTO = new UserDTO();
+            UserDto userDTO = new UserDto();
             userDTO.setStatus(HttpStatus.OK.value());
             userDTO.setMessage(AppConstants.KEY_SUCESSE);
 
@@ -100,15 +100,15 @@ public class UserService {
         return Optional.empty();
     }
 
-    public Optional<ListUserDTO> findAllDTO() {
+    public Optional<ListUserDto> findAllDTO() {
         List<User> list = userRepo.findAll();
         if (list != null) {
-            ListUserDTO luDTO = new ListUserDTO();
+            ListUserDto luDTO = new ListUserDto();
             luDTO.setStatus(HttpStatus.OK.value());
             luDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<UserDTO> dtoList = new ArrayList<>();
+            List<UserDto> dtoList = new ArrayList<>();
             for (User user : list) {
-                UserDTO userDTO = new UserDTO();
+                UserDto userDTO = new UserDto();
 //                userDTO.setUserId(user.getUid().toString());
                 userDTO.setNationalId(user.getNationalId());
                 userDTO.setName(user.getDisplayName());

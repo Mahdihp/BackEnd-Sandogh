@@ -3,8 +3,8 @@ package com.mahdi.sandogh.model.monthly.service;
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.model.monthly.Monthly;
-import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDTO;
-import com.mahdi.sandogh.model.monthly.dto.MonthlyDTO;
+import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDto;
+import com.mahdi.sandogh.model.monthly.dto.MonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyForm;
 import com.mahdi.sandogh.model.monthly.repository.MonthlyRepo;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Created by mahdi
@@ -62,10 +61,10 @@ public class MonthlyService {
         return monthly;
     }
 
-    public Optional<MonthlyDTO> findDTOById(Long monthlyId) {
+    public Optional<MonthlyDto> findDTOById(Long monthlyId) {
         Optional<Monthly> monthly = monthlyRepo.findById((monthlyId));
         if (monthly.isPresent()) {
-            MonthlyDTO monthlyDTO = new MonthlyDTO();
+            MonthlyDto monthlyDTO = new MonthlyDto();
             monthlyDTO.setStatus(HttpStatus.OK.value());
             monthlyDTO.setMessage(AppConstants.KEY_SUCESSE);
 
@@ -79,15 +78,15 @@ public class MonthlyService {
         return Optional.empty();
     }
 
-    public Optional<ListMonthlyDTO> findAllDTO(Long accountId) {
+    public Optional<ListMonthlyDto> findAllDTO(Long accountId) {
         Optional<List<Monthly>> list = monthlyRepo.findAllByAccountId(accountId);
         if (list.isPresent()) {
-            ListMonthlyDTO lmDTO = new ListMonthlyDTO();
+            ListMonthlyDto lmDTO = new ListMonthlyDto();
             lmDTO.setStatus(HttpStatus.OK.value());
             lmDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<MonthlyDTO> dtoList = new ArrayList<>();
+            List<MonthlyDto> dtoList = new ArrayList<>();
             for (Monthly monthly : list.get()) {
-                MonthlyDTO monthlyDTO = new MonthlyDTO();
+                MonthlyDto monthlyDTO = new MonthlyDto();
 
 //                monthlyDTO.setMonthlyId(monthly.getUid().toString());
                 monthlyDTO.setAmountPerMonth(monthly.getAmountPerMonth());

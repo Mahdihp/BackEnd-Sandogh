@@ -1,8 +1,8 @@
 package com.mahdi.sandogh.model.sahamsalaneh.service;
 
 import com.mahdi.sandogh.model.sahamsalaneh.SahamSalaneh;
-import com.mahdi.sandogh.model.sahamsalaneh.dto.ListSahamSalanehDTO;
-import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehDTO;
+import com.mahdi.sandogh.model.sahamsalaneh.dto.ListSahamSalanehDto;
+import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehDto;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehForm;
 import com.mahdi.sandogh.model.sahamsalaneh.repository.SahamSalanehRepo;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Created by mahdi
@@ -54,7 +53,7 @@ public class SahamSalanehService {
         return sahamSalaneh;
     }
 
-    public Optional<SahamSalanehDTO> findDTO(int queryType, String item) {
+    public Optional<SahamSalanehDto> findDTO(int queryType, String item) {
         Optional<SahamSalaneh> sahamSalaneh = Optional.empty();
         switch (queryType) {
             case 1:
@@ -69,7 +68,7 @@ public class SahamSalanehService {
         }
 
         if (sahamSalaneh.isPresent()) {
-            SahamSalanehDTO ssDTO = new SahamSalanehDTO();
+            SahamSalanehDto ssDTO = new SahamSalanehDto();
             ssDTO.setStatus(HttpStatus.OK.value());
             ssDTO.setMessage(AppConstants.KEY_SUCESSE);
 
@@ -82,15 +81,15 @@ public class SahamSalanehService {
         return Optional.empty();
     }
 
-    public Optional<ListSahamSalanehDTO> findAllDTO() {
+    public Optional<ListSahamSalanehDto> findAllDTO() {
         List<SahamSalaneh> list = sahamSalanehRepo.findAll();
         if (list.isEmpty()) {
-            ListSahamSalanehDTO lssDTO = new ListSahamSalanehDTO();
+            ListSahamSalanehDto lssDTO = new ListSahamSalanehDto();
             lssDTO.setStatus(HttpStatus.OK.value());
             lssDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<SahamSalanehDTO> dtoList = new ArrayList<>();
+            List<SahamSalanehDto> dtoList = new ArrayList<>();
             for (SahamSalaneh sahamSalaneh : list) {
-                SahamSalanehDTO ssDTO = new SahamSalanehDTO();
+                SahamSalanehDto ssDTO = new SahamSalanehDto();
 
 //                ssDTO.setSahamSalanehId(sahamSalaneh.getUid().toString());
                 ssDTO.setMembershipFee(sahamSalaneh.getMembershipFee());
