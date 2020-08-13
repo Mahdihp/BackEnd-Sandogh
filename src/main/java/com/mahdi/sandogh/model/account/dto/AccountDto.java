@@ -4,9 +4,12 @@ package com.mahdi.sandogh.model.account.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
+@Setter
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AccountDto extends BaseDto {
 

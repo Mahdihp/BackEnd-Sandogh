@@ -1,34 +1,27 @@
 package com.mahdi.sandogh.model.account.dto;
 
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
-@Data
+@Setter
+@Getter
 public class AccountForm {
 
-    private Long accountId;
+    private Integer fundid;  // ای دی صندوق
 
     @NotNull
     private String firstName;
-
     private String accountNumber;
 
     @NotNull
     private String lastName;
-
-    @NotNull
     private String fatherName;
-
-    @NotNull
     private String nationalCode;
-
     private Integer countLoan;
-
-    @NotNull
     private String mobileNumber;
-
     private String city;
     private String adderss;
 

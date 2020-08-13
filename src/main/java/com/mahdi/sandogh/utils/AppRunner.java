@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TimeZone;
 
 @Component
 public class AppRunner implements ApplicationRunner {
@@ -74,7 +75,7 @@ public class AppRunner implements ApplicationRunner {
             roles1.add(role1);
             user1.setRoles(roles1);
             userRepo.save(user1);
-
+            System.out.println("Insert");
         }
     }
 }

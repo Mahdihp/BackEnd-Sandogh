@@ -21,7 +21,7 @@ public class AuditingConfig {
     }
 
 
-    public class SpringSecurityAuditAwareImpl implements AuditorAware<Long> {
+    static class SpringSecurityAuditAwareImpl implements AuditorAware<Long> {
 
         @Override
         public Optional<Long> getCurrentAuditor() {

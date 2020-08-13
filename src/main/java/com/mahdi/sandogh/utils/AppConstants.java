@@ -10,7 +10,7 @@ public class AppConstants {
 
     public static final String KEY_SUCESSE = "sucesse!";
     public static final String KEY_FAIL = "fail";
-    public static final String KEY_NOT_FOUND_ACCOUNT = "حسابی موجود نیست.";
+    public static final String KEY_NOT_FOUND_ACCOUNT = "حسابی پیدا نشد.";
     public static final String KEY_UPDATE_ACCOUNT = "حساب مورد نظر بروز شد.";
     public static final String KEY_CREATE_ACCOUNT = "حساب جدید ساخته شد.";
     public static final String KEY_CREATE_LOAN = "وامی ثبت نشد.";
@@ -30,4 +30,10 @@ public class AppConstants {
     public static final String KEY_UPDATE_FUND = "صندوق بروز شد.";
     public static final String KEY_NOT_FOUND_FUND = "صندوقی پیدا نشد.";
     public static final String KEY_REMOVE_FUND = "صندوق حذف شد.";
+    public static final String KEY_REPEAT_ACCOUNT = "حسابی با این شماره ملی موجود است.";
+    public static final String KEY_NOT_FOUND_ACCOUNT_LIST = "حسابی پیدا نشد";
+    public static final String KEY_DEACTIVATE_ACCOUNT = "حساب غیر فعال شد.";
+    public static final String KEY_REMOVE_ACCOUNT = "حساب حذف شد.";
+    public static final String KEY_ACTIVATE_ACCOUNT = "حساب فعال شد.";
+    public static final String KEY_RECOVERY_ACCOUNT = "حساب بازیابی شد.";
 }

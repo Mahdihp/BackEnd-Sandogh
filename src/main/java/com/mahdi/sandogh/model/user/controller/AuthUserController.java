@@ -1,6 +1,5 @@
 package com.mahdi.sandogh.model.user.controller;
 
-import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.model.user.dto.LoginForm;
 import com.mahdi.sandogh.model.user.dto.UserDto;
@@ -50,6 +49,6 @@ public class AuthUserController {
             }
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_USER));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_USER).createBaseDto());
     }
 }

@@ -1,21 +1,18 @@
-package com.mahdi.sandogh.model.found.service;
+package com.mahdi.sandogh.model.fund.service;
 
-import com.mahdi.sandogh.model.found.Fund;
-import com.mahdi.sandogh.model.found.dto.FundDto;
-import com.mahdi.sandogh.model.found.dto.FundForm;
-import com.mahdi.sandogh.model.found.dto.ListFundDto;
-import com.mahdi.sandogh.model.found.repository.FundRepo;
-import com.mahdi.sandogh.model.loan.dto.ListLoanDto;
-import com.mahdi.sandogh.model.loan.dto.LoanDto;
+import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.account.service.AccountService;
+import com.mahdi.sandogh.model.fund.Fund;
+import com.mahdi.sandogh.model.fund.dto.FundDto;
+import com.mahdi.sandogh.model.fund.dto.FundForm;
+import com.mahdi.sandogh.model.fund.dto.ListFundDto;
+import com.mahdi.sandogh.model.fund.repository.FundRepo;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by mahdi
@@ -29,9 +26,11 @@ public class FundService {
 
     @Autowired
     private FundRepo fundRepo;
+    @Autowired
+    private AccountService accountService;
 
     public boolean create(FundForm form) {
-        List<Fund> list = fundRepo.findAllByDisplayNameAndDeleted(form.getDisplayName(),false);
+        List<Fund> list = fundRepo.findAllByDisplayNameAndDeleted(form.getDisplayName(), false);
         if (list != null && list.size() == 0) {
             Fund fund = new Fund();
             fund.setDisplayName(form.getDisplayName());
@@ -55,7 +54,7 @@ public class FundService {
         return false;
     }
 
-    public Optional<ListFundDto> findFundById(Integer id) {
+    public Optional<ListFundDto> findFundDtoById(Integer id) {
         Optional<Fund> fund = fundRepo.findById(id);
         if (fund.isPresent()) {
             ListFundDto fundDto = new ListFundDto();
@@ -70,6 +69,14 @@ public class FundService {
             return Optional.ofNullable(fundDto);
         }
         return Optional.empty();
+    }
+
+    public Optional<Fund> findFundById(Integer id) {
+        Optional<Fund> fund = fundRepo.findById(id);
+        if (fund.isPresent())
+            return fund;
+        else
+            return Optional.empty();
     }
 
     public Optional<ListFundDto> findAllFund() {
@@ -92,6 +99,24 @@ public class FundService {
         return Optional.empty();
     }
 
+    public boolean addAccountToFund(String accountNumber, Integer fundId) {
+        Optional<Account> byAccountNumber = accountService.findByAccountNumber(accountNumber);
+        Optional<Fund> fund = fundRepo.findById(fundId);
+        if (byAccountNumber.isPresent()) {
+            for (Fund fund1 : byAccountNumber.get().getFunds()) {
+                if (fund1.getId().equals(fundId)) {
+                    return false;
+                }
+            }
+            Set<Account> funds = new HashSet<>();
+            funds.add(byAccountNumber.get());
+            fund.get().setAccounts(funds);
+            fundRepo.save(fund.get());
+            return true;
+        }
+        return false;
+    }
+
     public boolean removeFund(Integer id) {
         Optional<Fund> fund = fundRepo.findById(id);
         if (fund.isPresent()) {
@@ -100,5 +125,20 @@ public class FundService {
             return true;
         }
         return false;
+    }
+
+    public Optional<List<Account>> findAllAccountByFundId(Integer fundId) {
+        List<Account> list = fundRepo.findAllByAccountsAndIdEquals(fundId);
+        if (list != null)
+            return Optional.ofNullable(list);
+        else
+            return Optional.empty();
+    }
+    public Optional<List<Account>> findAllAccountByNotFundId(Integer fundId) {
+        List<Account> list = fundRepo.findAllByAccountsIsNotId(fundId);
+        if (list != null)
+            return Optional.ofNullable(list);
+        else
+            return Optional.empty();
     }
 }

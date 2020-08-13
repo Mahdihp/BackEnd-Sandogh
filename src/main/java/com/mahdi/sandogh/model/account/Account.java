@@ -5,16 +5,12 @@ package com.mahdi.sandogh.model.account;
  */
 
 import com.mahdi.sandogh.model.audit.DateAudit;
-import com.mahdi.sandogh.model.found.Fund;
+import com.mahdi.sandogh.model.fund.Fund;
 import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
 import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.monthly.Monthly;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Nationalized;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.StringNVarcharType;
 
 import javax.persistence.*;
 import java.util.HashSet;

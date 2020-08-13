@@ -1,4 +1,4 @@
-package com.mahdi.sandogh.model.found;
+package com.mahdi.sandogh.model.fund;
 
 
 import com.mahdi.sandogh.model.account.Account;
@@ -6,13 +6,11 @@ import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.bank.Bank;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * صندوق ها

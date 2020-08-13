@@ -1,6 +1,5 @@
 package com.mahdi.sandogh.model.sahamsalaneh.controller;
 
-import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.ListSahamSalanehDto;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehDto;
 import com.mahdi.sandogh.model.sahamsalaneh.dto.SahamSalanehForm;
@@ -34,14 +33,14 @@ public class SahamSalanehController {
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createSahamSalaneh(@Valid @RequestBody SahamSalanehForm ssForm) {
         sahamSalanehService.create(ssForm);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_CREATE_SAHAMSALANEH));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_SAHAMSALANEH).createBaseDto());
     }
 
     @PostMapping(value = "/{sahamsalanehid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateSahamSalaneh(@PathVariable(value = "sahamsalanehid") String sahamsalanehId, @Valid @RequestBody SahamSalanehForm ssForm) {
         ssForm.setSahamSalanehId(Long.valueOf(sahamsalanehId));
         sahamSalanehService.update(ssForm);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_SAHAMSALANEH));
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_UPDATE_SAHAMSALANEH).createBaseDto());
     }
 
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -50,7 +49,7 @@ public class SahamSalanehController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_SAHAMSALANEH));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_SAHAMSALANEH).createBaseDto());
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -59,6 +58,6 @@ public class SahamSalanehController {
         if (sahamsalaneh.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(sahamsalaneh.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_SAHAMSALANEH));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_SAHAMSALANEH).createBaseDto());
     }
 }

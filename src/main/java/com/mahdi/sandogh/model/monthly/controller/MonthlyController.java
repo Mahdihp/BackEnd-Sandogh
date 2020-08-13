@@ -1,6 +1,5 @@
 package com.mahdi.sandogh.model.monthly.controller;
 
-import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyForm;
@@ -34,18 +33,18 @@ public class MonthlyController {
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createMonthly(@Valid @RequestBody MonthlyForm monthlyForm) {
         if (monthlyService.create(monthlyForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_CREATE_MONTHLY));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_MONTHLY).createBaseDto());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
     }
 
     @PostMapping(value = "/{monthlyid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> updateAccount(@PathVariable(value = "monthlyid") String monthlyId, @Valid @RequestBody MonthlyForm monthlyForm) {
         monthlyForm.setAccountId(Long.valueOf(monthlyId));
         if (monthlyService.update(monthlyForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_UPDATE_MONTHLY));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_UPDATE_MONTHLY).createBaseDto());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
 
     }
 
@@ -55,7 +54,7 @@ public class MonthlyController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -64,7 +63,7 @@ public class MonthlyController {
         if (monthlyDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(monthlyDTO.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(), AppConstants.KEY_NOT_FOUND_ACCOUNT));
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
     }
 
 

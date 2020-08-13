@@ -2,7 +2,7 @@ package com.mahdi.sandogh.model.bank;
 
 
 import com.mahdi.sandogh.model.audit.DateAudit;
-import com.mahdi.sandogh.model.found.Fund;
+import com.mahdi.sandogh.model.fund.Fund;
 import lombok.Getter;
 import lombok.Setter;
 

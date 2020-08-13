@@ -1,8 +1,6 @@
-package com.mahdi.sandogh.model.found.dto;
+package com.mahdi.sandogh.model.fund.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDto;
-import com.mahdi.sandogh.model.found.Fund;
 import lombok.Getter;
 import lombok.Setter;
 

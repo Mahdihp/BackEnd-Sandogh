@@ -1,15 +1,17 @@
 package com.mahdi.sandogh.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseDto {
 
     private Integer status;
     private String message;
-    private String accountId;
+    private String accountNumber;
     private Boolean active;
 
     public BaseDto() {
@@ -20,16 +22,16 @@ public class BaseDto {
         this.message = message;
     }
 
-    public BaseDto(Integer status, String message, String accountId) {
+    public BaseDto(Integer status, String message, String accountNumber) {
         this.status = status;
         this.message = message;
-        this.accountId = accountId;
+        this.accountNumber = accountNumber;
     }
 
-    public BaseDto(Integer status, String message, String accountId, Boolean active) {
+    public BaseDto(Integer status, String message, String accountNumber, Boolean active) {
         this.status = status;
         this.message = message;
-        this.accountId = accountId;
+        this.accountNumber = accountNumber;
         this.active = active;
     }
 }

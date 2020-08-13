@@ -15,6 +15,7 @@ public interface AccountRepo extends JpaRepository<Account,Long> {
 
     Boolean existsByNationalCode(String nationalCode);
     Optional<Account> findByAccountNumber(String accountNumber);
+
     Optional<Account> findByMobileNumber(String mobileNumber);
     Optional<Account> findByNationalCode(String nationalCode);
     Optional<List<Account>> findAllByFirstNameLikeOrLastNameLike(String firstName,String lastName);
