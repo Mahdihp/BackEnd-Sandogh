@@ -22,7 +22,7 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createLoan(@Valid @RequestBody LoanForm loanForm) {
         if (loanService.create(loanForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_LOAN).createBaseDto());
@@ -55,6 +55,6 @@ public class LoanController {
             return ResponseEntity.status(HttpStatus.OK).body(loan.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_LOAN).createBaseDto());
-    }
+    }*/
 
 }

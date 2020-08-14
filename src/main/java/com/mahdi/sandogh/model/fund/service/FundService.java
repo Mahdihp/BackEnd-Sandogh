@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.model.fund.service;
 
 import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.account.dto.AccountDto;
+import com.mahdi.sandogh.model.account.dto.ListAccountDto;
 import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.model.fund.Fund;
 import com.mahdi.sandogh.model.fund.dto.FundDto;
@@ -192,19 +194,30 @@ public class FundService {
                 .build();
     }
 
-    public Optional<List<Account>> findAllAccountByFundId(Integer fundId) {
-        List<Account> list = fundRepo.findAllByAccountsAndIdEquals(fundId);
-        if (list != null)
-            return Optional.ofNullable(list);
-        else
-            return Optional.empty();
+    public Optional<ListAccountDto> findAllAccountByFundId(Integer fundId) {
+        Optional<Fund> fund = fundRepo.findById(fundId);
+        if (fund.isPresent()) {
+            List<AccountDto> dtoList = new ArrayList<>();
+            ListAccountDto listAccountDto = new ListAccountDto();
+            listAccountDto.setStatus(HttpStatus.OK.value());
+            listAccountDto.setMessage(AppConstants.KEY_SUCESSE);
+            for (Account account : fund.get().getAccounts()) {
+                AccountDto accountDTO = new AccountDto();
+                accountDTO.setActive(account.isActive());
+                accountDTO.setFirstName(account.getFirstName());
+                accountDTO.setAccountNumber(account.getAccountNumber());
+                accountDTO.setLastName(account.getLastName());
+                accountDTO.setFatherName(account.getFatherName());
+                accountDTO.setMobileNumber(account.getMobileNumber());
+                accountDTO.setNationalCode(account.getNationalCode());
+                accountDTO.setCity(account.getCity());
+                accountDTO.setAdderss(account.getAdderss());
+                dtoList.add(accountDTO);
+            }
+            listAccountDto.setData(dtoList);
+            return Optional.ofNullable(listAccountDto);
+        }
+        return Optional.empty();
     }
 
-    public Optional<List<Account>> findAllAccountByNotFundId(Integer fundId) {
-        List<Account> list = fundRepo.findAllByAccountsIsNotId(fundId);
-        if (list != null)
-            return Optional.ofNullable(list);
-        else
-            return Optional.empty();
-    }
 }

@@ -30,7 +30,7 @@ public class SahamSalanehController {
     @Autowired
     private SahamSalanehService sahamSalanehService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createSahamSalaneh(@Valid @RequestBody SahamSalanehForm ssForm) {
         sahamSalanehService.create(ssForm);
         return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_SAHAMSALANEH).createBaseDto());
@@ -59,5 +59,5 @@ public class SahamSalanehController {
             return ResponseEntity.status(HttpStatus.OK).body(sahamsalaneh.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_SAHAMSALANEH).createBaseDto());
-    }
+    }*/
 }

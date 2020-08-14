@@ -19,7 +19,5 @@ public interface FundRepo extends JpaRepository<Fund, Integer> {
 
     List<Fund> findAllByDisplayNameAndDeleted(String displayName, Boolean deleted);
     List<Fund> findAllByDeleted(Boolean deleted);
-    List<Account> findAllByAccountsIsNotId(Integer fundId);
-    List<Account> findAllByAccountsAndIdEquals(Integer fundId);
 
 }

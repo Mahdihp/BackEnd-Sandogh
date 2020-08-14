@@ -22,16 +22,15 @@ import java.util.Optional;
  * https://github.com/mahdihp
  */
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/v1/monthlys")
+@RequestMapping(AppConstants.KEY_API_MONTHLYS)
 public class MonthlyController {
 
     @Autowired
     private MonthlyService monthlyService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> createMonthly(@Valid @RequestBody MonthlyForm monthlyForm) {
+    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> create(@Valid @RequestBody MonthlyForm monthlyForm) {
         if (monthlyService.create(monthlyForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_MONTHLY).createBaseDto());
         else
@@ -64,7 +63,7 @@ public class MonthlyController {
             return ResponseEntity.status(HttpStatus.OK).body(monthlyDTO.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
-    }
+    }*/
 
 
 }

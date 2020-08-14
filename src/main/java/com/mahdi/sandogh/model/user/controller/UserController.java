@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createUser(@Valid @RequestBody UserForm userForm) {
         UUID uid = userService.create(userForm);
         if (uid != null)
@@ -65,5 +65,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(user.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_USER).createBaseDto());
-    }
+    }*/
 }

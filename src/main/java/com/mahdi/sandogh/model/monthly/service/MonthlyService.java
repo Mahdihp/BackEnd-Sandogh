@@ -2,10 +2,13 @@ package com.mahdi.sandogh.model.monthly.service;
 
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.account.service.AccountService;
+import com.mahdi.sandogh.model.fund.Fund;
+import com.mahdi.sandogh.model.fund.service.FundService;
 import com.mahdi.sandogh.model.monthly.Monthly;
 import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyForm;
+import com.mahdi.sandogh.model.monthly.dto.MonthlyResponse;
 import com.mahdi.sandogh.model.monthly.repository.MonthlyRepo;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +35,27 @@ public class MonthlyService {
     private MonthlyRepo monthlyRepo;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private FundService fundService;
 
-    public boolean create(MonthlyForm monthlyForm) {
-        Optional<Account> account = accountService.findById(monthlyForm.getAccountId());
-        if (account.isPresent()) {
+    public MonthlyResponse create(MonthlyForm form) {
+        Optional<Account> account = accountService.findById(form.getAccountId());
+        Optional<Fund> fund = fundService.findFundById(form.getFundId());
+
+        if (account.isPresent() && fund.isPresent()) {
             Monthly monthly = new Monthly();
-//            monthly.setUid(UUID.randomUUID());
-            monthly.setAmountPerMonth(monthlyForm.getAmountPerMonth());
+            monthly.setAmountPerMonth(form.getAmountPerMonth());
             monthly.setAccount(account.get());
             monthlyRepo.save(monthly);
-            return true;
+            return MonthlyResponse.Builder.aMonthlyResponse()
+                    .withStatus(200)
+                    .withMessage("")
+                    .build();
         }
-        return false;
+        return MonthlyResponse.Builder.aMonthlyResponse()
+                .withStatus(201)
+                .withMessage("")
+                .build();
     }
 
     public boolean update(MonthlyForm monthlyForm) {

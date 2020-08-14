@@ -30,7 +30,7 @@ public class InstallmentLoanController {
     @Autowired
     private InstallmentLoanService installmentLoanService;
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createInstallmentLoan(@Valid @RequestBody InstallmentLoanForm ilForm) {
         if (installmentLoanService.create(ilForm))
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_INSTALLMENTLOAN).createBaseDto());
@@ -63,6 +63,6 @@ public class InstallmentLoanController {
             return ResponseEntity.status(HttpStatus.OK).body(installmentLoanDTO.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_LOAN).createBaseDto());
-    }
+    }*/
 
 }

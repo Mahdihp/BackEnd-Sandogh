@@ -1,6 +1,7 @@
 package com.mahdi.sandogh.model.monthly.dto;
 
 import lombok.Data;
+import org.joda.time.DateTime;
 
 /**
  * Created by mahdi
@@ -15,8 +16,9 @@ import lombok.Data;
 public class MonthlyForm {
 
     private Long monthlyId;
+    private Integer fundId;
     private long amountPerMonth; // مبلغ سهم هر ماه
-    private long creationDate; // تاریخ
+//    private DateTime creationDate; // تاریخ
     private Long accountId;
 
     public MonthlyForm() {
