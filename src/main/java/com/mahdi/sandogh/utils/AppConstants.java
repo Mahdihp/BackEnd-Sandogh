@@ -36,4 +36,10 @@ public class AppConstants {
     public static final String KEY_REMOVE_ACCOUNT = "حساب حذف شد.";
     public static final String KEY_ACTIVATE_ACCOUNT = "حساب فعال شد.";
     public static final String KEY_RECOVERY_ACCOUNT = "حساب بازیابی شد.";
+    public static final String KEY_REPEAT_FUND = "صندوق تکراری است.";
+
+    public static final String KEY_ALREADY_ADD_FUND = "این صندوق قبلا اضافه شده.";
+    public static final String KEY_ADD_TO_FUND = "به صندوق اضافه شد.";
+    public static final String KEY_RECOVERY_FUND = "صندوق بازیابی شد.";
+    public static final String KEY_REMOVE_AS_FUND = "حساب مورد نظر از صندوق حذف شد.";
 }

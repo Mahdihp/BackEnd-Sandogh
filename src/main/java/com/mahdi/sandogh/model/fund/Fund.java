@@ -32,6 +32,12 @@ public class Fund extends DateAudit {
     @Column(name = "createBy")
     private String createBy;
 
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "address")
+    private String address;
+
     @NotNull
     @Column(name = "description")
     private String description;

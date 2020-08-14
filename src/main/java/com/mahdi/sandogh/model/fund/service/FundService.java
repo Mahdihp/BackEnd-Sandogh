@@ -5,6 +5,7 @@ import com.mahdi.sandogh.model.account.service.AccountService;
 import com.mahdi.sandogh.model.fund.Fund;
 import com.mahdi.sandogh.model.fund.dto.FundDto;
 import com.mahdi.sandogh.model.fund.dto.FundForm;
+import com.mahdi.sandogh.model.fund.dto.FundResponse;
 import com.mahdi.sandogh.model.fund.dto.ListFundDto;
 import com.mahdi.sandogh.model.fund.repository.FundRepo;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -29,7 +30,7 @@ public class FundService {
     @Autowired
     private AccountService accountService;
 
-    public boolean create(FundForm form) {
+    public FundResponse create(FundForm form) {
         List<Fund> list = fundRepo.findAllByDisplayNameAndDeleted(form.getDisplayName(), false);
         if (list != null && list.size() == 0) {
             Fund fund = new Fund();
@@ -37,21 +38,33 @@ public class FundService {
             fund.setCreateBy(form.getCreateBy());
             fund.setDescription(form.getDescription());
             fundRepo.save(fund);
-            return true;
+            return FundResponse.Builder.aFundResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_CREATE_FUND)
+                    .build();
         }
-        return false;
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_REPEAT_FUND)
+                .build();
     }
 
-    public boolean update(FundForm form) {
+    public FundResponse update(FundForm form) {
         Optional<Fund> fund = fundRepo.findById(form.getId());
         if (fund.isPresent()) {
             fund.get().setDisplayName(form.getDisplayName());
             fund.get().setCreateBy(form.getCreateBy());
             fund.get().setDescription(form.getDescription());
             fundRepo.save(fund.get());
-            return true;
+            return FundResponse.Builder.aFundResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_UPDATE_FUND)
+                    .build();
         }
-        return false;
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND)
+                .build();
     }
 
     public Optional<ListFundDto> findFundDtoById(Integer id) {
@@ -99,32 +112,84 @@ public class FundService {
         return Optional.empty();
     }
 
-    public boolean addAccountToFund(String accountNumber, Integer fundId) {
+    public FundResponse addAccountToFund(String accountNumber, Integer fundId) {
         Optional<Account> byAccountNumber = accountService.findByAccountNumber(accountNumber);
         Optional<Fund> fund = fundRepo.findById(fundId);
         if (byAccountNumber.isPresent()) {
             for (Fund fund1 : byAccountNumber.get().getFunds()) {
                 if (fund1.getId().equals(fundId)) {
-                    return false;
+                    return FundResponse.Builder.aFundResponse()
+                            .withStatus(201)
+                            .withMessage(AppConstants.KEY_ALREADY_ADD_FUND)
+                            .build();
                 }
             }
             Set<Account> funds = new HashSet<>();
             funds.add(byAccountNumber.get());
             fund.get().setAccounts(funds);
             fundRepo.save(fund.get());
-            return true;
+            return FundResponse.Builder.aFundResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_ADD_TO_FUND)
+                    .build();
         }
-        return false;
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_ALREADY_ADD_FUND)
+                .build();
     }
 
-    public boolean removeFund(Integer id) {
+    public FundResponse removeAccountAsFund(String accountNumber, Integer fundId) {
+        Optional<Account> byAccountNumber = accountService.findByAccountNumber(accountNumber);
+        if (byAccountNumber.isPresent()) {
+            for (Fund fund1 : byAccountNumber.get().getFunds()) {
+                if (fund1.getId().equals(fundId)) {
+                    byAccountNumber.get().getFunds().remove(fund1);
+                    accountService.saveAccount(byAccountNumber.get());
+                    return FundResponse.Builder.aFundResponse()
+                            .withStatus(200)
+                            .withMessage(AppConstants.KEY_REMOVE_AS_FUND)
+                            .build();
+                }
+            }
+
+        }
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND)
+                .build();
+    }
+
+    public FundResponse remove(Integer id) {
         Optional<Fund> fund = fundRepo.findById(id);
         if (fund.isPresent()) {
             fund.get().setDeleted(true);
             fundRepo.save(fund.get());
-            return true;
+            return FundResponse.Builder.aFundResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_REMOVE_FUND)
+                    .build();
         }
-        return false;
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND)
+                .build();
+    }
+
+    public FundResponse recovery(Integer id) {
+        Optional<Fund> fund = fundRepo.findById(id);
+        if (fund.isPresent()) {
+            fund.get().setDeleted(false);
+            fundRepo.save(fund.get());
+            return FundResponse.Builder.aFundResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_RECOVERY_FUND)
+                    .build();
+        }
+        return FundResponse.Builder.aFundResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND)
+                .build();
     }
 
     public Optional<List<Account>> findAllAccountByFundId(Integer fundId) {
@@ -134,6 +199,7 @@ public class FundService {
         else
             return Optional.empty();
     }
+
     public Optional<List<Account>> findAllAccountByNotFundId(Integer fundId) {
         List<Account> list = fundRepo.findAllByAccountsIsNotId(fundId);
         if (list != null)

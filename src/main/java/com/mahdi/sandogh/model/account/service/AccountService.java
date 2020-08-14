@@ -255,4 +255,8 @@ public class AccountService {
                 .withMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT)
                 .build();
     }
+
+    public void saveAccount(Account account) {
+        accountRepo.save(account);
+    }
 }

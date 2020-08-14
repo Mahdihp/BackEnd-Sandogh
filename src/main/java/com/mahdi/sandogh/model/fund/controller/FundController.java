@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.model.fund.controller;
 
+import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.fund.dto.FundForm;
+import com.mahdi.sandogh.model.fund.dto.FundResponse;
 import com.mahdi.sandogh.model.fund.dto.ListFundDto;
 import com.mahdi.sandogh.model.fund.service.FundService;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -29,18 +31,14 @@ public class FundController {
 
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> create(@Valid @RequestBody FundForm fundForm) {
-        if (service.create(fundForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_FUND).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(201).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+        FundResponse fundResponse = service.create(fundForm);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
     }
 
     @PostMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> update(@Valid @RequestBody FundForm fundForm) {
-        if (service.update(fundForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_UPDATE_FUND).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(201).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+        FundResponse fundResponse = service.update(fundForm);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
     }
 
     @GetMapping(value = "/one", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -49,7 +47,7 @@ public class FundController {
         if (fund.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(fund.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_FUND).createBaseDto());
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_FUND));
     }
 
     @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -58,20 +56,32 @@ public class FundController {
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(201).setMessage(AppConstants.KEY_NOT_FOUND_FUND).createBaseDto());
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_FUND));
     }
 
     @PostMapping(value = "/remove", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> remove(@RequestParam("fundid") Integer fundid) {
-        if (service.removeFund(fundid))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_REMOVE_FUND).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(201).setMessage(AppConstants.KEY_NOT_FOUND_FUND).createBaseDto());
+        FundResponse fundResponse = service.remove(fundid);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
     }
 
-    @PostMapping(value = "/addfund", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/recovery", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> recovery(@RequestParam("fundid") Integer fundid) {
+        FundResponse fundResponse = service.recovery(fundid);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
+    }
+
+    @PostMapping(value = "/addtofund", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> addToFund(@RequestParam("accountnumber") String accountnumber,
                                        @RequestParam("fundId") Integer fundId) {
-        service.addAccountToFund(accountnumber,fundId);
+        FundResponse fundResponse = service.addAccountToFund(accountnumber, fundId);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
+    }
+
+    @PostMapping(value = "/removeasfund", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> removeAsFund(@RequestParam("accountnumber") String accountnumber,
+                                       @RequestParam("fundId") Integer fundId) {
+        FundResponse fundResponse = service.removeAccountAsFund(accountnumber, fundId);
+        return ResponseEntity.status(HttpStatus.OK).body(fundResponse);
     }
 }
