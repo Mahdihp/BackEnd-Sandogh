@@ -2,11 +2,15 @@ package com.mahdi.sandogh.model.loan;
 
 
 import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.fund.Fund;
+import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -46,6 +50,13 @@ public class Loan { //جدول وام ها
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fund_id", nullable = false)
+    private Fund fund;
+
+    @OneToMany(mappedBy = "loan")
+    private Set<InstallmentLoan> installmentLoans = new HashSet<>();
 
     public Loan() {
     }

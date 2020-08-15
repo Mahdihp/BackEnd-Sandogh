@@ -4,6 +4,7 @@ package com.mahdi.sandogh.model.fund;
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.bank.Bank;
+import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.monthly.Monthly;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,5 +64,8 @@ public class Fund extends DateAudit {
 
     @OneToMany(mappedBy = "fund")
     private Set<Monthly> monthlies = new HashSet<>();
+
+    @OneToMany(mappedBy = "fund")
+    private Set<Loan> loans = new HashSet<>();
 
 }

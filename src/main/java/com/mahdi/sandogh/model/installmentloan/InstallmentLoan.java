@@ -3,6 +3,7 @@ package com.mahdi.sandogh.model.installmentloan;
 
 import com.mahdi.sandogh.model.account.Account;
 import com.mahdi.sandogh.model.audit.DateAudit;
+import com.mahdi.sandogh.model.loan.Loan;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,5 +35,9 @@ public class InstallmentLoan extends DateAudit { // جدول اقساط وام
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "loan_id", nullable = false)
+    private Loan loan;
 
 }

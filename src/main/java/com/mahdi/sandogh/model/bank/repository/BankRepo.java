@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BankRepo extends JpaRepository<Bank, Integer> {
+
+    Boolean existsByDisplayNameAndAccountNumber(String displayName, String accountNumber);
 }

@@ -10,14 +10,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
-
-بانک ها
+ * بانک ها
  */
 @Setter
 @Getter
 @Entity
 @Table(name = "banks")
-public class Bank  extends DateAudit {
+public class Bank extends DateAudit { // جدول بانک ها یا حساب بانکی
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
