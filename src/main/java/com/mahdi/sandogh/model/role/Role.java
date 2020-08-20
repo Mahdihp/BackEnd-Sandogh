@@ -1,9 +1,7 @@
 package com.mahdi.sandogh.model.role;
 
 
-import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.permission.Permission;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
