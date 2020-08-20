@@ -1,6 +1,6 @@
 # BackEnd-Sandogh
 
-پروژه سمت سرورصندوق قرض الحسنه حضرت ولی عصر عج
+صندوق قرض الحسنه حضرت ولی عصر عج
 
 
 Programming: Mahdi Hosseinpour
