@@ -126,7 +126,34 @@ public class BankService {
         }
         return Optional.empty();
     }
+    public Optional<ListBankDto> findAllBankByFund(Integer fundId) {
+        List<Bank> list = bankRepo.findAllByFundId(fundId);
+        if (list != null) {
+            ListBankDto listBankDto = new ListBankDto();
 
+            listBankDto.setStatus(HttpStatus.OK.value());
+            listBankDto.setMessage(AppConstants.KEY_SUCESSE);
+
+            List<BankDto> dtoList = new ArrayList<>();
+            for (Bank bankRef : list) {
+                BankDto bank = new BankDto();
+                bank.setDisplayName(bankRef.getDisplayName());
+                bank.setAmount(bankRef.getAmount());
+                bank.setSheba(bankRef.getSheba());
+                bank.setAccountNumber(bankRef.getAccountNumber());
+                bank.setCustomerNumber(bankRef.getCustomerNumber());
+                bank.setUsername(bankRef.getUsername());
+                bank.setPassword(bankRef.getPassword());
+                bank.setCardNumber(bankRef.getCardNumber());
+                bank.setDescription(bankRef.getDescription());
+                bank.setFundId(bankRef.getFund().getId());
+                dtoList.add(bank);
+            }
+            listBankDto.setData(dtoList);
+            return Optional.ofNullable(listBankDto);
+        }
+        return Optional.empty();
+    }
     public Optional<ListBankDto> findAllBank() {
         List<Bank> list = bankRepo.findAll();
         if (list != null) {

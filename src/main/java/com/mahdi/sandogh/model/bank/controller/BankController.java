@@ -58,6 +58,15 @@ public class BankController {
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_BANK));
     }
 
+    @GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> getAllByFund(@RequestParam("fundid") Integer fundId) {
+        Optional<ListBankDto> list = service.findAllBankByFund(fundId);
+        if (list.isPresent())
+            return ResponseEntity.status(HttpStatus.OK).body(list.get());
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_BANK));
+    }
+
     @PostMapping(value = "/remove", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> remove(@RequestParam("bankid") Integer fundid) {
         BankResponse fundResponse = service.remove(fundid);
