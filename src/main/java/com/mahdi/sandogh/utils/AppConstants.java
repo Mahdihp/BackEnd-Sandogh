@@ -9,6 +9,7 @@ public class AppConstants {
     public static final String KEY_API_FUND = KEY_API_VER + "/funds";
     public static final String KEY_API_ACCOUNT = KEY_API_VER + "/account";
     public static final String KEY_API_MONTHLYS = KEY_API_VER + "/monthlys";
+    public static final String KEY_API_LOAN = KEY_API_VER + "/loans";
     public static final String KEY_API_INSTALLMENT_LOAN = KEY_API_VER + "/installmentloan";
 
     public static final String KEY_SUCESSE = "sucesse!";

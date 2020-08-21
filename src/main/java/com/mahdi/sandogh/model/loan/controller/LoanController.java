@@ -1,8 +1,11 @@
 package com.mahdi.sandogh.model.loan.controller;
 
+import com.mahdi.sandogh.model.BaseDto;
+import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.loan.dto.ListLoanDto;
 import com.mahdi.sandogh.model.loan.dto.LoanDto;
 import com.mahdi.sandogh.model.loan.dto.LoanForm;
+import com.mahdi.sandogh.model.loan.dto.LoanResponse;
 import com.mahdi.sandogh.model.loan.service.LoanService;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,45 +19,50 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/loans")
+@RequestMapping(AppConstants.KEY_API_LOAN)
 public class LoanController {
 
     @Autowired
     private LoanService loanService;
 
-    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> createLoan(@Valid @RequestBody LoanForm loanForm) {
-        if (loanService.create(loanForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_LOAN).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> create(@Valid @RequestBody LoanForm loanForm) {
+        LoanResponse loanResponse = loanService.create(loanForm);
+        return ResponseEntity.status(HttpStatus.OK).body(loanResponse);
     }
 
-    @PostMapping(value = "/{loanid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> updateLoan(@PathVariable(value = "loanid") String loanId, @Valid @RequestBody LoanForm loanForm) {
-        loanForm.setAccountId(Long.valueOf(loanId));
-        if (loanService.update(loanForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_UPDATE_LOAN).createBaseDto());
+    @PostMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> update(@Valid @RequestBody LoanForm loanForm) {
+        LoanResponse loanResponse = loanService.update(loanForm);
+        return ResponseEntity.status(HttpStatus.OK).body(loanResponse);
+
+    }
+
+    @PostMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> findAllLoanByFundId(@RequestParam("loanid") String loanId) {
+        Optional<ListLoanDto> list = loanService.findAllByFundId(Integer.valueOf(loanId));
+        if (list.isPresent())
+            return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
     @PostMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllLoan() {
-        Optional<ListLoanDto> list = loanService.findAllDTO();
+        Optional<ListLoanDto> list = loanService.findAllDto();
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_LOAN).createBaseDto());
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> findLoan(@RequestParam("type") int type, @RequestParam("loanid") String loanId) {
-        Optional<LoanDto> loan = loanService.findDTOById(Long.valueOf(loanId));
+    public ResponseEntity<?> findLoan(@RequestParam("loanid") String loanId) {
+        Optional<Loan> loan = loanService.findById(Long.valueOf(loanId));
         if (loan.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(loan.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_LOAN).createBaseDto());
-    }*/
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_LOAN));
+    }
 
 }

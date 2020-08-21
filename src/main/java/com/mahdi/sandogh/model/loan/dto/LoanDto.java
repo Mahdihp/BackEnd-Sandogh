@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LoanDto extends BaseDto {
+public class LoanDto  {
 
-    private String loanId;
+    private Integer loanId;
     private Integer countLoan; // تعداد وام
     private Long sumLoan; // مجموع تعداد وام
     private Long currentLoanAmount; // مبلغ وام جاری
@@ -19,12 +19,10 @@ public class LoanDto extends BaseDto {
     private Integer countInstallments; // تعداد اقساط
     private Long amountPerInstallment; // مبلغ هر قسط
     private Long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
-    private String accountId;
+    private Long accountId;
+    private Integer fundId;
 
     public LoanDto() {
     }
 
-    public LoanDto(Integer status, String message) {
-        super(status, message);
-    }
 }
