@@ -12,7 +12,10 @@ import java.util.Set;
 
 public class PermissionName {
 
-    public static final String API_ACCESS_TO_UPDATE_ALL = "ACCESS_TO_UPDATE_ALL";
+    public static final String ROLE_ADMIN_ACCESS_ALL = "Role_Admin_Access_All";
+    public static final String ROLE_ADMIN_ACCESS_ = "Role_Admin_Access_All";
+
+
     public static final String API_ACCESS_TO_UPDATE_ONE = "ACCESS_TO_UPDATE_ONE";
     public static final String API_ACCESS_TO_SEARCH = "ACCESS_TO_SEARCH";
     public static final String API_ACCESS_TO_DETECT_CHANGES = "ACCESS_TO_DETECT_CHANGES";
@@ -23,7 +26,7 @@ public class PermissionName {
 
     public static Set<String> getAllFeatureNames() {
         Set<String> result = new HashSet<String>();
-        result.add(API_ACCESS_TO_UPDATE_ALL);
+        result.add(ROLE_ADMIN_ACCESS_ALL);
         result.add(API_ACCESS_TO_UPDATE_ONE);
         result.add(API_ACCESS_TO_SEARCH);
         result.add(API_ACCESS_TO_DETECT_CHANGES);

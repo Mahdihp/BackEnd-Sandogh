@@ -14,6 +14,7 @@ public class LoanForm {
     private Long amountPerInstallment; // مبلغ هر قسط
     private Long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
     private Long accountId;
+    private Integer fundId;
 
     public LoanForm() {
     }

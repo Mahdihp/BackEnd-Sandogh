@@ -6,7 +6,6 @@ import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.loan.Loan;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 
@@ -24,10 +23,6 @@ public class InstallmentLoan extends DateAudit { // جدول اقساط وام
 
     @Column(name = "amountinstallment")
     private long amountInstallment; // مبلغ قسط
-
-    @Column(name = "creationdate", updatable = false)
-    @CreatedDate
-    private long creationDate; // تاریخ
 
     @Column(name = "numberloan")
     private int numberLoan; // شماره قسط

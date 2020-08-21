@@ -7,6 +7,7 @@ import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.loan.dto.ListLoanDto;
 import com.mahdi.sandogh.model.loan.dto.LoanDto;
 import com.mahdi.sandogh.model.loan.dto.LoanForm;
+import com.mahdi.sandogh.model.loan.dto.LoanResponse;
 import com.mahdi.sandogh.model.loan.repository.LoanRepo;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,17 @@ public class LoanService {
     private AccountService accountService;
 
     //  یه عضو چند بار وام می تونه بگیره
-    public boolean create(LoanForm loanForm) {
-        Optional<Account> account = accountService.findById(loanForm.getAccountId());
+    public LoanResponse create(LoanForm form) {
+        Optional<Account> account = accountService.findById(form.getAccountId());
         if (account.isPresent()) {
             Loan loan = new Loan();
-//            loan.setUid(UUID.randomUUID());
-            loan.setCountLoan(loanForm.getCountLoan());
+            loan.setCountLoan(form.getCountLoan());
 //            loan.setSumLoan(loanForm.getSumLoan());
-            loan.setCurrentLoanAmount(loanForm.getCurrentLoanAmount());
-            loan.setDateCurrentLoan(loanForm.getDateCurrentLoan());
-            loan.setCountInstallments(loanForm.getCountInstallments());
-            loan.setAmountPerInstallment(loanForm.getAmountPerInstallment());
-            loan.setDateFinishInstallment(loanForm.getDateFinishInstallment());
+            loan.setCurrentLoanAmount(form.getCurrentLoanAmount());
+            loan.setDateCurrentLoan(form.getDateCurrentLoan());
+            loan.setCountInstallments(form.getCountInstallments());
+            loan.setAmountPerInstallment(form.getAmountPerInstallment());
+            loan.setDateFinishInstallment(form.getDateFinishInstallment());
             loan.setAccount(account.get());
             loanRepo.save(loan);
             return true;

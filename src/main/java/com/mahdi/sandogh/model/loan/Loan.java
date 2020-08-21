@@ -2,27 +2,28 @@ package com.mahdi.sandogh.model.loan;
 
 
 import com.mahdi.sandogh.model.account.Account;
+import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.fund.Fund;
 import com.mahdi.sandogh.model.installmentloan.InstallmentLoan;
-import lombok.Data;
-import org.hibernate.annotations.Type;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "loans")
-@Data
-public class Loan { //جدول وام ها
+public class Loan extends DateAudit { //جدول وام ها
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "countloan")
     private int countLoan; // تعداد وام
@@ -58,6 +59,5 @@ public class Loan { //جدول وام ها
     @OneToMany(mappedBy = "loan")
     private Set<InstallmentLoan> installmentLoans = new HashSet<>();
 
-    public Loan() {
-    }
+
 }

@@ -9,6 +9,7 @@ public class AppConstants {
     public static final String KEY_API_FUND = KEY_API_VER + "/funds";
     public static final String KEY_API_ACCOUNT = KEY_API_VER + "/account";
     public static final String KEY_API_MONTHLYS = KEY_API_VER + "/monthlys";
+    public static final String KEY_API_INSTALLMENT_LOAN = KEY_API_VER + "/installmentloan";
 
     public static final String KEY_SUCESSE = "sucesse!";
     public static final String KEY_FAIL = "fail";
@@ -48,4 +49,6 @@ public class AppConstants {
     public static final String KEY_ADD_BANK = "حساب بانکی اضافه شد.";
     public static final String KEY_NOT_FOUND_BANK = "حسابی پیدا نشد.";
     public static final String KEY_REMOVE_BANK = "حساب بانکی مورد نظر حذف شد.";
+    public static final String KEY_CREATE_INSTALLMENT_LOAN = "قسط وام ثبت شد.";
+    public static final String KEY_UPDATE_INSTALLMENT_LOAN = "قسط وام بروز شد.";
 }

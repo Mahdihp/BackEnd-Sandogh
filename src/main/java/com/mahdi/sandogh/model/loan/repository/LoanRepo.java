@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface LoanRepo extends JpaRepository<Loan, Long> {
+public interface LoanRepo extends JpaRepository<Loan, Integer> {
 
 
     Optional<Loan> findById(Long id);
