@@ -13,7 +13,7 @@ import lombok.Setter;
 public class InstallmentLoanDto {
 
     private Long installmentLoanId;
-    private Long amountInstallment; // مبلغ قسط
+    private Integer amountInstallment; // مبلغ قسط
     private Integer numberLoan; // شماره قسط
     private Long accountId;
     private Integer loanId;

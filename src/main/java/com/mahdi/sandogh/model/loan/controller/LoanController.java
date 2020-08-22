@@ -38,6 +38,15 @@ public class LoanController {
 
     }
 
+    @PostMapping(value = "/listloan", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> findAllLoanAccount(@RequestParam("accountnumber") String accountNumber) {
+        Optional<ListLoanDto> list = loanService.findALlLoanAccount(accountNumber);
+        if (list.isPresent())
+            return ResponseEntity.status(HttpStatus.OK).body(list.get());
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_LOAN));
+    }
+
     @PostMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllLoanByFundId(@RequestParam("loanid") String loanId) {
         Optional<ListLoanDto> list = loanService.findAllByFundId(Integer.valueOf(loanId));

@@ -22,10 +22,10 @@ public class InstallmentLoan extends DateAudit { // جدول اقساط وام
     private Long id;
 
     @Column(name = "amountinstallment")
-    private long amountInstallment; // مبلغ قسط
+    private Integer amountInstallment; // مبلغ قسط
 
     @Column(name = "numberloan")
-    private int numberLoan; // شماره قسط
+    private Integer numberLoan; // شماره قسط
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)

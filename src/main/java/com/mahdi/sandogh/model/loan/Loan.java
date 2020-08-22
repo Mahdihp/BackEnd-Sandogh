@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,17 +37,17 @@ public class Loan extends DateAudit { //جدول وام ها
 
     @Column(name = "datecurrentloan")
     @CreatedDate
-    private long dateCurrentLoan; // تاریخ شروع وام جاری
+    private LocalDateTime dateCurrentLoan; // تاریخ شروع وام جاری
 
     @Column(name = "countinstallments")
     private int countInstallments; // تعداد اقساط
 
     @Column(name = "amountperinstallment")
-    private long amountPerInstallment; // مبلغ هر قسط
+    private Integer amountPerInstallment; // مبلغ هر قسط
 
     @Column(name = "datefinishinstallment")
     @CreatedDate
-    private long dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
+    private LocalDateTime dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)

@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface LoanRepo extends JpaRepository<Loan, Integer> {
 
 
-    Optional<Loan> findById(Long id);
+    Optional<Loan> findById(Integer id);
 
     Optional<Loan> findByCurrentLoanAmount(long amount);
 

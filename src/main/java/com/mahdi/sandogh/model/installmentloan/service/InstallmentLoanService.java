@@ -80,6 +80,34 @@ public class InstallmentLoanService {
             return Optional.empty();
     }
 
+    /**
+     *  لیست اقساطی که تا به حال این عضو پرداخت کرده
+     * @param accountNumber
+     * @return
+     */
+    public Optional<ListInstallmentLoanDto> findDtoByAccountNumber(String accountNumber) {
+        Optional<Account> account = accountService.findByAccountNumber(accountNumber);
+        if (account.isPresent()) {
+            ListInstallmentLoanDto lilDTO = new ListInstallmentLoanDto();
+            lilDTO.setStatus(HttpStatus.OK.value());
+            lilDTO.setMessage(AppConstants.KEY_SUCESSE);
+
+            List<InstallmentLoanDto> dtoList = new ArrayList<>();
+            for (InstallmentLoan installmentLoan : account.get().getInstallmentLoans()) {
+                InstallmentLoanDto ilDTO = new InstallmentLoanDto();
+                ilDTO.setInstallmentLoanId(installmentLoan.getId());
+                ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());
+                ilDTO.setNumberLoan(installmentLoan.getNumberLoan());
+                ilDTO.setAccountId(installmentLoan.getAccount().getId());
+                ilDTO.setLoanId(installmentLoan.getLoan().getId());
+                dtoList.add(ilDTO);
+            }
+            lilDTO.setData(dtoList);
+            return Optional.ofNullable(lilDTO);
+        }
+        return Optional.empty();
+    }
+
     public Optional<ListInstallmentLoanDto> findDtoById(Long installmentLoanId) {
         Optional<InstallmentLoan> installmentLoan = installmentLoanRepo.findById((installmentLoanId));
         if (installmentLoan.isPresent()) {
@@ -101,7 +129,12 @@ public class InstallmentLoanService {
         return Optional.empty();
     }
 
-    public Optional<ListInstallmentLoanDto> findAllDtoILLoan(Long loanId) {
+    /**
+     *  لیست اقساط براساس شماره وام
+     * @param loanId
+     * @return
+     */
+    public Optional<ListInstallmentLoanDto> findAllDtoILLoan(Integer loanId) {
         Optional<Loan> list = loanService.findById(loanId);
         if (list.isPresent()) {
             ListInstallmentLoanDto lilDTO = new ListInstallmentLoanDto();

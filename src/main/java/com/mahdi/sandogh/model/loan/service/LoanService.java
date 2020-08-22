@@ -107,6 +107,7 @@ public class LoanService {
                 loanDTO.setDateFinishInstallment(loan.getDateFinishInstallment());
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
+                loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
@@ -115,14 +116,39 @@ public class LoanService {
         return Optional.empty();
     }
 
-    public Optional<Loan> findById(Long loanId) {
+    public Optional<Loan> findById(Integer loanId) {
         Optional<Loan> loan = loanRepo.findById((loanId));
         if (loan.isPresent())
             return Optional.ofNullable(loan.get());
         else
             return Optional.empty();
     }
-
+    public Optional<ListLoanDto> findALlLoanAccount(String accountNumber) {
+        Optional<Account> account = accountService.findByAccountNumber(accountNumber);
+        if (account.isPresent()){
+            ListLoanDto llDTO = new ListLoanDto();
+            llDTO.setStatus(HttpStatus.OK.value());
+            llDTO.setMessage(AppConstants.KEY_SUCESSE);
+            List<LoanDto> dtoList = new ArrayList<>();
+            for (Loan loan : account.get().getLoans()) {
+                LoanDto loanDTO = new LoanDto();
+                loanDTO.setLoanId(loan.getId());
+                loanDTO.setCountLoan(loan.getCountLoan());
+                loanDTO.setCurrentLoanAmount(loan.getCurrentLoanAmount());
+                loanDTO.setDateCurrentLoan(loan.getDateCurrentLoan());
+                loanDTO.setCountInstallments(loan.getCountInstallments());
+                loanDTO.setAmountPerInstallment(loan.getAmountPerInstallment());
+                loanDTO.setDateFinishInstallment(loan.getDateFinishInstallment());
+                loanDTO.setAccountId(loan.getAccount().getId());
+                loanDTO.setFundId(loan.getFund().getId());
+                loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
+                dtoList.add(loanDTO);
+            }
+            llDTO.setData(dtoList);
+            return Optional.ofNullable(llDTO);
+        }
+        return Optional.empty();
+    }
     public Optional<ListLoanDto> findAllByFundId(Integer fundId) {
         Optional<Fund> list = fundService.findFundById(fundId);
         if (list.isPresent()) {
@@ -143,6 +169,7 @@ public class LoanService {
                 loanDTO.setDateFinishInstallment(loan.getDateFinishInstallment());
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
+                loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
@@ -170,6 +197,7 @@ public class LoanService {
                 loanDTO.setDateFinishInstallment(loan.getDateFinishInstallment());
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
+                loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
