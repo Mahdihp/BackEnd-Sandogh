@@ -1,8 +1,10 @@
 package com.mahdi.sandogh.model.monthly.controller;
 
+import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.monthly.dto.ListMonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyDto;
 import com.mahdi.sandogh.model.monthly.dto.MonthlyForm;
+import com.mahdi.sandogh.model.monthly.dto.MonthlyResponse;
 import com.mahdi.sandogh.model.monthly.service.MonthlyService;
 import com.mahdi.sandogh.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,43 +29,37 @@ import java.util.Optional;
 public class MonthlyController {
 
     @Autowired
-    private MonthlyService monthlyService;
+    private MonthlyService service;
 
-    /*@PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> create(@Valid @RequestBody MonthlyForm monthlyForm) {
-        if (monthlyService.create(monthlyForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_CREATE_MONTHLY).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+        MonthlyResponse monthlyResponse = service.create(monthlyForm);
+        return ResponseEntity.status(HttpStatus.OK).body(monthlyResponse);
     }
 
-    @PostMapping(value = "/{monthlyid}", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> updateAccount(@PathVariable(value = "monthlyid") String monthlyId, @Valid @RequestBody MonthlyForm monthlyForm) {
-        monthlyForm.setAccountId(Long.valueOf(monthlyId));
-        if (monthlyService.update(monthlyForm))
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_UPDATE_MONTHLY).createBaseDto());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
-
+    @PostMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> update(@Valid @RequestBody MonthlyForm monthlyForm) {
+        MonthlyResponse monthlyResponse = service.update(monthlyForm);
+        return ResponseEntity.status(HttpStatus.OK).body(monthlyResponse);
     }
 
     @PostMapping(value = "/all/{monthlyid}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllAccount(@PathVariable(value = "monthlyid") String monthlyId) {
-        Optional<ListMonthlyDto> list = monthlyService.findAllDTO(Long.valueOf(monthlyId));
+        Optional<ListMonthlyDto> list = service.findAllDTO(Long.valueOf(monthlyId));
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
+            return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("monthlyid") String monthlyid) {
-        Optional<MonthlyDto> monthlyDTO = monthlyService.findDTOById(Long.valueOf(monthlyid));
+        Optional<MonthlyDto> monthlyDTO = service.findDTOById(Long.valueOf(monthlyid));
         if (monthlyDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(monthlyDTO.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
-    }*/
+    }
 
 
 }

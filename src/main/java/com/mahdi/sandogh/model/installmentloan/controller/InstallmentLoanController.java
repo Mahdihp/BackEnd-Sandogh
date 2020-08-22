@@ -1,7 +1,6 @@
 package com.mahdi.sandogh.model.installmentloan.controller;
 
 import com.mahdi.sandogh.model.BaseDto;
-import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanDto;
 import com.mahdi.sandogh.model.installmentloan.dto.InstallmentLoanForm;
 import com.mahdi.sandogh.model.installmentloan.dto.ListInstallmentLoanDto;
 import com.mahdi.sandogh.model.installmentloan.dto.ResponseIL;
@@ -29,33 +28,33 @@ import java.util.Optional;
 public class InstallmentLoanController {
 
     @Autowired
-    private InstallmentLoanService installmentLoanService;
+    private InstallmentLoanService service;
 
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> create(@Valid @RequestBody InstallmentLoanForm ilForm) {
-        ResponseIL responseIL = installmentLoanService.create(ilForm);
+    public ResponseEntity<?> create(@Valid @RequestBody InstallmentLoanForm form) {
+        ResponseIL responseIL = service.create(form);
         return ResponseEntity.status(HttpStatus.OK).body(responseIL);
     }
 
     @PostMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> update(@Valid @RequestBody InstallmentLoanForm ilForm) {
-        ResponseIL responseIL = installmentLoanService.update(ilForm);
+    public ResponseEntity<?> update(@Valid @RequestBody InstallmentLoanForm form) {
+        ResponseIL responseIL = service.update(form);
         return ResponseEntity.status(HttpStatus.OK).body(responseIL);
 
     }
 
     @PostMapping(value = "/listaccount", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllILAccount(@RequestParam("accountnumber") String accountNumber) {
-        Optional<ListInstallmentLoanDto> list = installmentLoanService.findDtoByAccountNumber(accountNumber);
+        Optional<ListInstallmentLoanDto> list = service.findDtoByAccountNumber(accountNumber);
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_LOAN));
     }
 
-    @PostMapping(value = "/listaccount", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/listloan", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAllILLoan(@RequestParam("loanid") Integer loanId) {
-        Optional<ListInstallmentLoanDto> list = installmentLoanService.findAllDtoILLoan(loanId);
+        Optional<ListInstallmentLoanDto> list = service.findAllDtoILLoan(loanId);
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
@@ -64,7 +63,7 @@ public class InstallmentLoanController {
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findInstallmentLoan(@RequestParam("installmentloanid") String installmentloanid) {
-        Optional<ListInstallmentLoanDto> loanDto = installmentLoanService.findDtoById(Long.valueOf(installmentloanid));
+        Optional<ListInstallmentLoanDto> loanDto = service.findDtoById(Long.valueOf(installmentloanid));
         if (loanDto.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(loanDto.get());
         else

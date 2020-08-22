@@ -22,7 +22,7 @@ public class Monthly extends DateAudit { // جدول ماهانه ها
     private Long id;
 
     @Column(name = "amountpermonth")
-    private long amountPerMonth; // مبلغ سهم هر ماه
+    private Integer amountPerMonth; // مبلغ سهم هر ماه
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)

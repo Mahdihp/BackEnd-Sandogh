@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by mahdi
  * User: mahdi
@@ -17,9 +19,9 @@ import lombok.Data;
 public class MonthlyDto extends BaseDto {
 
     private String monthlyId;
-    private Long amountPerMonth; // مبلغ سهم هر ماه
-    private Long creationDate; // تاریخ
-    private Long modificationDate;
+    private Integer amountPerMonth; // مبلغ سهم هر ماه
+    private LocalDateTime creationDate; // تاریخ
+    private LocalDateTime updatedAt;
     private String accountId;
 
     public MonthlyDto() {

@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.model.monthly.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.joda.time.DateTime;
 
 /**
@@ -12,14 +14,15 @@ import org.joda.time.DateTime;
  */
 
 
-@Data
+
+@Setter
+@Getter
 public class MonthlyForm {
 
     private Long monthlyId;
+    private Integer amountPerMonth; // مبلغ سهم هر ماه
     private Integer fundId;
-    private long amountPerMonth; // مبلغ سهم هر ماه
-//    private DateTime creationDate; // تاریخ
-    private Long accountId;
+    private String accountNumber;
 
     public MonthlyForm() {
     }

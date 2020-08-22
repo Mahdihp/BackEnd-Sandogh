@@ -66,8 +66,8 @@ public class LoanController {
     }
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> findLoan(@RequestParam("loanid") String loanId) {
-        Optional<Loan> loan = loanService.findById(Long.valueOf(loanId));
+    public ResponseEntity<?> findLoan(@RequestParam("loanid") Integer loanId) {
+        Optional<Loan> loan = loanService.findById(loanId);
         if (loan.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(loan.get());
         else

@@ -39,14 +39,31 @@ public class MonthlyService {
     private FundService fundService;
 
     public MonthlyResponse create(MonthlyForm form) {
-        Optional<Account> account = accountService.findById(form.getAccountId());
+        Optional<Account> account = accountService.findByAccountNumber(form.getAccountNumber());
         Optional<Fund> fund = fundService.findFundById(form.getFundId());
-
         if (account.isPresent() && fund.isPresent()) {
             Monthly monthly = new Monthly();
             monthly.setAmountPerMonth(form.getAmountPerMonth());
             monthly.setAccount(account.get());
+            monthly.setFund(fund.get());
             monthlyRepo.save(monthly);
+            return MonthlyResponse.Builder.aMonthlyResponse()
+                    .withStatus(200)
+                    .withMessage(AppConstants.KEY_CREATE_MONTHLY)
+                    .build();
+        }
+        return MonthlyResponse.Builder.aMonthlyResponse()
+                .withStatus(201)
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND + "\n" + " یا "+
+                        AppConstants.KEY_NOT_FOUND_ACCOUNT)
+                .build();
+    }
+
+    public MonthlyResponse update(MonthlyForm monthlyForm) {
+        Optional<Monthly> monthly = monthlyRepo.findById(monthlyForm.getMonthlyId());
+        if (monthly.isPresent()) {
+            monthly.get().setAmountPerMonth(monthlyForm.getAmountPerMonth());
+            monthlyRepo.save(monthly.get());
             return MonthlyResponse.Builder.aMonthlyResponse()
                     .withStatus(200)
                     .withMessage("")
@@ -56,16 +73,6 @@ public class MonthlyService {
                 .withStatus(201)
                 .withMessage("")
                 .build();
-    }
-
-    public boolean update(MonthlyForm monthlyForm) {
-        Optional<Monthly> monthly = monthlyRepo.findById(monthlyForm.getMonthlyId());
-        if (monthly.isPresent()) {
-            monthly.get().setAmountPerMonth(monthlyForm.getAmountPerMonth());
-            monthlyRepo.save(monthly.get());
-            return true;
-        }
-        return false;
     }
 
     public Optional<Monthly> findById(Long monthlyId) {
