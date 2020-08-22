@@ -54,7 +54,7 @@ public class MonthlyController {
 
     @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> findAccount(@RequestParam("monthlyid") String monthlyid) {
-        Optional<MonthlyDto> monthlyDTO = service.findDTOById(Long.valueOf(monthlyid));
+        Optional<MonthlyDto> monthlyDTO = service.findDtoById(Long.valueOf(monthlyid));
         if (monthlyDTO.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(monthlyDTO.get());
         else

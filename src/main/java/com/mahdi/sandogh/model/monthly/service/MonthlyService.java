@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +55,7 @@ public class MonthlyService {
         }
         return MonthlyResponse.Builder.aMonthlyResponse()
                 .withStatus(201)
-                .withMessage(AppConstants.KEY_NOT_FOUND_FUND + "\n" + " یا "+
+                .withMessage(AppConstants.KEY_NOT_FOUND_FUND + "\n" + " یا " +
                         AppConstants.KEY_NOT_FOUND_ACCOUNT)
                 .build();
     }
@@ -66,12 +67,12 @@ public class MonthlyService {
             monthlyRepo.save(monthly.get());
             return MonthlyResponse.Builder.aMonthlyResponse()
                     .withStatus(200)
-                    .withMessage("")
+                    .withMessage(AppConstants.KEY_UPDATE_MONTHLY)
                     .build();
         }
         return MonthlyResponse.Builder.aMonthlyResponse()
                 .withStatus(201)
-                .withMessage("")
+                .withMessage(AppConstants.KEY_NOT_FOUND_MONTHLY)
                 .build();
     }
 
@@ -80,19 +81,25 @@ public class MonthlyService {
         return monthly;
     }
 
-    public Optional<MonthlyDto> findDTOById(Long monthlyId) {
+    public Optional<ListMonthlyDto> findDtoById(Long monthlyId) {
         Optional<Monthly> monthly = monthlyRepo.findById((monthlyId));
         if (monthly.isPresent()) {
-            MonthlyDto monthlyDTO = new MonthlyDto();
-            monthlyDTO.setStatus(HttpStatus.OK.value());
-            monthlyDTO.setMessage(AppConstants.KEY_SUCESSE);
+            ListMonthlyDto lmDTO = new ListMonthlyDto();
+            lmDTO.setStatus(HttpStatus.OK.value());
+            lmDTO.setMessage(AppConstants.KEY_SUCESSE);
+            List<MonthlyDto> dtoList = new ArrayList<>();
 
-//            monthlyDTO.setMonthlyId(monthly.get().getUid().toString());
+            MonthlyDto monthlyDTO = new MonthlyDto();
+            monthlyDTO.setMonthlyId(monthly.get().getId());
             monthlyDTO.setAmountPerMonth(monthly.get().getAmountPerMonth());
-//            monthlyDTO.setCreationDate(monthly.get().getCreationDate());
-//            monthlyDTO.setModificationDate(monthly.get().getModificationDate());
-//            monthlyDTO.setAccountId(monthly.get().getAccount().getUid().toString());
-            return Optional.ofNullable(monthlyDTO);
+            monthlyDTO.setCreationDate(monthly.get().getCreatedAt());
+            monthlyDTO.setAccountNumber(monthly.get().getAccount().getAccountNumber());
+            monthlyDTO.setFundId(monthly.get().getFund().getId());
+
+            dtoList.add(monthlyDTO);
+            lmDTO.setData(dtoList);
+
+            return Optional.ofNullable(lmDTO);
         }
         return Optional.empty();
     }
@@ -106,12 +113,11 @@ public class MonthlyService {
             List<MonthlyDto> dtoList = new ArrayList<>();
             for (Monthly monthly : list.get()) {
                 MonthlyDto monthlyDTO = new MonthlyDto();
-
-//                monthlyDTO.setMonthlyId(monthly.getUid().toString());
+                monthlyDTO.setMonthlyId(monthly.getId());
                 monthlyDTO.setAmountPerMonth(monthly.getAmountPerMonth());
-//                monthlyDTO.setCreationDate(monthly.getCreationDate());
-//                monthlyDTO.setModificationDate(monthly.getModificationDate());
-//                monthlyDTO.setAccountId(monthly.getAccount().getUid().toString());
+                monthlyDTO.setCreationDate(monthly.getCreatedAt());
+                monthlyDTO.setAccountNumber(monthly.getAccount().getAccountNumber());
+                monthlyDTO.setFundId(monthly.getFund().getId());
                 dtoList.add(monthlyDTO);
             }
             lmDTO.setData(dtoList);

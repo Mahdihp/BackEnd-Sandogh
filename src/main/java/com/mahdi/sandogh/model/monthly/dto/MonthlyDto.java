@@ -16,13 +16,13 @@ import java.time.LocalDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MonthlyDto extends BaseDto {
+public class MonthlyDto {
 
-    private String monthlyId;
+    private Long monthlyId;
     private Integer amountPerMonth; // مبلغ سهم هر ماه
     private LocalDateTime creationDate; // تاریخ
-    private LocalDateTime updatedAt;
-    private String accountId;
+    private String accountNumber;
+    private Integer fundId;
 
     public MonthlyDto() {
     }

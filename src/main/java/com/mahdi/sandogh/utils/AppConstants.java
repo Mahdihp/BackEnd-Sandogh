@@ -21,7 +21,7 @@ public class AppConstants {
     public static final String KEY_UPDATE_LOAN = "وام بروز شد.";
     public static final String KEY_NOT_FOUND_LOAN = "وامی پیدا نشد";
     public static final String KEY_CREATE_MONTHLY = "قسط مورد نظر ثبت شد.";
-    public static final String KEY_UPDATE_MONTHLY = "قسط مورد نظر بروز شد.";
+    public static final String KEY_UPDATE_MONTHLY = "ماهیانه مورد نظر بروز شد.";
     public static final String KEY_CREATE_SAHAMSALANEH = "سهم سالانه ثبت شد.";
     public static final String KEY_UPDATE_SAHAMSALANEH = "سهم سالانه بروز شد.";
     public static final String KEY_NOT_FOUND_SAHAMSALANEH = "سهم سالانه موجود نیست";
@@ -52,4 +52,5 @@ public class AppConstants {
     public static final String KEY_REMOVE_BANK = "حساب بانکی مورد نظر حذف شد.";
     public static final String KEY_CREATE_INSTALLMENT_LOAN = "قسط وام ثبت شد.";
     public static final String KEY_UPDATE_INSTALLMENT_LOAN = "قسط وام بروز شد.";
+    public static final String KEY_NOT_FOUND_MONTHLY = "ماهیانه ای پیدا نشد.";
 }
