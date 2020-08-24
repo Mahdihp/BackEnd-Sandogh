@@ -43,23 +43,13 @@ public class MonthlyController {
         return ResponseEntity.status(HttpStatus.OK).body(monthlyResponse);
     }
 
-    @PostMapping(value = "/all/{monthlyid}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> findAllAccount(@PathVariable(value = "monthlyid") String monthlyId) {
-        Optional<ListMonthlyDto> list = service.findAllDTO(Long.valueOf(monthlyId));
+    @PostMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> findAllMonthlyAccount(@RequestParam("accountnumber") String accountNumber) {
+        Optional<ListMonthlyDto> list = service.findAllDto(accountNumber);
         if (list.isPresent())
             return ResponseEntity.status(HttpStatus.OK).body(list.get());
         else
             return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(201, AppConstants.KEY_NOT_FOUND_ACCOUNT));
     }
-
-    @PostMapping(value = "/one", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> findAccount(@RequestParam("monthlyid") String monthlyid) {
-        Optional<MonthlyDto> monthlyDTO = service.findDtoById(Long.valueOf(monthlyid));
-        if (monthlyDTO.isPresent())
-            return ResponseEntity.status(HttpStatus.OK).body(monthlyDTO.get());
-        else
-            return ResponseEntity.status(HttpStatus.OK).body(new BaseDtoBuilder().setStatus(HttpStatus.OK.value()).setMessage(AppConstants.KEY_NOT_FOUND_ACCOUNT).createBaseDto());
-    }
-
 
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by mahdi
  * User: mahdi
@@ -21,7 +23,9 @@ public class MonthlyForm {
 
     private Long monthlyId;
     private Integer amountPerMonth; // مبلغ سهم هر ماه
+    @NotNull
     private Integer fundId;
+    @NotNull
     private String accountNumber;
 
     public MonthlyForm() {

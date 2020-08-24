@@ -22,5 +22,5 @@ public interface MonthlyRepo extends JpaRepository<Monthly, Long> {
 
     Optional<Monthly> findById(Long uid);
 
-    Optional<List<Monthly>> findAllByAccountId(Long id);
+    Optional<List<Monthly>> findAllByAccount_AccountNumber(String accountNumber);
 }

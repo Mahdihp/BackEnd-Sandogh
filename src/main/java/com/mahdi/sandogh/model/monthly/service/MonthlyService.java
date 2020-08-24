@@ -104,8 +104,8 @@ public class MonthlyService {
         return Optional.empty();
     }
 
-    public Optional<ListMonthlyDto> findAllDTO(Long accountId) {
-        Optional<List<Monthly>> list = monthlyRepo.findAllByAccountId(accountId);
+    public Optional<ListMonthlyDto> findAllDto(String accountId) {
+        Optional<List<Monthly>> list = monthlyRepo.findAllByAccount_AccountNumber(accountId);
         if (list.isPresent()) {
             ListMonthlyDto lmDTO = new ListMonthlyDto();
             lmDTO.setStatus(HttpStatus.OK.value());
