@@ -6,8 +6,11 @@ import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.bank.Bank;
 import com.mahdi.sandogh.model.loan.Loan;
 import com.mahdi.sandogh.model.monthly.Monthly;
+import com.mahdi.sandogh.model.sahamsalaneh.SahamSalaneh;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -68,4 +71,8 @@ public class Fund extends DateAudit {
     @OneToMany(mappedBy = "fund")
     private Set<Loan> loans = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sahamsalaneh_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private SahamSalaneh sahamSalaneh;
 }

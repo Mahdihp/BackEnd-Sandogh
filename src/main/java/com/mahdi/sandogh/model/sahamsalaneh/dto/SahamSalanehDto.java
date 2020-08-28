@@ -5,6 +5,7 @@ import com.mahdi.sandogh.model.BaseDto;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * Created by mahdi
@@ -18,14 +19,14 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SahamSalanehDto extends BaseDto {
 
-    private String sahamSalanehId;
+    private Integer sahamSalanehId;
 
     @NotNull
     private Integer yesrs; //سال
     @NotNull
     private Long membershipFee; // حق عضویت
-    private Long creationDate;
-    private Long modificationDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime modificationDate;
 
     public SahamSalanehDto() {
     }

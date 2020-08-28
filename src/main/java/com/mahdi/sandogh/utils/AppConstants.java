@@ -11,6 +11,7 @@ public class AppConstants {
     public static final String KEY_API_MONTHLYS = KEY_API_VER + "/monthlys";
     public static final String KEY_API_LOAN = KEY_API_VER + "/loans";
     public static final String KEY_API_INSTALLMENT_LOAN = KEY_API_VER + "/installmentloan";
+    public static final String KEY_API_SAHAM_SALANEH = KEY_API_VER + "/sahamsalaneh";
 
     public static final String KEY_SUCESSE = "sucesse!";
     public static final String KEY_FAIL = "fail";

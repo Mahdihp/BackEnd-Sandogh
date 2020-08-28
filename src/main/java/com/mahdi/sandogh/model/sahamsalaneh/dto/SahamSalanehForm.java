@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.model.sahamsalaneh.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,7 +15,8 @@ import javax.validation.constraints.NotNull;
  */
 
 
-@Data
+@Setter
+@Getter
 public class SahamSalanehForm {
 
     private Long sahamSalanehId;

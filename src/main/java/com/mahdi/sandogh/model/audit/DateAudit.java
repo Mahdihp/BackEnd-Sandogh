@@ -12,9 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Setter
 @Getter
