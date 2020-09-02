@@ -5,6 +5,7 @@ public class AppConstants {
 
 
     public static final String KEY_API_VER = "/api/v1";
+    public static final String KEY_API_USERS = KEY_API_VER + "/users";
     public static final String KEY_API_BANK = KEY_API_VER + "/bank";
     public static final String KEY_API_FUND = KEY_API_VER + "/funds";
     public static final String KEY_API_ACCOUNT = KEY_API_VER + "/account";
@@ -29,6 +30,7 @@ public class AppConstants {
     public static final String KEY_CREATE_USER = "کاربر جدید ثبت شد.";
     public static final String KEY_UPDATE_USER = "کاربر بروز شد.";
     public static final String KEY_NOT_FOUND_USER = "کاربری پیدا نشد.";
+    public static final String KEY_SIGNOUT = "خارج شدید.";
     public static final String KEY_CREATE_INSTALLMENTLOAN = "قسط مورد نظر ثبت شد.";
     public static final String KEY_UPDATE_INSTALLMENTLOAN = "قسط مورد نظر بروز شد.";
     public static final String KEY_CREATE_FUND = "صندوق ساخته شد.";

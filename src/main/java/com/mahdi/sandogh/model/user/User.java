@@ -25,7 +25,7 @@ public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
+    private Integer id;
 
     @Size(max = 50)
     @Column(name = "displayname")

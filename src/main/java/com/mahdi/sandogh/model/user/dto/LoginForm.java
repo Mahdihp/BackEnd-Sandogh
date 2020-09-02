@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.model.user.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,11 +15,12 @@ import javax.validation.constraints.NotNull;
  */
 
 
-@Data
+@Setter
+@Getter
 public class LoginForm {
 
     @NotNull
-    private String userName;
+    private String username;
 
     @NotNull
     private String password;

@@ -1,9 +1,9 @@
 package com.mahdi.sandogh.model.user.controller;
 
-import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.user.User;
+import com.mahdi.sandogh.model.user.dto.ListUserResponse;
 import com.mahdi.sandogh.model.user.dto.LoginForm;
-import com.mahdi.sandogh.model.user.dto.UserDto;
+import com.mahdi.sandogh.model.user.dto.UserResponse;
 import com.mahdi.sandogh.model.user.service.UserService;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
 import com.mahdi.sandogh.utils.AppConstants;
@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -25,9 +26,8 @@ import java.util.Optional;
  * https://github.com/mahdihp
  */
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping(AppConstants.KEY_API_USERS)
 public class AuthUserController {
 
     @Autowired
@@ -38,18 +38,48 @@ public class AuthUserController {
 
     @PostMapping(value = "/signin", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> signIn(@Valid @RequestBody LoginForm loginRequest) {
-        Optional<User> user = userService.findByUsername(loginRequest.getUserName());
+        Optional<User> user = userService.findByUsername(loginRequest);
+        System.out.println(loginRequest.getUsername());
         if (user.isPresent()) {
             JwtResponse jwtResponse = jwtUtil.generateToken(loginRequest);
             if (jwtResponse != null) {
-                UserDto userDTO = UserDto.convertToUserDTO(user.get());
-                userDTO.setStatus(HttpStatus.OK.value());
-                userDTO.setMessage(AppConstants.KEY_SUCESSE);
-                userDTO.setJwtResponse(jwtResponse);
-                return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+                UserResponse userResponse = UserResponse.Builder.anUserResponse()
+                        .withUsername(user.get().getUserName())
+                        .withNationalId(user.get().getNationalId())
+                        .withDisplayName(user.get().getDisplayName())
+                        .withLogin(user.get().isLogin())
+                        .withActive(user.get().isActive())
+                        .withCreateTime(user.get().getCreatedAt())
+                        .withUpdateTime(user.get().getUpdatedAt())
+                        .withJwtResponse(jwtResponse)
+                        .build();
+                ListUserResponse listUserResponse =new ListUserResponse() ;
+                listUserResponse.setStatus(HttpStatus.OK.value());
+                listUserResponse.setMessage(AppConstants.KEY_SUCESSE);
+                listUserResponse.setData(Arrays.asList(userResponse));
+                return ResponseEntity.status(HttpStatus.OK).body(listUserResponse);
             }
         }
+        ListUserResponse listUserResponse =new ListUserResponse() ;
+        listUserResponse.setStatus(201);
+        listUserResponse.setMessage(AppConstants.KEY_NOT_FOUND_USER);
+        return ResponseEntity.status(HttpStatus.OK).body(listUserResponse);
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseDto(HttpStatus.OK.value(),AppConstants.KEY_NOT_FOUND_USER));
+    @PostMapping(value = "/signout", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> signOut(@Valid @RequestBody LoginForm loginRequest) {
+        Optional<User> user = userService.findByUsername(loginRequest);
+        System.out.println(loginRequest.getUsername());
+        if (user.isPresent()) {
+            jwtUtil.generateToken(loginRequest);
+            ListUserResponse listUserResponse =new ListUserResponse() ;
+            listUserResponse.setStatus(200);
+            listUserResponse.setMessage(AppConstants.KEY_SIGNOUT);
+            return ResponseEntity.status(HttpStatus.OK).body(listUserResponse);
+        }
+        ListUserResponse listUserResponse =new ListUserResponse() ;
+        listUserResponse.setStatus(201);
+        listUserResponse.setMessage(AppConstants.KEY_NOT_FOUND_USER);
+        return ResponseEntity.status(HttpStatus.OK).body(listUserResponse);
     }
 }

@@ -28,11 +28,11 @@ public class JwtUtil {
 
 
     public JwtResponse generateToken(@Valid @RequestBody LoginForm loginForm) {
-        System.out.println("Log---generateToken--------------------:" + loginForm.getUserName());
+        System.out.println("Log---generateToken--------------------:" + loginForm.getUsername());
         System.out.println("Log---generateToken--------------------:" + loginForm.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginForm.getUserName(),
+                        loginForm.getUsername(),
                         loginForm.getPassword())
         );
 

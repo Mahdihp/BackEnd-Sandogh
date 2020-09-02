@@ -4,8 +4,9 @@ import com.mahdi.sandogh.model.role.Role;
 import com.mahdi.sandogh.model.role.RoleName;
 import com.mahdi.sandogh.model.role.repository.RoleRepo;
 import com.mahdi.sandogh.model.user.User;
-import com.mahdi.sandogh.model.user.dto.ListUserDto;
-import com.mahdi.sandogh.model.user.dto.UserDto;
+import com.mahdi.sandogh.model.user.dto.ListUserResponse;
+import com.mahdi.sandogh.model.user.dto.LoginForm;
+import com.mahdi.sandogh.model.user.dto.UserResponse;
 import com.mahdi.sandogh.model.user.dto.UserForm;
 import com.mahdi.sandogh.model.user.repository.UserRepo;
 import com.mahdi.sandogh.security.jwt.JwtProvider;
@@ -81,41 +82,41 @@ public class UserService {
         return user;
     }
 
-    public Optional<UserDto> findDTOById(Long userId) {
+    public Optional<UserResponse> findDTOById(Long userId) {
         Optional<User> user = userRepo.findById((userId));
         if (user.isPresent()) {
-            UserDto userDTO = new UserDto();
-            userDTO.setStatus(HttpStatus.OK.value());
-            userDTO.setMessage(AppConstants.KEY_SUCESSE);
-
-//            userDTO.setUserId(user.get().getUid().toString());
-
-            userDTO.setName(user.get().getDisplayName());
-            userDTO.setNationalId(user.get().getNationalId());
-            userDTO.setUserName(user.get().getUserName());
-            userDTO.setPassword(user.get().getPassword());
-            userDTO.setActive(user.get().isActive());
-            return Optional.ofNullable(userDTO);
+            UserResponse userResponse =UserResponse.Builder.anUserResponse()
+                    .withUsername(user.get().getUserName())
+                    .withNationalId(user.get().getNationalId())
+                    .withDisplayName(user.get().getDisplayName())
+                    .withLogin(user.get().isLogin())
+                    .withActive(user.get().isActive())
+                    .withCreateTime(user.get().getCreatedAt())
+                    .withUpdateTime(user.get().getUpdatedAt())
+                    .build();
+            return Optional.ofNullable(userResponse);
         }
         return Optional.empty();
     }
 
-    public Optional<ListUserDto> findAllDTO() {
+    public Optional<ListUserResponse> findAllDTO() {
         List<User> list = userRepo.findAll();
         if (list != null) {
-            ListUserDto luDTO = new ListUserDto();
+            ListUserResponse luDTO = new ListUserResponse();
             luDTO.setStatus(HttpStatus.OK.value());
             luDTO.setMessage(AppConstants.KEY_SUCESSE);
-            List<UserDto> dtoList = new ArrayList<>();
+            List<UserResponse> dtoList = new ArrayList<>();
             for (User user : list) {
-                UserDto userDTO = new UserDto();
-//                userDTO.setUserId(user.getUid().toString());
-                userDTO.setNationalId(user.getNationalId());
-                userDTO.setName(user.getDisplayName());
-                userDTO.setUserName(user.getUserName());
-                userDTO.setPassword(user.getPassword());
-                userDTO.setActive(user.isActive());
-                dtoList.add(userDTO);
+                UserResponse userResponse =UserResponse.Builder.anUserResponse()
+                        .withUsername(user.getUserName())
+                        .withNationalId(user.getNationalId())
+                        .withDisplayName(user.getDisplayName())
+                        .withLogin(user.isLogin())
+                        .withActive(user.isActive())
+                        .withCreateTime(user.getCreatedAt())
+                        .withUpdateTime(user.getUpdatedAt())
+                        .build();
+                dtoList.add(userResponse);
             }
             luDTO.setData(dtoList);
             return Optional.ofNullable(luDTO);
@@ -124,8 +125,8 @@ public class UserService {
     }
 
 
-    public Optional<User> findByUsername(String userName) {
-        Optional<User> user = userRepo.findByUserName(userName);
+    public Optional<User> findByUsername(LoginForm loginForm) {
+        Optional<User> user = userRepo.findByUserName(loginForm.getUsername());
         return user;
     }
 }
