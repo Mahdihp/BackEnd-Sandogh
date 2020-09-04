@@ -17,7 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Can just allow `methods` that you need.
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
+                .allowedOrigins("*")
                 .allowedMethods("GET", "POST")
                 .allowedHeaders("Access-Control-Allow-Methods")
                 .allowedHeaders("‘Access-Control-Allow-Origin",
