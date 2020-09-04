@@ -2,13 +2,16 @@ package com.mahdi.sandogh.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mahdi.sandogh.model.BaseDto;
+import com.mahdi.sandogh.model.permission.Permission;
+import com.mahdi.sandogh.model.role.Role;
+import com.mahdi.sandogh.model.role.RoleName;
 import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mahdi
@@ -33,9 +36,13 @@ public class UserResponse {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private JwtResponse jwtResponse;
+    private Role roles;
+    private List<Permission> permissions;
 
 
     public static final class Builder {
+
+
         private UserResponse userResponse;
 
         private Builder() {
@@ -91,8 +98,18 @@ public class UserResponse {
             return this;
         }
 
+        public Builder withRoles(Role roles) {
+            userResponse.setRoles(roles);
+            return this;
+        }
+
+        public Builder withPermissions(List<Permission> permissions) {
+            userResponse.setPermissions(permissions);
+            return this;
+        }
+
         public Builder but() {
-            return anUserResponse().withName(userResponse.getName()).withNationalId(userResponse.getNationalId()).withUsername(userResponse.getUsername()).withDisplayName(userResponse.getDisplayName()).withLogin(userResponse.getLogin()).withActive(userResponse.getActive()).withCreateTime(userResponse.getCreateTime()).withUpdateTime(userResponse.getUpdateTime()).withJwtResponse(userResponse.getJwtResponse());
+            return anUserResponse().withName(userResponse.getName()).withNationalId(userResponse.getNationalId()).withUsername(userResponse.getUsername()).withDisplayName(userResponse.getDisplayName()).withLogin(userResponse.getLogin()).withActive(userResponse.getActive()).withCreateTime(userResponse.getCreateTime()).withUpdateTime(userResponse.getUpdateTime()).withJwtResponse(userResponse.getJwtResponse()).withRoles(userResponse.getRoles()).withPermissions(userResponse.getPermissions());
         }
 
         public UserResponse build() {

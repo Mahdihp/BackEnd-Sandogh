@@ -1,5 +1,6 @@
 package com.mahdi.sandogh.model.user.controller;
 
+import com.mahdi.sandogh.model.role.Role;
 import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.model.user.dto.ListUserResponse;
 import com.mahdi.sandogh.model.user.dto.LoginForm;
@@ -43,6 +44,11 @@ public class AuthUserController {
         if (user.isPresent()) {
             JwtResponse jwtResponse = jwtUtil.generateToken(loginRequest);
             if (jwtResponse != null) {
+
+                Role role = null;
+                for (Role role1 : user.get().getRoles()) {
+                    role = role1;
+                }
                 UserResponse userResponse = UserResponse.Builder.anUserResponse()
                         .withUsername(user.get().getUserName())
                         .withNationalId(user.get().getNationalId())
@@ -51,6 +57,8 @@ public class AuthUserController {
                         .withActive(user.get().isActive())
                         .withCreateTime(user.get().getCreatedAt())
                         .withUpdateTime(user.get().getUpdatedAt())
+                        .withRoles(role)
+                        .withPermissions(role.getPermissions())
                         .withJwtResponse(jwtResponse)
                         .build();
                 ListUserResponse listUserResponse =new ListUserResponse() ;

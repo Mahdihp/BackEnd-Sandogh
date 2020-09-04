@@ -1,18 +1,17 @@
 package com.mahdi.sandogh.model.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.role.Role;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -20,7 +19,6 @@ import java.util.UUID;
 @Table(name = "users")
 public class User extends DateAudit {
 
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +51,7 @@ public class User extends DateAudit {
     @Column(name = "deleted")
     private boolean deleted = false;
 
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

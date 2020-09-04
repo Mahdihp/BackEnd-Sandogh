@@ -1,9 +1,7 @@
 package com.mahdi.sandogh.model.monthly.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.joda.time.DateTime;
 
 import javax.validation.constraints.NotNull;
 

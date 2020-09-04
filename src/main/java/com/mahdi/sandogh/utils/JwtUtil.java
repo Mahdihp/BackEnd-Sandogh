@@ -28,18 +28,22 @@ public class JwtUtil {
 
 
     public JwtResponse generateToken(@Valid @RequestBody LoginForm loginForm) {
-        System.out.println("Log---generateToken--------------------:" + loginForm.getUsername());
-        System.out.println("Log---generateToken--------------------:" + loginForm.getPassword());
-        Authentication authentication = authenticationManager.authenticate(
+        System.out.println("Log---generateToken--1------------------:" + loginForm.getUsername());
+        System.out.println("Log---generateToken--2------------------:" + loginForm.getPassword());
+        Authentication authentication = null;
+
+        authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginForm.getUsername(),
                         loginForm.getPassword())
         );
 
+        System.out.println("Log---generateToken--3------------------:" + loginForm.getPassword());
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("Log---generateToken--------------------:");
+        System.out.println("Log---generateToken---4-----------------:");
         String jwt = jwtProvider.generateJwtToken(authentication);
-        System.out.println("Log---generateToken--------------------:");
+        System.out.println("Log---generateToken---5-----------------:");
         return new JwtResponse(jwt);
     }
 

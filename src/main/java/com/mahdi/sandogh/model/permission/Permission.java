@@ -1,9 +1,12 @@
 package com.mahdi.sandogh.model.permission;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mahdi.sandogh.model.audit.DateAudit;
 import com.mahdi.sandogh.model.role.Role;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -30,5 +33,6 @@ public class Permission {
     private String displayName;
 
     @ManyToMany(mappedBy = "permissions")
+    @JsonBackReference
     private Collection<Role> roles;
 }

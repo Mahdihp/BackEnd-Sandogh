@@ -1,6 +1,8 @@
 package com.mahdi.sandogh.utils;
 
 
+import com.mahdi.sandogh.model.permission.Permission;
+import com.mahdi.sandogh.model.permission.PermissionName;
 import com.mahdi.sandogh.model.permission.repository.PermissionRepo;
 import com.mahdi.sandogh.model.role.Role;
 import com.mahdi.sandogh.model.role.RoleName;
@@ -13,10 +15,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TimeZone;
+import java.util.*;
 
 @Component
 public class AppRunner implements ApplicationRunner {
@@ -40,7 +39,10 @@ public class AppRunner implements ApplicationRunner {
 
     private void addPermission() {
         if (permissionRepo.count() <= 0) {
-
+            Permission permission=new Permission();
+            permission.setDisplayName(PermissionName.ROLE_ADMIN_ACCESS_ALL);
+            permissionRepo.save(permission);
+            System.out.println("Insert Permissions...");
         }
     }
 
@@ -48,6 +50,8 @@ public class AppRunner implements ApplicationRunner {
         if (roleRepo.count() <= 0) {
             Role adminRole = new Role();
             adminRole.setName(RoleName.ROLE_ADMIN);
+            Permission permission=permissionRepo .findAll().get(0);
+            adminRole.setPermissions(Arrays.asList(permission));
             roleRepo.save(adminRole);
 
             Role adminUser = new Role();
@@ -71,6 +75,7 @@ public class AppRunner implements ApplicationRunner {
             user1.setActive(true);
 
             Role role1 = roleRepo.findByName(RoleName.ROLE_ADMIN).get();
+
             Set<Role> roles1 = new HashSet<>();
             roles1.add(role1);
             user1.setRoles(roles1);
