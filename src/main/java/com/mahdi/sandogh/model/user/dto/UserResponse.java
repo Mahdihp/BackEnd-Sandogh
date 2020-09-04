@@ -1,17 +1,13 @@
 package com.mahdi.sandogh.model.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mahdi.sandogh.model.BaseDto;
 import com.mahdi.sandogh.model.permission.Permission;
-import com.mahdi.sandogh.model.role.Role;
-import com.mahdi.sandogh.model.role.RoleName;
-import com.mahdi.sandogh.model.user.User;
 import com.mahdi.sandogh.security.jwt.JwtResponse;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by mahdi
@@ -36,13 +32,11 @@ public class UserResponse {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private JwtResponse jwtResponse;
-    private Role roles;
+    private String roles;
     private List<Permission> permissions;
 
 
     public static final class Builder {
-
-
         private UserResponse userResponse;
 
         private Builder() {
@@ -98,7 +92,7 @@ public class UserResponse {
             return this;
         }
 
-        public Builder withRoles(Role roles) {
+        public Builder withRoles(String roles) {
             userResponse.setRoles(roles);
             return this;
         }

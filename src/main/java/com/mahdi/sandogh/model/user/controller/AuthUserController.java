@@ -57,7 +57,7 @@ public class AuthUserController {
                         .withActive(user.get().isActive())
                         .withCreateTime(user.get().getCreatedAt())
                         .withUpdateTime(user.get().getUpdatedAt())
-                        .withRoles(role)
+                        .withRoles(role.getName().name())
                         .withPermissions(role.getPermissions())
                         .withJwtResponse(jwtResponse)
                         .build();
