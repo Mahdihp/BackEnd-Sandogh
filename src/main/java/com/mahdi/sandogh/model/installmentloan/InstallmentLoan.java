@@ -27,6 +27,12 @@ public class InstallmentLoan extends DateAudit { // جدول اقساط وام
     @Column(name = "numberloan")
     private Integer numberLoan; // شماره قسط
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "createby")
+    private String createBy;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;

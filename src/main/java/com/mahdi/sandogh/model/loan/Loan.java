@@ -49,6 +49,17 @@ public class Loan extends DateAudit { //جدول وام ها
     @CreatedDate
     private LocalDateTime dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "createby")
+    private String createBy;
+
+    @Column(name = "remainingLoan")
+    private Long remainingLoan;  // مانده وام
+
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;

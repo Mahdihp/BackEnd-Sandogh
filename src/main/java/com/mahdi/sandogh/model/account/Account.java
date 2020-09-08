@@ -40,6 +40,9 @@ public class Account extends DateAudit {
     @Column(name = "fathername")
     private String fatherName;
 
+    @Column(name = "lawyer")
+    private String lawyer;  // وکیل
+
     @Column(name = "mobilenumber")
     private String mobileNumber;
 

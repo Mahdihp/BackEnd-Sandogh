@@ -24,6 +24,12 @@ public class Monthly extends DateAudit { // جدول ماهانه ها
     @Column(name = "amountpermonth")
     private Integer amountPerMonth; // مبلغ سهم هر ماه
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "createby")
+    private String createBy;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
