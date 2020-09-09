@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+
 
 @Setter
 @Getter
@@ -15,6 +17,8 @@ public class InstallmentLoanDto {
     private Long installmentLoanId;
     private Integer amountInstallment; // مبلغ قسط
     private Integer numberLoan; // شماره قسط
+    private String description;
+    private String createBy;
     private Long accountId;
     private Integer loanId;
     private Long creationDate; // تاریخ

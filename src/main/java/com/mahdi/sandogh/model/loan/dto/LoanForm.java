@@ -2,6 +2,7 @@ package com.mahdi.sandogh.model.loan.dto;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +18,8 @@ public class LoanForm {
     private LocalDateTime dateFinishInstallment; // تاریخ پایان قسط یا تاریخ آخرین قسط
     private Long accountId;
     private Integer fundId;
-
+    private String description;
+    private String createBy;
     public LoanForm() {
     }
 }

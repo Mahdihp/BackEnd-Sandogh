@@ -23,7 +23,8 @@ public class MonthlyDto {
     private LocalDateTime creationDate; // تاریخ
     private String accountNumber;
     private Integer fundId;
-
+    private String description;
+    private String createBy;
     public MonthlyDto() {
     }
 }

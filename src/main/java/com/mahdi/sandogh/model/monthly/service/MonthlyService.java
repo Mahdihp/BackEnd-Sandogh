@@ -47,6 +47,8 @@ public class MonthlyService {
             monthly.setAmountPerMonth(form.getAmountPerMonth());
             monthly.setAccount(account.get());
             monthly.setFund(fund.get());
+            monthly.setDescription(form.getDescription());
+            monthly.setCreateBy(form.getCreateBy());
             monthlyRepo.save(monthly);
             return MonthlyResponse.Builder.aMonthlyResponse()
                     .withStatus(200)
@@ -64,6 +66,8 @@ public class MonthlyService {
         Optional<Monthly> monthly = monthlyRepo.findById(monthlyForm.getMonthlyId());
         if (monthly.isPresent()) {
             monthly.get().setAmountPerMonth(monthlyForm.getAmountPerMonth());
+            monthly.get().setDescription(monthlyForm.getDescription());
+            monthly.get().setCreateBy(monthlyForm.getCreateBy());
             monthlyRepo.save(monthly.get());
             return MonthlyResponse.Builder.aMonthlyResponse()
                     .withStatus(200)
@@ -95,7 +99,8 @@ public class MonthlyService {
             monthlyDTO.setCreationDate(monthly.get().getCreatedAt());
             monthlyDTO.setAccountNumber(monthly.get().getAccount().getAccountNumber());
             monthlyDTO.setFundId(monthly.get().getFund().getId());
-
+            monthlyDTO.setDescription(monthly.get().getDescription());
+            monthlyDTO.setCreateBy(monthly.get().getCreateBy());
             dtoList.add(monthlyDTO);
             lmDTO.setData(dtoList);
 
@@ -118,6 +123,8 @@ public class MonthlyService {
                 monthlyDTO.setCreationDate(monthly.getCreatedAt());
                 monthlyDTO.setAccountNumber(monthly.getAccount().getAccountNumber());
                 monthlyDTO.setFundId(monthly.getFund().getId());
+                monthlyDTO.setDescription(monthly.getDescription());
+                monthlyDTO.setCreateBy(monthly.getCreateBy());
                 dtoList.add(monthlyDTO);
             }
             lmDTO.setData(dtoList);

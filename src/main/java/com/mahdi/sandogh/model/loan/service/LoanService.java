@@ -49,6 +49,8 @@ public class LoanService {
             loan.setDateFinishInstallment(form.getDateFinishInstallment());
             loan.setAccount(account.get());
             loan.setFund(fund.get());
+            loan.setDescription(form.getDescription());
+            loan.setCreateBy(form.getCreateBy());
             loanRepo.save(loan);
             return LoanResponse.Builder.aLoanResponse()
                     .withMessage(AppConstants.KEY_CREATE_LOAN)
@@ -75,6 +77,8 @@ public class LoanService {
             loan.get().setDateFinishInstallment(form.getDateFinishInstallment());
             loan.get().setAccount(account.get());
             loan.get().setFund(fund.get());
+            loan.get().setDescription(form.getDescription());
+            loan.get().setCreateBy(form.getCreateBy());
             loanRepo.save(loan.get());
             return LoanResponse.Builder.aLoanResponse()
                     .withMessage(AppConstants.KEY_UPDATE_LOAN)
@@ -108,6 +112,8 @@ public class LoanService {
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
                 loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
+                loanDTO.setDescription(loan.getDescription());
+                loanDTO.setCreateBy(loan.getCreateBy());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
@@ -142,6 +148,8 @@ public class LoanService {
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
                 loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
+                loanDTO.setDescription(loan.getDescription());
+                loanDTO.setCreateBy(loan.getCreateBy());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
@@ -170,6 +178,8 @@ public class LoanService {
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
                 loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
+                loanDTO.setDescription(loan.getDescription());
+                loanDTO.setCreateBy(loan.getCreateBy());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);
@@ -198,6 +208,8 @@ public class LoanService {
                 loanDTO.setAccountId(loan.getAccount().getId());
                 loanDTO.setFundId(loan.getFund().getId());
                 loanDTO.setCreatedAt(loan.getFund().getCreatedAt());
+                loanDTO.setDescription(loan.getDescription());
+                loanDTO.setCreateBy(loan.getCreateBy());
                 dtoList.add(loanDTO);
             }
             llDTO.setData(dtoList);

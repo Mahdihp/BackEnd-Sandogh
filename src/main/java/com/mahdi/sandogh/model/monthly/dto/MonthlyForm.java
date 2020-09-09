@@ -3,6 +3,7 @@ package com.mahdi.sandogh.model.monthly.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -25,7 +26,8 @@ public class MonthlyForm {
     private Integer fundId;
     @NotNull
     private String accountNumber;
-
+    private String description;
+    private String createBy;
     public MonthlyForm() {
     }
 }

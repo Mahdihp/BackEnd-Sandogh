@@ -24,7 +24,8 @@ public class LoanDto  {
     private Long accountId;
     private Integer fundId;
     private LocalDateTime createdAt ;
-
+    private String description;
+    private String createBy;
     public LoanDto() {
     }
 

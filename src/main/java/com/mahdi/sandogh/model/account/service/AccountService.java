@@ -46,6 +46,7 @@ public class AccountService {
             account.setFirstName(form.getFirstName());
             account.setLastName(form.getLastName());
             account.setFatherName(form.getFatherName());
+            account.setLawyer(form.getLawyer());
             account.setMobileNumber(form.getMobileNumber());
             account.setNationalCode(form.getNationalCode());
             account.setCity(form.getCity());
@@ -73,6 +74,7 @@ public class AccountService {
             account.get().setFirstName(accountForm.getFirstName());
             account.get().setLastName(accountForm.getLastName());
             account.get().setFatherName(accountForm.getFatherName());
+            account.get().setLawyer(accountForm.getLawyer());
             account.get().setMobileNumber(accountForm.getMobileNumber());
             account.get().setNationalCode(accountForm.getNationalCode());
             account.get().setCity(accountForm.getCity());
@@ -127,6 +129,7 @@ public class AccountService {
             accountDTO.setActive(account.get().isActive());
             accountDTO.setFirstName(account.get().getFirstName());
             accountDTO.setLastName(account.get().getLastName());
+            accountDTO.setLawyer(account.get().getLawyer());
             accountDTO.setAccountNumber(account.get().getAccountNumber());
             accountDTO.setFatherName(account.get().getFatherName());
             accountDTO.setMobileNumber(account.get().getMobileNumber());
@@ -152,6 +155,7 @@ public class AccountService {
                 accountDTO.setActive(account.isActive());
                 accountDTO.setFirstName(account.getFirstName());
                 accountDTO.setAccountNumber(account.getAccountNumber());
+                accountDTO.setLawyer(account.getLawyer());
                 accountDTO.setLastName(account.getLastName());
                 accountDTO.setFatherName(account.getFatherName());
                 accountDTO.setMobileNumber(account.getMobileNumber());
@@ -179,6 +183,7 @@ public class AccountService {
                 accountDTO.setFirstName(account.getFirstName());
                 accountDTO.setAccountNumber(account.getAccountNumber());
                 accountDTO.setLastName(account.getLastName());
+                accountDTO.setLawyer(account.getLawyer());
                 accountDTO.setFatherName(account.getFatherName());
                 accountDTO.setMobileNumber(account.getMobileNumber());
                 accountDTO.setNationalCode(account.getNationalCode());

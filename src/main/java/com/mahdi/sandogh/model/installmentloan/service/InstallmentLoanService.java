@@ -39,6 +39,8 @@ public class InstallmentLoanService {
             InstallmentLoan installmentLoan = new InstallmentLoan();
             installmentLoan.setAmountInstallment(form.getAmountInstallment());
             installmentLoan.setNumberLoan(form.getNumberLoan());
+            installmentLoan.setDescription(form.getDescription());
+            installmentLoan.setCreateBy(form.getCreateBy());
             installmentLoan.setAccount(account.get());
             installmentLoan.setLoan(loan.get());
             installmentLoanRepo.save(installmentLoan);
@@ -58,6 +60,8 @@ public class InstallmentLoanService {
         if (installmentLoan.isPresent()) {
             installmentLoan.get().setAmountInstallment(form.getAmountInstallment());
             installmentLoan.get().setNumberLoan(form.getNumberLoan());
+            installmentLoan.get().setDescription(form.getDescription());
+            installmentLoan.get().setCreateBy(form.getCreateBy());
 //            installmentLoan.get().setAccount(installmentLoan.get().getAccount());
 //            installmentLoan.get().setLoan(installmentLoan.get().getLoan());
             installmentLoanRepo.save(installmentLoan.get());
@@ -98,6 +102,8 @@ public class InstallmentLoanService {
                 ilDTO.setInstallmentLoanId(installmentLoan.getId());
                 ilDTO.setAmountInstallment(installmentLoan.getAmountInstallment());
                 ilDTO.setNumberLoan(installmentLoan.getNumberLoan());
+                ilDTO.setDescription(installmentLoan.getDescription());
+                ilDTO.setCreateBy(installmentLoan.getCreateBy());
                 ilDTO.setAccountId(installmentLoan.getAccount().getId());
                 ilDTO.setLoanId(installmentLoan.getLoan().getId());
                 dtoList.add(ilDTO);
@@ -122,6 +128,8 @@ public class InstallmentLoanService {
             ilDTO.setNumberLoan(installmentLoan.get().getNumberLoan());
             ilDTO.setAccountId(installmentLoan.get().getAccount().getId());
             ilDTO.setLoanId(installmentLoan.get().getLoan().getId());
+            ilDTO.setDescription(installmentLoan.get().getDescription());
+            ilDTO.setCreateBy(installmentLoan.get().getCreateBy());
 
             lilDTO.setData(Arrays.asList(ilDTO));
             return Optional.ofNullable(lilDTO);
@@ -150,6 +158,8 @@ public class InstallmentLoanService {
                 ilDTO.setNumberLoan(installmentLoan.getNumberLoan());
                 ilDTO.setAccountId(installmentLoan.getAccount().getId());
                 ilDTO.setLoanId(installmentLoan.getLoan().getId());
+                ilDTO.setDescription(installmentLoan.getDescription());
+                ilDTO.setCreateBy(installmentLoan.getCreateBy());
                 dtoList.add(ilDTO);
             }
             lilDTO.setData(dtoList);

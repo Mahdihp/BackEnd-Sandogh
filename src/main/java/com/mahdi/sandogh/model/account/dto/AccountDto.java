@@ -16,6 +16,7 @@ public class AccountDto extends BaseDto {
     private String accountId;
     private String accountNumber;
     private String firstName;
+    private String lawyer;
     private String lastName;
     private String fatherName;
     private String nationalCode;

@@ -19,6 +19,7 @@ public class AccountForm {
     @NotNull
     private String lastName;
     private String fatherName;
+    private String lawyer;
     private String nationalCode;
     private Integer countLoan;
     private String mobileNumber;
